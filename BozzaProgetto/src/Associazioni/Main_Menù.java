@@ -34,24 +34,11 @@ public class Main_Menù extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Main_Menù frame = new Main_Menù();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
 	/**
 	 * Create the frame.
 	 */
-	public Main_Menù() {
-		setTitle("NomeProgramma\r\n");
+	public Main_Menù(Controller ctr) {
+		setTitle("RevHub 1.0");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 798, 522);
@@ -69,21 +56,26 @@ public class Main_Menù extends JFrame {
 		lblNewLabel.setForeground(new Color(240, 255, 255));
 		lblNewLabel.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 37));
 		
+		//icona mail
 		JLabel label = new JLabel("");
 		Image img3 = new ImageIcon(this.getClass().getResource("/mail.png")).getImage();
 		label.setIcon(new ImageIcon(img3));
 		
+		//bottone panino
 		JButton button = new JButton("");
 		button.setBounds(75, 264, 173, 170);
 		button.setForeground(Color.WHITE);
 		button.setBackground(new Color(245, 245, 245));
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				ctr.goRisto(ctr);
+				dispose();
 			}
 		});
 		Image img = new ImageIcon(this.getClass().getResource("/burger.png")).getImage();
 		button.setIcon(new ImageIcon(img));
 		
+		//bottone hotel
 		JButton button_1 = new JButton("");
 		button_1.setBounds(313, 264, 173, 170);
 		button_1.setForeground(Color.WHITE);
@@ -95,6 +87,7 @@ public class Main_Menù extends JFrame {
 		Image img1 = new ImageIcon(this.getClass().getResource("/hotel.png")).getImage();
 		button_1.setIcon(new ImageIcon(img1));
 		
+		//bottone ombrellone
 		JButton button_2 = new JButton("");
 		button_2.setBounds(554, 264, 173, 170);
 		button_2.addActionListener(new ActionListener() {
@@ -107,7 +100,7 @@ public class Main_Menù extends JFrame {
 		button_2.setIcon(new ImageIcon(img2));
 		
 		JLabel lblPerIniziareSeleziona = new JLabel("Per iniziare, seleziona una categoria!");
-		lblPerIniziareSeleziona.setBounds(140, 175, 520, 38);
+		lblPerIniziareSeleziona.setBounds(139, 165, 520, 47);
 		lblPerIniziareSeleziona.setForeground(Color.DARK_GRAY);
 		lblPerIniziareSeleziona.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 30));
 		contentPane.setLayout(null);
