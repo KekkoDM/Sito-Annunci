@@ -29,9 +29,6 @@ public class Main_Frame extends JFrame {
 	private JTable ristotable;
 
 	/**
-	 * Launch the application.
-	 */
-	/**
 	 * Create the frame.
 	 */
 	public Main_Frame() {
@@ -55,9 +52,21 @@ public class Main_Frame extends JFrame {
 		homepanel.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("HOME\r\n");
-		lblNewLabel.setBounds(305, 231, 204, 99);
+		lblNewLabel.setBounds(27, 11, 204, 99);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 75));
 		homepanel.add(lblNewLabel);
+		
+		JButton accedijb = new JButton("Accedi\r\n");
+		accedijb.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ctr.goAccedi(accedijb);
+			}
+		});
+		accedijb.setForeground(new Color(255, 255, 255));
+		accedijb.setBackground(new Color(46, 139, 87));
+		accedijb.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 23));
+		accedijb.setBounds(614, 51, 129, 36);
+		homepanel.add(accedijb);
 		
 		JPanel ristopanel = new JPanel();
 		ristopanel.setBackground(new Color(255, 255, 255));
@@ -71,9 +80,14 @@ public class Main_Frame extends JFrame {
 		ristopanel.add(ristotable);
 		
 		JPanel alloggipanel = new JPanel();
+		alloggipanel.setBackground(new Color(255, 255, 255));
 		layeredPane.add(alloggipanel, "name_276128323411800");
 		
+		JLabel lblAaaaaaa = new JLabel("Aaaaaaa");
+		alloggipanel.add(lblAaaaaaa);
+		
 		JPanel attrazionipanel = new JPanel();
+		attrazionipanel.setBackground(new Color(255, 255, 255));
 		layeredPane.add(attrazionipanel, "name_276141316664400");
 		
 		//BOTTONE RISTORANTE
@@ -86,20 +100,21 @@ public class Main_Frame extends JFrame {
 		ristojb.setForeground(new Color(255, 255, 255));
 		ristojb.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 23));
 		ristojb.setBackground(new Color(46, 139, 87));
-		ristojb.setBounds(0, 166, 244, 43);
+		ristojb.setBounds(0, 177, 244, 43);
 		main_panel.add(ristojb);
 		Border emptyBorder = BorderFactory.createEmptyBorder();
 		ristojb.setBorder(emptyBorder);
 		
 		JButton alloggijb = new JButton("Alloggi\r\n");
 		alloggijb.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
+				ctr.switchPanel(layeredPane,alloggipanel);
 			}
 		});
 		alloggijb.setBackground(new Color(46, 139, 87));
 		alloggijb.setForeground(new Color(255, 255, 255));
 		alloggijb.setFont(new Font("Microsoft YaHei Light", Font.PLAIN, 23));
-		alloggijb.setBounds(0, 207, 244, 43);
+		alloggijb.setBounds(0, 231, 244, 43);
 		main_panel.add(alloggijb);
 		Border emptyBorder1 = BorderFactory.createEmptyBorder();
 		alloggijb.setBorder(emptyBorder1);
@@ -111,9 +126,9 @@ public class Main_Frame extends JFrame {
 			}
 		});
 		homejb.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 23));
-		homejb.setForeground(new Color(255, 255, 255));
+		homejb.setForeground(Color.WHITE);
 		homejb.setBackground(new Color(46, 139, 87));
-		homejb.setBounds(0, 123, 244, 43);
+		homejb.setBounds(0, 124, 244, 43);
 		main_panel.add(homejb);
 		Border emptyBorder2 = BorderFactory.createEmptyBorder();
 		homejb.setBorder(emptyBorder2);
@@ -126,10 +141,15 @@ public class Main_Frame extends JFrame {
 		
 		
 		JButton attrazionijb = new JButton("Attrazioni\r\n");
+		attrazionijb.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ctr.switchPanel(layeredPane,attrazionipanel);
+			}
+		});
 		attrazionijb.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 23));
 		attrazionijb.setForeground(new Color(255, 255, 255));
 		attrazionijb.setBackground(new Color(46, 139, 87));
-		attrazionijb.setBounds(0, 249, 244, 43);
+		attrazionijb.setBounds(0, 285, 244, 43);
 		main_panel.add(attrazionijb);
 		Border emptyBorder3 = BorderFactory.createEmptyBorder();
 		attrazionijb.setBorder(emptyBorder3);
