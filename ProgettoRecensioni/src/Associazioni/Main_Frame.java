@@ -14,6 +14,8 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.ScrollPane;
+
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -30,10 +32,10 @@ import javax.swing.SwingConstants;
 public class Main_Frame extends JFrame {
 
 	private JPanel main_panel;
-	private String[] column_headers= {"Ristorante","Ultima Recensione","Valutazione","Tag"};
-	private String[][] rows = {{"Pizzalò","Un posto bla bla bla, bla bla bla , consiglio bla bla bla","****","Pizzeria"}};
+    ristoranteDAO rdao = new ristoranteDAO();
 	private JTable ristotable;
-
+	
+	
 	/**
 	 * Create the frame.
 	 */
@@ -83,10 +85,12 @@ public class Main_Frame extends JFrame {
 		testo_home.setBounds(26, 121, 717, 129);
 		homepanel.add(testo_home);
 		
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon(Main_Frame.class.getResource("/img/capri.jpg")));
-		lblNewLabel_1.setBounds(0, 278, 823, 296);
-		homepanel.add(lblNewLabel_1);
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon(Main_Frame.class.getResource("/img/capri.jpg")));
+		label.setBounds(0, 263, 823, 311);
+		homepanel.add(label);
+		
+		
 		
 
 		
@@ -95,11 +99,20 @@ public class Main_Frame extends JFrame {
 		layeredPane.add(ristopanel, "name_276109691756800");
 		ristopanel.setLayout(null);
 		
+		
+        
+		
+		
 		//TABELLA RISTORANTE
-		ristotable = new JTable(rows,column_headers);
+		ristotable = new JTable(rdao.getRistoranti());
+		ristotable.setEnabled(false);
 		ristotable.setBackground(new Color(245, 245, 245));
+		ristopanel.add(new JScrollPane(ristotable));
 		ristotable.setBounds(120, 129, 598, 375);
+		ristotable.setRowHeight(40);
 		ristopanel.add(ristotable);
+		
+		
 		
 		JPanel alloggipanel = new JPanel();
 		alloggipanel.setBackground(new Color(255, 255, 255));
