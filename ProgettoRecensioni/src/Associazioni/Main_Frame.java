@@ -99,18 +99,22 @@ public class Main_Frame extends JFrame {
 		layeredPane.add(ristopanel, "name_276109691756800");
 		ristopanel.setLayout(null);
 		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(120, 78, 598, 426);
+		ristopanel.add(scrollPane);
+		
 		
         
 		
 		
 		//TABELLA RISTORANTE
 		ristotable = new JTable(rdao.getRistoranti());
+		scrollPane.setViewportView(ristotable);
+		ristotable.setFillsViewportHeight(true);
+		ristotable.setColumnSelectionAllowed(true);
 		ristotable.setEnabled(false);
 		ristotable.setBackground(new Color(245, 245, 245));
-		ristopanel.add(new JScrollPane(ristotable));
-		ristotable.setBounds(120, 129, 598, 375);
-		ristotable.setRowHeight(40);
-		ristopanel.add(ristotable);
+		ristotable.setRowHeight(50);
 		
 		
 		
