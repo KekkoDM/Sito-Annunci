@@ -37,7 +37,6 @@ public class ristoranteDAO {
 			ResultSet rs = s.executeQuery();
 			
 			while(rs.next()) {
-				
 				String nome = rs.getString(1);
 				String citta = rs.getString(2);
 				String via = rs.getString(3);
@@ -46,9 +45,7 @@ public class ristoranteDAO {
 				
 				Object[] ristorante = {nome, citta, via, civico, specialita};
 				tableModel.addRow(ristorante);
-				
 			}
-			s.close();
 		}catch(SQLException e) {
 			System.err.println("Errore SQL");
 			e.printStackTrace();
@@ -57,9 +54,4 @@ public class ristoranteDAO {
 		return tableModel;
 	}
 
-	
-	
-	
-	
-	
 }

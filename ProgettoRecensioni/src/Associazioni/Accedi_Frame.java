@@ -1,13 +1,9 @@
 package Associazioni;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import java.awt.Font;
@@ -25,6 +21,7 @@ public class Accedi_Frame extends JDialog {
 	 * Create the dialog.
 	 */
 	public Accedi_Frame() {
+		setResizable(false);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(255, 255, 255));
@@ -63,7 +60,6 @@ public class Accedi_Frame extends JDialog {
 		btnNewButton.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 14));
 		btnNewButton.setBounds(148, 186, 137, 23);
 		contentPanel.add(btnNewButton);
-		
 		
 	}
 }
