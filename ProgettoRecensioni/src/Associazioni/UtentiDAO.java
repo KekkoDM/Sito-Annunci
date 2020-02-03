@@ -7,51 +7,38 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
-import javax.swing.table.DefaultTableModel;
-
-public class ristoranteDAO {
+public class UtentiDAO {
 	
-	public DefaultTableModel getRistoranti() {
-		String col[] = {"Nome","Città","Via","Civico","Specialità"};
-		DefaultTableModel tableModel = new DefaultTableModel(col, 0);
-		
-		
+	public int checkUtente(String u, String p) {
 		try {
 			Class.forName("org.postgresql.Driver");
 		}catch(ClassNotFoundException e) {
 			System.err.println("Classe non trovata");
 		}
-		
 		String url = "jdbc:postgresql://localhost/progetto";
 		Properties props = new Properties();
-		props.setProperty("user","ospite");
-		props.setProperty("password","ospite123");
-		
+		props.setProperty("user","postgres");
+		props.setProperty("password","ale123");
 		Connection conn = null;
-		
-		
+		int flag = 1;
 		try {
 			conn = DriverManager.getConnection(url, props);
-			String query = "select nome, citta, via, civico, specialita from ristorante";
+			String query = "select username,password from utente";
 			PreparedStatement s = conn.prepareStatement(query);
 			ResultSet rs = s.executeQuery();
-			
 			while(rs.next()) {
-				String nome = rs.getString(1);
-				String citta = rs.getString(2);
-				String via = rs.getString(3);
-				int civico = rs.getInt(4);
-				String specialita = rs.getString(5);
-				
-				Object[] ristorante = {nome, citta, via, civico, specialita};
-				tableModel.addRow(ristorante);
+				String username = rs.getString(1);
+				String password = rs.getString(2);
+				if(p.equals(password) && u.equals(username)) {
+					flag = 0;
+					break;
+				}
 			}
 		}catch(SQLException e) {
 			System.err.println("Errore SQL");
 			e.printStackTrace();
 		}
 		
-		return tableModel;
+		return flag;
 	}
-
 }

@@ -15,7 +15,6 @@ public class ristorante {
 	private int codm2;
 	private int codv2;
 	
-	
 	public int getCodri() {
 		return codri;
 	}

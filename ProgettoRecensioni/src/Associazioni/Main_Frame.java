@@ -15,7 +15,6 @@ import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.ScrollPane;
-
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -35,10 +34,6 @@ public class Main_Frame extends JFrame {
     ristoranteDAO rdao = new ristoranteDAO();
 	private JTable ristotable;
 	
-	
-	/**
-	 * Create the frame.
-	 */
 	public Main_Frame(Controller ctr) {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -64,10 +59,15 @@ public class Main_Frame extends JFrame {
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 75));
 		homepanel.add(lblNewLabel);
 		
+		JLabel Usertext = new JLabel("");
+		Usertext.setForeground(new Color(0, 0, 0));
+		Usertext.setBounds(27, 190, 169, 36);
+		homepanel.add(Usertext);
+		
 		JButton accedijb = new JButton("Accedi\r\n");
 		accedijb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {				
-				ctr.goAccedi(ctr.main);
+				ctr.apriAccedi();
 			}
 		});
 		accedijb.setForeground(new Color(255, 255, 255));
@@ -76,23 +76,23 @@ public class Main_Frame extends JFrame {
 		accedijb.setBounds(614, 51, 129, 36);
 		homepanel.add(accedijb);
 		
-		
-		
-		
 		JTextArea testo_home = new JTextArea();
 		testo_home.setFont(new Font("Microsoft YaHei Light", Font.PLAIN, 15));
 		testo_home.setText("Benvenuto in RevHub, il programma #1 di recensioni in Italia!\r\nPrima di iniziare, clicca sul bottone accedi se hai gi\u00E0 un account RevHub.");
-		testo_home.setBounds(26, 121, 717, 129);
+		testo_home.setBounds(26, 121, 501, 46);
 		homepanel.add(testo_home);
 		
 		JLabel label = new JLabel("");
 		label.setIcon(new ImageIcon(Main_Frame.class.getResource("/img/capri.jpg")));
-		label.setBounds(0, 263, 823, 311);
+		label.setBounds(0, 278, 823, 296);
 		homepanel.add(label);
 		
-		
-		
-
+		JButton btnEsci = new JButton("Esci");
+		btnEsci.setForeground(new Color(255, 255, 255));
+		btnEsci.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 23));
+		btnEsci.setBackground(new Color(46, 139, 87));
+		btnEsci.setBounds(614, 119, 129, 35);
+		homepanel.add(btnEsci);
 		
 		JPanel ristopanel = new JPanel();
 		ristopanel.setBackground(new Color(255, 255, 255));
@@ -102,11 +102,7 @@ public class Main_Frame extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(120, 78, 598, 426);
 		ristopanel.add(scrollPane);
-		
-		
-        
-		
-		
+	
 		//TABELLA RISTORANTE
 		ristotable = new JTable(rdao.getRistoranti());
 		scrollPane.setViewportView(ristotable);
@@ -115,8 +111,6 @@ public class Main_Frame extends JFrame {
 		ristotable.setEnabled(false);
 		ristotable.setBackground(new Color(245, 245, 245));
 		ristotable.setRowHeight(50);
-		
-		
 		
 		JPanel alloggipanel = new JPanel();
 		alloggipanel.setBackground(new Color(255, 255, 255));
@@ -197,6 +191,5 @@ public class Main_Frame extends JFrame {
 		lblNewLabel_3.setBounds(76, 89, 104, 26);
 		lblNewLabel_3.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 28));
 		main_panel.add(lblNewLabel_3);
-		
 	}
 }
