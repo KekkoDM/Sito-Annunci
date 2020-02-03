@@ -15,15 +15,18 @@ public class UtentiDAO {
 		}catch(ClassNotFoundException e) {
 			System.err.println("Classe non trovata");
 		}
+		
+		
 		String url = "jdbc:postgresql://localhost/progetto";
 		Properties props = new Properties();
 		props.setProperty("user","postgres");
-		props.setProperty("password","ale123");
+		props.setProperty("password","F123");
 		Connection conn = null;
 		int flag = 1;
+		
 		try {
 			conn = DriverManager.getConnection(url, props);
-			String query = "select username,password from utente";
+			String query = "select username,password from utente where username='" + u + "' and password ='" + p +"'";
 			PreparedStatement s = conn.prepareStatement(query);
 			ResultSet rs = s.executeQuery();
 			while(rs.next()) {

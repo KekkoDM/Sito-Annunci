@@ -7,14 +7,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
-import javax.swing.table.DefaultTableModel;
-
-public class ristoranteDAO {
+public class Connessione{
 	
-	public DefaultTableModel getRistoranti() {
-		String col[] = {"Nome","Città","Via","Civico","Specialità"};
-		DefaultTableModel tableModel = new DefaultTableModel(col, 0);
-		
+	private Connection conn;
+	private ResultSet rs;
+	
+	public void ConnessioneDB() {
 		
 		try {
 			Class.forName("org.postgresql.Driver");
@@ -27,14 +25,24 @@ public class ristoranteDAO {
 		props.setProperty("user","postgres");
 		props.setProperty("password","F123");
 		
-		Connection conn = null;
-		
+		 this.conn = null;
 		
 		try {
-			conn = DriverManager.getConnection(url, props);
-			String query = "select nome, citta, via, civico, specialita from ristorante";
+			this.conn = DriverManager.getConnection(url, props);
+		}catch(SQLException e) {
+			System.err.println("Errore SQL");
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public void Query(String select,String from ,String where) {
+		
+		try {
+			
+			String query = "select " + select + "from " + from;
 			PreparedStatement s = conn.prepareStatement(query);
-			ResultSet rs = s.executeQuery();
+			this.rs = s.executeQuery();
 			
 			while(rs.next()) {
 				String nome = rs.getString(1);
@@ -43,15 +51,13 @@ public class ristoranteDAO {
 				int civico = rs.getInt(4);
 				String specialita = rs.getString(5);
 				
-				Object[] ristorante = {nome, citta, via, civico, specialita};
-				tableModel.addRow(ristorante);
+				
 			}
 		}catch(SQLException e) {
 			System.err.println("Errore SQL");
 			e.printStackTrace();
 		}
 		
-		return tableModel;
 	}
 
 }
