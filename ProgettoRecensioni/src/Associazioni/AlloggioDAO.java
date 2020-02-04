@@ -9,11 +9,11 @@ import java.util.Properties;
 
 import javax.swing.table.DefaultTableModel;
 
-public class ristoranteDAO {
+public class AlloggioDAO {
 	
-	public DefaultTableModel getRistoranti() {
-		String col[] = {"Nome","Città","Via","Civico","Specialità"};
-		DefaultTableModel tableModel = new DefaultTableModel(col, 0);
+	public DefaultTableModel getAlloggio() {
+		String column[] = {"Nome","città","Via","Civico","Bagni,Camere,Letti"};
+		DefaultTableModel tableModel = new DefaultTableModel(column, 0);
 		
 		
 		try {
@@ -25,14 +25,14 @@ public class ristoranteDAO {
 		String url = "jdbc:postgresql://localhost/progetto";
 		Properties props = new Properties();
 		props.setProperty("user","postgres");
-		props.setProperty("password","F123");
+		props.setProperty("password","Password");
 		
 		Connection conn = null;
 		
 		
 		try {
 			conn = DriverManager.getConnection(url, props);
-			String query = "select nome, citta, via, civico, specialita from ristorante";
+			String query = "select * from attrazione";
 			PreparedStatement s = conn.prepareStatement(query);
 			ResultSet rs = s.executeQuery();
 			
@@ -41,10 +41,14 @@ public class ristoranteDAO {
 				String citta = rs.getString(2);
 				String via = rs.getString(3);
 				int civico = rs.getInt(4);
-				String specialita = rs.getString(5);
-				
-				Object[] ristorante = {nome, citta, via, civico, specialita};
-				tableModel.addRow(ristorante);
+				int bagni = rs.getInt(5);
+				int camere = rs.getInt(6);
+				int letti = rs.getInt(7);
+				int metriq = rs.getInt(8);
+				String telefono = rs.getString(9);
+								
+				Object[] alloggio = {nome, citta, via, civico,bagni, camere, letti, metriq, telefono};
+				tableModel.addRow(alloggio);
 			}
 		}catch(SQLException e) {
 			System.err.println("Errore SQL");
