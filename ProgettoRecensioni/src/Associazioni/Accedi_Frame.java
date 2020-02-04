@@ -38,28 +38,24 @@ public class Accedi_Frame extends JDialog {
 			contentPanel.add(lblAccedi);
 		}
 		
-		JLabel esitotext = new JLabel();
-		esitotext.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 12));
-		esitotext.setForeground(Color.RED);
-		esitotext.setBounds(134, 167, 176, 23);
-		contentPanel.add(esitotext);
-		
 		passtext = new JPasswordField();
-		passtext.setBounds(193, 122, 137, 17);
+		passtext.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		passtext.setBounds(134, 152, 196, 38);
 		contentPanel.add(passtext);
 		
 		usertext = new JTextField();
-		usertext.setBounds(193, 86, 137, 17);
+		usertext.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		usertext.setBounds(134, 80, 196, 38);
 		contentPanel.add(usertext);
 		usertext.setColumns(10);
 		
 		JLabel lblUsername = new JLabel("Username");
-		lblUsername.setBounds(109, 86, 137, 14);
+		lblUsername.setBounds(28, 87, 137, 14);
 		lblUsername.setFont(new Font("Microsoft YaHei Light", Font.PLAIN, 15));
 		contentPanel.add(lblUsername);
 		
 		JLabel lblPassword = new JLabel("Password");
-		lblPassword.setBounds(109, 122, 137, 14);
+		lblPassword.setBounds(28, 160, 137, 14);
 		lblPassword.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 15));
 		contentPanel.add(lblPassword);
 		
