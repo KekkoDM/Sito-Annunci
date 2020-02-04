@@ -15,27 +15,13 @@ public class ristoranteDAO {
 		String col[] = {"Nome","Città","Via","Civico","Specialità"};
 		DefaultTableModel tableModel = new DefaultTableModel(col, 0);
 		
+		Connessione c = new Connessione();
+					
+		c.ConnessioneDB();
+		String select = "nome, citta, via, civico, specialita";
 		
 		try {
-			Class.forName("org.postgresql.Driver");
-		}catch(ClassNotFoundException e) {
-			System.err.println("Classe non trovata");
-		}
-		
-		String url = "jdbc:postgresql://localhost/progetto";
-		Properties props = new Properties();
-		props.setProperty("user","postgres");
-		props.setProperty("password","F123");
-		
-		Connection conn = null;
-		
-		
-		try {
-			conn = DriverManager.getConnection(url, props);
-			String query = "select nome, citta, via, civico, specialita from ristorante";
-			PreparedStatement s = conn.prepareStatement(query);
-			ResultSet rs = s.executeQuery();
-			
+			ResultSet rs=c.Query(select, "ristorante", "", tableModel);
 			while(rs.next()) {
 				String nome = rs.getString(1);
 				String citta = rs.getString(2);
@@ -43,14 +29,15 @@ public class ristoranteDAO {
 				int civico = rs.getInt(4);
 				String specialita = rs.getString(5);
 				
-				Object[] ristorante = {nome, citta, via, civico, specialita};
-				tableModel.addRow(ristorante);
+				Object[] riga = {nome, citta, via, civico, specialita};
+				tableModel.addRow(riga);
+				
 			}
 		}catch(SQLException e) {
 			System.err.println("Errore SQL");
 			e.printStackTrace();
 		}
-		
+		c.ChiudiConn();
 		return tableModel;
 	}
 

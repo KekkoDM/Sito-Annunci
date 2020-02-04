@@ -1,6 +1,7 @@
 package Associazioni;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,47 +13,34 @@ import javax.swing.table.DefaultTableModel;
 public class AttrazioneDAO {
 		
 		public DefaultTableModel getAttrazione() {
-			String column[] = {"Nome","città","Via","Civico","Descrizione,Telefono,Orario"};
+			String column[] = {"Nome","città","Via","Civico","Descrizione","Telefono","Orario"};
 			DefaultTableModel tableModel = new DefaultTableModel(column, 0);
 			
+			Connessione c = new Connessione();
+			
+			c.ConnessioneDB();
+			String select = "Nome, citta,Via,Civico,Descrizione,Telefono,Orario";
 			
 			try {
-				Class.forName("org.postgresql.Driver");
-			}catch(ClassNotFoundException e) {
-				System.err.println("Classe non trovata");
-			}
-			
-			String url = "jdbc:postgresql://localhost/progetto";
-			Properties props = new Properties();
-			props.setProperty("user","postgres");
-			props.setProperty("password","Password");
-			
-			Connection conn = null;
-			
-			
-			try {
-				conn = DriverManager.getConnection(url, props);
-				String query = "select * from attrazione";
-				PreparedStatement s = conn.prepareStatement(query);
-				ResultSet rs = s.executeQuery();
-				
+				ResultSet rs=c.Query(select, "attrazione", "", tableModel);
 				while(rs.next()) {
 					String nome = rs.getString(1);
 					String citta = rs.getString(2);
 					String via = rs.getString(3);
 					int civico = rs.getInt(4);
-					String descrizione = rs.getString(5);
-					String telefono = rs.getString(6);
-					Time orario = rs.getTime(7);
+					String Descrizione = rs.getString(5);
+					String Telefono = rs.getString(6);
+					Date Orario = rs.getDate(7);
 					
-					Object[] attrazione = {nome, citta, via, civico, descrizione, telefono, orario};
-					tableModel.addRow(attrazione);
+					Object[] riga = {nome, citta, via, civico, Descrizione,Telefono,Orario};
+					tableModel.addRow(riga);
+					
 				}
 			}catch(SQLException e) {
 				System.err.println("Errore SQL");
 				e.printStackTrace();
 			}
-			
+			c.ChiudiConn();
 			return tableModel;
 		}
 

@@ -32,7 +32,11 @@ public class Main_Frame extends JFrame {
 
 	private JPanel main_panel;
     ristoranteDAO rdao = new ristoranteDAO();
+    AlloggioDAO adao = new AlloggioDAO();
+    AttrazioneDAO tdao = new AttrazioneDAO();
 	private JTable ristotable;
+	private JTable alloggiotable;
+	private JTable attrazionetable;
 	
 	public Main_Frame(Controller ctr) {
 		setResizable(false);
@@ -112,16 +116,46 @@ public class Main_Frame extends JFrame {
 		ristotable.setBackground(new Color(245, 245, 245));
 		ristotable.setRowHeight(50);
 		
+		
+		//PANEL ALLOGGIO
 		JPanel alloggipanel = new JPanel();
 		alloggipanel.setBackground(new Color(255, 255, 255));
 		layeredPane.add(alloggipanel, "name_276128323411800");
+		alloggipanel.setLayout(null);
 		
-		JLabel lblAaaaaaa = new JLabel("Aaaaaaa");
-		alloggipanel.add(lblAaaaaaa);
+		JScrollPane scrollPane2 = new JScrollPane();
+		scrollPane2.setBounds(120, 78, 598, 426);
+		alloggipanel.add(scrollPane2);
+	
+		//TABELLA ALLOGGIO
+		alloggiotable = new JTable(adao.getAlloggio());
+		scrollPane2.setViewportView(alloggiotable);
+		alloggiotable.setFillsViewportHeight(true);
+		alloggiotable.setColumnSelectionAllowed(true);
+		alloggiotable.setEnabled(false);
+		alloggiotable.setBackground(new Color(245, 245, 245));
+		alloggiotable.setRowHeight(50);
+
 		
-		JPanel attrazionipanel = new JPanel();
-		attrazionipanel.setBackground(new Color(255, 255, 255));
-		layeredPane.add(attrazionipanel, "name_276141316664400");
+		//PANEL ATTRAZIONE
+		JPanel attrazionepanel = new JPanel();
+		attrazionepanel.setBackground(new Color(255, 255, 255));
+		layeredPane.add(attrazionepanel, "name_276141316664400");
+		attrazionepanel.setLayout(null);
+		
+		JScrollPane scrollPane3 = new JScrollPane();
+		scrollPane3.setBounds(120, 78, 598, 426);
+		attrazionepanel.add(scrollPane3);
+	
+		//TABELLA ATTRAZIONE
+		attrazionetable = new JTable(tdao.getAttrazione());
+		scrollPane3.setViewportView(attrazionetable);
+		attrazionetable.setFillsViewportHeight(true);
+		attrazionetable.setColumnSelectionAllowed(true);
+		attrazionetable.setEnabled(false);
+		attrazionetable.setBackground(new Color(245, 245, 245));
+		attrazionetable.setRowHeight(50);		
+
 		
 		//BOTTONE RISTORANTE
 		JButton ristojb = new JButton("Ristorante");
@@ -171,7 +205,7 @@ public class Main_Frame extends JFrame {
 		attrazionijb.setBounds(0, 312, 244, 43);
 		attrazionijb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ctr.switchPanel(layeredPane,attrazionipanel);
+				ctr.switchPanel(layeredPane,attrazionepanel);
 			}
 		});
 		attrazionijb.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 23));

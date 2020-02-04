@@ -7,6 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+
 public class Connessione{
 	
 	private Connection conn;
@@ -36,28 +39,34 @@ public class Connessione{
 	}
 	
 	
-	public void Query(String select,String from ,String where) {
+	
+	public ResultSet Query(String select,String from ,String where, DefaultTableModel t) {
+		
+		
 		
 		try {
 			
-			String query = "select " + select + "from " + from;
+			String query = "select "+select +" from "+from;
 			PreparedStatement s = conn.prepareStatement(query);
-			this.rs = s.executeQuery();
+			rs = s.executeQuery();
 			
-			while(rs.next()) {
-				String nome = rs.getString(1);
-				String citta = rs.getString(2);
-				String via = rs.getString(3);
-				int civico = rs.getInt(4);
-				String specialita = rs.getString(5);
-				
-				
-			}
+			
 		}catch(SQLException e) {
 			System.err.println("Errore SQL");
 			e.printStackTrace();
 		}
 		
+		return rs;
 	}
 
+	
+	
+	public void ChiudiConn() {
+		try {
+			conn.close();
+		}catch(SQLException e) {
+			System.err.println("Errore Connessione Chiusura");
+			e.printStackTrace();
+		}
+	}
 }
