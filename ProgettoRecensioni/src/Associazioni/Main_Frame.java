@@ -113,7 +113,7 @@ public class Main_Frame extends JFrame {
 		ristotable.setFillsViewportHeight(true);
 		ristotable.setColumnSelectionAllowed(true);
 		ristotable.setEnabled(false);
-		ristotable.setBackground(new Color(245, 245, 245));
+		ristotable.setBackground(new Color(245, 245, 220));
 		ristotable.setRowHeight(50);
 		
 		
