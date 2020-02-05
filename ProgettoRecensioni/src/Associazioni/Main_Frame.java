@@ -8,6 +8,8 @@ import javax.swing.JScrollPane;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
+
 import java.awt.Color;
 import java.awt.CardLayout;
 import javax.swing.BorderFactory;
@@ -27,6 +29,8 @@ import javax.swing.JSeparator;
 import javax.swing.ImageIcon;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Main_Frame extends JFrame {
 
@@ -37,8 +41,11 @@ public class Main_Frame extends JFrame {
 	private JTable ristotable;
 	private JTable alloggiotable;
 	private JTable attrazionetable;
+	private Utente UtenteCorrente;
+	private JLabel userlabel = new JLabel();
 	
 	public Main_Frame(Controller ctr) {
+		setTitle("RevHub");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1070, 603);
@@ -62,11 +69,11 @@ public class Main_Frame extends JFrame {
 		lblNewLabel.setBounds(27, 11, 204, 99);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 75));
 		homepanel.add(lblNewLabel);
+		userlabel.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 15));
 		
-		JLabel Usertext = new JLabel("");
-		Usertext.setForeground(new Color(0, 0, 0));
-		Usertext.setBounds(27, 190, 169, 36);
-		homepanel.add(Usertext);
+		userlabel.setForeground(new Color(0, 0, 0));
+		userlabel.setBounds(27, 190, 226, 36);
+		homepanel.add(userlabel);
 		
 		JButton accedijb = new JButton("Accedi\r\n");
 		accedijb.addActionListener(new ActionListener() {
@@ -81,6 +88,7 @@ public class Main_Frame extends JFrame {
 		homepanel.add(accedijb);
 		
 		JTextArea testo_home = new JTextArea();
+		testo_home.setEditable(false);
 		testo_home.setFont(new Font("Microsoft YaHei Light", Font.PLAIN, 15));
 		testo_home.setText("Benvenuto in RevHub, il programma #1 di recensioni in Italia!\r\nPrima di iniziare, clicca sul bottone accedi se hai gi\u00E0 un account RevHub.");
 		testo_home.setBounds(26, 121, 501, 46);
@@ -104,17 +112,37 @@ public class Main_Frame extends JFrame {
 		ristopanel.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(120, 78, 598, 426);
+		scrollPane.setBounds(121, 115, 598, 426);
 		ristopanel.add(scrollPane);
 	
 		//TABELLA RISTORANTE
 		ristotable = new JTable(rdao.getRistoranti());
+	/*	ristotable.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(java.awt.event.MouseEvent evt) {
+				int index = ristotable.getSelectedRow();
+				JOptionPane.showMessageDialog(null,index);
+			}
+		}); */
 		scrollPane.setViewportView(ristotable);
 		ristotable.setFillsViewportHeight(true);
 		ristotable.setColumnSelectionAllowed(true);
 		ristotable.setEnabled(false);
 		ristotable.setBackground(new Color(245, 245, 220));
 		ristotable.setRowHeight(50);
+		
+		JLabel label_1 = new JLabel("");
+		label_1.setIcon(new ImageIcon(Main_Frame.class.getResource("/img/restaurant_alponte_scritta-300x133.png")));
+		label_1.setBounds(12, 0, 316, 95);
+		ristopanel.add(label_1);
+		
+		JButton btnAccedi = new JButton("Inserisci");
+		btnAccedi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnAccedi.setBounds(639, 47, 97, 25);
+		ristopanel.add(btnAccedi);
 		
 		
 		//PANEL ALLOGGIO
@@ -225,5 +253,20 @@ public class Main_Frame extends JFrame {
 		lblNewLabel_3.setBounds(76, 89, 104, 26);
 		lblNewLabel_3.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 28));
 		main_panel.add(lblNewLabel_3);
+	}
+
+	public Utente getUtenteCorrente() {
+		return UtenteCorrente;
+	}
+
+	public void setUtenteCorrente(Utente utenteCorrente) {
+		UtenteCorrente = utenteCorrente;
+	}
+	
+	public void setUtenteLabel() {
+		this.getUtenteLabel().setText("Benvenuto "+this.getUtenteCorrente().getUsername()+"!");
+	}
+	public JLabel getUtenteLabel() {
+		return userlabel;
 	}
 }

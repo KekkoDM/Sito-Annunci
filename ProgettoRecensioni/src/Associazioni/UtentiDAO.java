@@ -9,7 +9,7 @@ import java.util.Properties;
 
 public class UtentiDAO {
 	
-	public int checkUtente(String u, String p) {
+	public Utente checkUtente(String u, String p) {
 		try {
 			Class.forName("org.postgresql.Driver");
 		}catch(ClassNotFoundException e) {
@@ -22,18 +22,25 @@ public class UtentiDAO {
 		props.setProperty("user","postgres");
 		props.setProperty("password","F123");
 		Connection conn = null;
-		int flag = 1;
 		
+		Utente user = new Utente();
 		try {
 			conn = DriverManager.getConnection(url, props);
-			String query = "select username,password from utente where username='" + u + "' and password ='" + p +"'";
+			String query = "select username,password,nome,cognome,tipo from utente where username='" + u + "' and password ='" + p +"'";
 			PreparedStatement s = conn.prepareStatement(query);
 			ResultSet rs = s.executeQuery();
 			while(rs.next()) {
 				String username = rs.getString(1);
 				String password = rs.getString(2);
+				String nome = rs.getString(3);
+				String cognome = rs.getString(4);
+				String tipo = rs.getString(5);
 				if(p.equals(password) && u.equals(username)) {
-					flag = 0;
+					user.setUsername(username);
+					user.setPassword(password);
+					user.setNome(nome);
+					user.setCognome(cognome);
+					user.setTipo(tipo);
 					break;
 				}
 			}
@@ -41,7 +48,6 @@ public class UtentiDAO {
 			System.err.println("Errore SQL");
 			e.printStackTrace();
 		}
-		
-		return flag;
+		return user;
 	}
 }

@@ -60,6 +60,7 @@ public class Connessione{
 	}
 
 	
+	
 	public void Insert (String table ,String values) {
 		
         try {
@@ -76,6 +77,7 @@ public class Connessione{
 		}
 		
 	}
+	
 	
 	
 	

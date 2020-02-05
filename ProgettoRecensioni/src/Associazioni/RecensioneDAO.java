@@ -25,6 +25,8 @@ public class RecensioneDAO {
 		
 	}
 
+	
+	
 	public DefaultTableModel getRecesnione() {
 		String column[] = {"CodRe","Valutazione","Titolo","Testo","Data"};
 		DefaultTableModel tab = new DefaultTableModel(column, 0);

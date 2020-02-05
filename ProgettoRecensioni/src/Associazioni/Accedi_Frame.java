@@ -41,7 +41,7 @@ public class Accedi_Frame extends JDialog {
 		JLabel esitotext = new JLabel();
 		esitotext.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 17));
 		esitotext.setForeground(Color.RED);
-		esitotext.setBounds(120, 178, 196, 23);
+		esitotext.setBounds(94, 178, 256, 23);
 		contentPanel.add(esitotext);
 		
 		passtext = new JPasswordField();
@@ -70,12 +70,15 @@ public class Accedi_Frame extends JDialog {
 			public void actionPerformed(ActionEvent arg0) {
 				String username = usertext.getText();
 				String password = passtext.getText();
-				int flag = udao.checkUtente(username, password);
-				if(flag == 0){
-					ctr.chiudiAccedi();
+				Utente user = new Utente();
+				user = udao.checkUtente(username, password);
+				if(user.getUsername().equals(" ")){
+					esitotext.setText("Username e Password errati!");
 				}
 				else {
-					esitotext.setText("Username e Password errati!");
+					ctr.chiudiAccedi();
+					ctr.main.setUtenteCorrente(user);
+					ctr.main.setUtenteLabel();
 				}
 			}
 		});
