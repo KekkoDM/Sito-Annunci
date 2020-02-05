@@ -60,6 +60,24 @@ public class Connessione{
 	}
 
 	
+	public void Insert (String table ,String values) {
+		
+        try {
+			
+        	String query = "insert into " + table + " values(" + values + ");";
+			
+			PreparedStatement st = conn.prepareStatement(query);
+			
+			st.executeUpdate();
+		}
+		catch(SQLException e) {
+			System.err.println("Errore");
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
 	
 	public void ChiudiConn() {
 		try {

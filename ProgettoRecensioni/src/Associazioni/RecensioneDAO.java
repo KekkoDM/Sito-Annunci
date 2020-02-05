@@ -11,37 +11,18 @@ import java.util.Properties;
 import javax.swing.table.DefaultTableModel;
 
 public class RecensioneDAO {
-	public void AggiungiRecensione(int codre,float valutazione,String titolo,String testo,Date data) {
-		try {
-			Class.forName("org.postgresql.Driver");
-		}
-		catch(ClassNotFoundException e) {
-			System.err.println("Classe non trovata");
-		}
-		String url = "jdbc:postgresql://localhost/progetto";
-		Properties prop = new Properties();
-		prop.setProperty("user","postgres");
-		prop.setProperty("password","Password");
+	
+	
+	public void AggiungiRecensione(String valutazione,String titolo,String testo,String data) {
 		
-		Connection connect = null;
+		String values= valutazione + "," + titolo + "," + testo + "," + data;
+		Connessione c = new Connessione();
 		
-		try {
-			connect = DriverManager.getConnection(url, prop);
-			String query = "insert into recensione values ( , , , , , , , , , )";
-			PreparedStatement st = connect.prepareStatement(query);
-			st.clearParameters();
-			st.setInt(1, codre);
-			st.setFloat(2, valutazione);
-			st.setString(3, titolo);
-			st.setString(4, testo);
-			st.setDate(5, data);
-			
-			st.executeUpdate();
-		}
-		catch(SQLException e) {
-			System.err.println("Errore");
-			e.printStackTrace();
-		}
+		c.ConnessioneDB();
+		c.Insert("recensione", values);
+		c.ChiudiConn();
+		
+		
 	}
 
 	public DefaultTableModel getRecesnione() {
