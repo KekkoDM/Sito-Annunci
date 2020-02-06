@@ -21,12 +21,14 @@ public class Controller {
 		main = new Main_Frame(this);
 		main.setVisible(true);
 	}
+	
 	public void switchPanel(JLayeredPane panel,JPanel newpanel) {
 		panel.removeAll();
 		panel.add(newpanel);
 		panel.repaint();
 		panel.revalidate();
 	}
+	
 	public void apriAccedi(){
 		accedi = new Accedi_Frame(this);
 		accedi.setVisible(true);
@@ -38,8 +40,10 @@ public class Controller {
 		    }
 		});
 	}
+	
 	public void chiudiAccedi() {
 		accedi.dispose();
 		main.setEnabled(true);
 	}
+	
 }

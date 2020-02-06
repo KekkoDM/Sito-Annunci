@@ -9,7 +9,6 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
-
 import java.awt.Color;
 import java.awt.CardLayout;
 import javax.swing.BorderFactory;
@@ -42,7 +41,9 @@ public class Main_Frame extends JFrame {
 	private JTable alloggiotable;
 	private JTable attrazionetable;
 	private Utente UtenteCorrente;
-	private JLabel userlabel = new JLabel();
+	private JLabel userlabel;
+	private JButton accedijb;
+	private JButton escijb;
 	
 	public Main_Frame(Controller ctr) {
 		setTitle("RevHub");
@@ -69,13 +70,13 @@ public class Main_Frame extends JFrame {
 		lblNewLabel.setBounds(27, 11, 204, 99);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 75));
 		homepanel.add(lblNewLabel);
+		userlabel = new JLabel();
 		userlabel.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 15));
-		
 		userlabel.setForeground(new Color(0, 0, 0));
 		userlabel.setBounds(27, 190, 226, 36);
 		homepanel.add(userlabel);
 		
-		JButton accedijb = new JButton("Accedi\r\n");
+		accedijb = new JButton("Accedi\r\n");
 		accedijb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {				
 				ctr.apriAccedi();
@@ -99,12 +100,19 @@ public class Main_Frame extends JFrame {
 		label.setBounds(0, 278, 823, 296);
 		homepanel.add(label);
 		
-		JButton btnEsci = new JButton("Esci");
-		btnEsci.setForeground(new Color(255, 255, 255));
-		btnEsci.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 23));
-		btnEsci.setBackground(new Color(46, 139, 87));
-		btnEsci.setBounds(614, 119, 129, 35);
-		homepanel.add(btnEsci);
+		escijb = new JButton("Esci");
+		escijb.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ctr.main.getAccediButton().setEnabled(true);
+				ctr.main.getUtenteCorrente();
+				ctr.main.getUtenteLabel().setText(" ");
+			}
+		});
+		escijb.setForeground(new Color(255, 255, 255));
+		escijb.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 23));
+		escijb.setBackground(new Color(46, 139, 87));
+		escijb.setBounds(614, 119, 129, 35);
+		homepanel.add(escijb);
 		
 		JPanel ristopanel = new JPanel();
 		ristopanel.setBackground(new Color(255, 255, 255));
@@ -265,8 +273,15 @@ public class Main_Frame extends JFrame {
 	
 	public void setUtenteLabel() {
 		this.getUtenteLabel().setText("Benvenuto "+this.getUtenteCorrente().getUsername()+"!");
+		this.getAccediButton().setEnabled(false);
 	}
 	public JLabel getUtenteLabel() {
 		return userlabel;
+	}
+	public JButton getAccediButton() {
+		return accedijb;
+	}
+	public JButton getEsciButton() {
+		return escijb;
 	}
 }
