@@ -16,6 +16,10 @@ public class Utente {
 	}
 	public Utente() {
 		Username = " ";
+		Password = " ";
+		Nome = " ";
+		Cognome = " ";
+		Tipo = " ";
 	}
 	public String getUsername() {
 		return Username;

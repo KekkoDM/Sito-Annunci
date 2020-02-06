@@ -46,6 +46,8 @@ public class Main_Frame extends JFrame {
 	private JButton escijb;
 	
 	public Main_Frame(Controller ctr) {
+		
+		UtenteCorrente = new Utente();
 		setTitle("RevHub");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -106,6 +108,8 @@ public class Main_Frame extends JFrame {
 				ctr.main.getAccediButton().setEnabled(true);
 				ctr.main.getUtenteCorrente();
 				ctr.main.getUtenteLabel().setText(" ");
+				Utente nuovo_utente = new Utente();
+				ctr.main.setUtenteCorrente(nuovo_utente);
 			}
 		});
 		escijb.setForeground(new Color(255, 255, 255));
@@ -191,6 +195,10 @@ public class Main_Frame extends JFrame {
 		attrazionetable.setEnabled(false);
 		attrazionetable.setBackground(new Color(245, 245, 245));
 		attrazionetable.setRowHeight(50);		
+		
+		JPanel modristopanel = new JPanel();
+		modristopanel.setBackground(Color.WHITE);
+		layeredPane.add(modristopanel, "name_1447936606331700");
 
 		
 		//BOTTONE RISTORANTE
@@ -198,7 +206,10 @@ public class Main_Frame extends JFrame {
 		ristojb.setBounds(0, 204, 244, 43);
 		ristojb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				ctr.switchPanel(layeredPane,ristopanel);
+				if(ctr.main.getUtenteCorrente().getTipo().equals("moderatore"))
+					ctr.switchPanel(layeredPane, modristopanel);
+				else
+					ctr.switchPanel(layeredPane,ristopanel);
 			}
 		});
 		ristojb.setForeground(new Color(255, 255, 255));
