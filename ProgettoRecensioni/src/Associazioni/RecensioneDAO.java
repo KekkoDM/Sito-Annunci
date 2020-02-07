@@ -1,5 +1,6 @@
 package Associazioni;
 
+import java.awt.Checkbox;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -8,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import javax.swing.JCheckBox;
 import javax.swing.table.DefaultTableModel;
 
 public class RecensioneDAO {
@@ -27,40 +29,31 @@ public class RecensioneDAO {
 
 	
 	
-	public DefaultTableModel getRecesnione() {
-		String column[] = {"CodRe","Valutazione","Titolo","Testo","Data"};
+	public DefaultTableModel getRistoNonApprovate() {
+		String column[] = {"Nome","Valutazione","Titolo","Testo","Data","Approva"};
 		DefaultTableModel tab = new DefaultTableModel(column, 0);
+		Connessione c = new Connessione();
+		
+		c.ConnessioneDB();
+		String select = "nome,valutazione,titolo,testo,data";
 		
 		try {
-			Class.forName("org.postgresql.Driver");
-		}
-		catch(ClassNotFoundException e) {
-			System.err.println("Classe non trovata");
-		}
-		
-		String url = "";
-		Properties props = new Properties();
-		props.setProperty("user","postgres");
-		props.setProperty("password","Password");
-		
-		Connection conn = null;
-		
-		try {
-			conn = DriverManager.getConnection(url, props);
-			String query = "select * from recensione";
-			PreparedStatement s = conn.prepareStatement(query);
-			ResultSet rs = s.executeQuery();
+			
+			ResultSet rs =c.Query(select, "ristorante join recensione on codri=codri2", "approvata <> true", tab);
 			
 			while(rs.next()) {
-				int codre = rs.getInt(1);
+				String nome = rs.getString(1);
 				String valutazione = rs.getString(2);
 				String titolo = rs.getString(3);
 				String testo = rs.getString(4);
-				Date data= rs.getDate(4);
+				Date data= rs.getDate(5);
+				JCheckBox approva = new JCheckBox();
 				
-				Object[] recensione = {codre,valutazione,titolo,testo,data};
+				Object[] recensione = {nome,valutazione,titolo,testo,data,approva};
 				tab.addRow(recensione);
+				
 			}
+			c.ChiudiConn();
 		}
 		catch(SQLException e) {
 			System.err.println("Errore SQL");

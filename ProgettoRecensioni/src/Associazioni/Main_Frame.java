@@ -30,6 +30,7 @@ import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JCheckBox;
 
 public class Main_Frame extends JFrame {
 
@@ -37,15 +38,15 @@ public class Main_Frame extends JFrame {
     ristoranteDAO rdao = new ristoranteDAO();
     AlloggioDAO adao = new AlloggioDAO();
     AttrazioneDAO tdao = new AttrazioneDAO();
+    RecensioneDAO recDAO = new RecensioneDAO();
 	private JTable ristotable;
+	private JTable modristotable;
 	private JTable alloggiotable;
 	private JTable attrazionetable;
 	private Utente UtenteCorrente;
 	private JLabel userlabel;
 	private JButton accedijb;
 	private JButton escijb;
-	private JButton inseriscijb;
-	private JButton aggiungijb;
 	
 	public Main_Frame(Controller ctr) {
 		
@@ -126,18 +127,18 @@ public class Main_Frame extends JFrame {
 		ristopanel.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 115, 823, 459);
+		scrollPane.setBounds(121, 115, 598, 426);
 		ristopanel.add(scrollPane);
 	
 		//TABELLA RISTORANTE
 		ristotable = new JTable(rdao.getRistoranti());
-		ristotable.addMouseListener(new MouseAdapter() {
+	/*	ristotable.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
 				int index = ristotable.getSelectedRow();
 				JOptionPane.showMessageDialog(null,index);
 			}
-		}); 
+		}); */
 		scrollPane.setViewportView(ristotable);
 		ristotable.setFillsViewportHeight(true);
 		ristotable.setColumnSelectionAllowed(true);
@@ -150,21 +151,13 @@ public class Main_Frame extends JFrame {
 		label_1.setBounds(12, 0, 316, 95);
 		ristopanel.add(label_1);
 		
-		inseriscijb = new JButton("Inserisci");
-		inseriscijb.addActionListener(new ActionListener() {
+		JButton btnAccedi = new JButton("Inserisci");
+		btnAccedi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		inseriscijb.setBounds(639, 47, 97, 25);
-		ristopanel.add(inseriscijb);
-		
-		aggiungijb = new JButton("Aggiungi");
-		aggiungijb.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		aggiungijb.setBounds(506, 48, 89, 23);
-		ristopanel.add(aggiungijb);
+		btnAccedi.setBounds(639, 47, 97, 25);
+		ristopanel.add(btnAccedi);
 		
 		
 		//PANEL ALLOGGIO
@@ -206,33 +199,37 @@ public class Main_Frame extends JFrame {
 		attrazionetable.setBackground(new Color(245, 245, 245));
 		attrazionetable.setRowHeight(50);		
 		
+		
+		//PANEL RISTORANTE MODERATORE
 		JPanel modristopanel = new JPanel();
 		modristopanel.setBackground(Color.WHITE);
 		layeredPane.add(modristopanel, "name_1447936606331700");
-
+		modristopanel.setLayout(null);
+		
+		JScrollPane scrollPane4 = new JScrollPane();
+		scrollPane4.setBounds(120, 78, 598, 426);
+		modristopanel.add(scrollPane4);
+	
+		//TABELLA MODERATORE
+		modristotable = new JTable(recDAO.getRistoNonApprovate());
+		scrollPane4.setViewportView(modristotable);
+		modristotable.setFillsViewportHeight(true);
+		modristotable.setColumnSelectionAllowed(true);
+		modristotable.setEnabled(false);
+		modristotable.setBackground(new Color(245, 245, 245));
+		modristotable.setRowHeight(50);
+		
+		
 		
 		//BOTTONE RISTORANTE
 		JButton ristojb = new JButton("Ristorante");
 		ristojb.setBounds(0, 204, 244, 43);
 		ristojb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				ctr.switchPanel(layeredPane,ristopanel);
 				if(ctr.main.getUtenteCorrente().getTipo().equals("moderatore"))
 					ctr.switchPanel(layeredPane, modristopanel);
-				else if(ctr.main.getUtenteCorrente().getTipo().equals("admin")) {
-					ctr.main.getAggiungiButton().setVisible(true);
-					ctr.main.getInserisciButton().setVisible(false);
-				}
-				else if(ctr.main.getUtenteCorrente().getTipo().equals("base")) {
-					ctr.main.getAggiungiButton().setVisible(false);
-					ctr.main.getInserisciButton().setVisible(true);
-				}
-				else {
+				else
 					ctr.switchPanel(layeredPane,ristopanel);
-					ctr.main.getAggiungiButton().setVisible(false);
-					ctr.main.getInserisciButton().setVisible(false);
-				}
-					
 			}
 		});
 		ristojb.setForeground(new Color(255, 255, 255));
@@ -309,24 +306,13 @@ public class Main_Frame extends JFrame {
 		this.getUtenteLabel().setText("Benvenuto "+this.getUtenteCorrente().getUsername()+"!");
 		this.getAccediButton().setEnabled(false);
 	}
-	
 	public JLabel getUtenteLabel() {
 		return userlabel;
 	}
-	
 	public JButton getAccediButton() {
 		return accedijb;
 	}
-	
 	public JButton getEsciButton() {
 		return escijb;
-	}
-	
-	public JButton getAggiungiButton() {
-		return aggiungijb;
-	}
-	
-	public JButton getInserisciButton() {
-		return inseriscijb;
 	}
 }

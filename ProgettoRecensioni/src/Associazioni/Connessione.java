@@ -26,7 +26,7 @@ public class Connessione{
 		String url = "jdbc:postgresql://localhost/progetto";
 		Properties props = new Properties();
 		props.setProperty("user","postgres");
-		props.setProperty("password","ale123");
+		props.setProperty("password","F123");
 		
 		 this.conn = null;
 		
@@ -41,12 +41,18 @@ public class Connessione{
 	
 	
 	public ResultSet Query(String select,String from ,String where, DefaultTableModel t) {
-		
+		String query="";
 		
 		
 		try {
 			
-			String query = "select "+select +" from "+from;
+			if(where.contentEquals("")) {
+				query = "select "+select +" from "+from;
+			}else {
+				query = "select "+select +" from "+from + " where " + where;
+			}
+			
+			
 			PreparedStatement s = conn.prepareStatement(query);
 			rs = s.executeQuery();
 			
