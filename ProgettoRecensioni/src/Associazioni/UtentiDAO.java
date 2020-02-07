@@ -20,7 +20,7 @@ public class UtentiDAO {
 		String url = "jdbc:postgresql://localhost/progetto";
 		Properties props = new Properties();
 		props.setProperty("user","postgres");
-		props.setProperty("password","F123");
+		props.setProperty("password","ale123");
 		Connection conn = null;
 		
 		Utente user = new Utente();

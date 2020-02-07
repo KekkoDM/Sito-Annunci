@@ -47,6 +47,8 @@ public class Main_Frame extends JFrame {
 	private JLabel userlabel;
 	private JButton accedijb;
 	private JButton escijb;
+	private JButton aggiungijb;
+	private JButton inseriscijb;
 	
 	public Main_Frame(Controller ctr) {
 		
@@ -151,13 +153,23 @@ public class Main_Frame extends JFrame {
 		label_1.setBounds(12, 0, 316, 95);
 		ristopanel.add(label_1);
 		
-		JButton btnAccedi = new JButton("Inserisci");
-		btnAccedi.addActionListener(new ActionListener() {
+		inseriscijb = new JButton("Inserisci");
+		inseriscijb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				ctr.apriInserisci();
 			}
 		});
-		btnAccedi.setBounds(639, 47, 97, 25);
-		ristopanel.add(btnAccedi);
+		inseriscijb.setBounds(639, 47, 97, 25);
+		ristopanel.add(inseriscijb);
+		
+		aggiungijb = new JButton("Aggiungi");
+		aggiungijb.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
+		aggiungijb.setBounds(489, 48, 89, 23);
+		ristopanel.add(aggiungijb);
 		
 		
 		//PANEL ALLOGGIO
@@ -226,10 +238,21 @@ public class Main_Frame extends JFrame {
 		ristojb.setBounds(0, 204, 244, 43);
 		ristojb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(ctr.main.getUtenteCorrente().getTipo().equals("moderatore"))
+				ctr.switchPanel(layeredPane,ristopanel);
+				if(ctr.main.getUtenteCorrente().getTipo().equals("moderatore")) 
 					ctr.switchPanel(layeredPane, modristopanel);
-				else
-					ctr.switchPanel(layeredPane,ristopanel);
+				else if(ctr.main.getUtenteCorrente().getTipo().equals("admin")){
+					ctr.main.getAggiungiButton().setVisible(true);
+					ctr.main.getInserisciButton().setVisible(false);
+				}
+				else if(ctr.main.getUtenteCorrente().getTipo().equals("base")){
+					ctr.main.getAggiungiButton().setVisible(false);
+					ctr.main.getInserisciButton().setVisible(true);
+				}
+				else {
+					ctr.main.getAggiungiButton().setVisible(false);
+					ctr.main.getInserisciButton().setVisible(false);
+				}
 			}
 		});
 		ristojb.setForeground(new Color(255, 255, 255));
@@ -314,5 +337,11 @@ public class Main_Frame extends JFrame {
 	}
 	public JButton getEsciButton() {
 		return escijb;
+	}
+	public JButton getInserisciButton() {
+		return inseriscijb;
+	}
+	public JButton getAggiungiButton() {
+		return aggiungijb;
 	}
 }
