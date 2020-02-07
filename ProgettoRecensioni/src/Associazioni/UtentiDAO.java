@@ -10,25 +10,15 @@ import java.util.Properties;
 public class UtentiDAO {
 	
 	public Utente checkUtente(String u, String p) {
-		try {
-			Class.forName("org.postgresql.Driver");
-		}catch(ClassNotFoundException e) {
-			System.err.println("Classe non trovata");
-		}
-		
-		
-		String url = "jdbc:postgresql://localhost/progetto";
-		Properties props = new Properties();
-		props.setProperty("user","postgres");
-		props.setProperty("password","ale123");
-		Connection conn = null;
+		Connessione c = new Connessione();
+		c.ConnessioneDB();
 		
 		Utente user = new Utente();
+		String select = "username,password,nome,cognome,tipo";
+		String where = "username='" + u + "' and password ='" + p +"'";
 		try {
-			conn = DriverManager.getConnection(url, props);
-			String query = "select username,password,nome,cognome,tipo from utente where username='" + u + "' and password ='" + p +"'";
-			PreparedStatement s = conn.prepareStatement(query);
-			ResultSet rs = s.executeQuery();
+			
+			ResultSet rs = c.Query(select, "utente", where);
 			while(rs.next()) {
 				String username = rs.getString(1);
 				String password = rs.getString(2);
@@ -44,6 +34,7 @@ public class UtentiDAO {
 					break;
 				}
 			}
+			c.ChiudiConn();
 		}catch(SQLException e) {
 			System.err.println("Errore SQL");
 			e.printStackTrace();

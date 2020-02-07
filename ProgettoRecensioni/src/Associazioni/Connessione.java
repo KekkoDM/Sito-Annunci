@@ -26,7 +26,7 @@ public class Connessione{
 		String url = "jdbc:postgresql://localhost/progetto";
 		Properties props = new Properties();
 		props.setProperty("user","postgres");
-		props.setProperty("password","ale123");
+		props.setProperty("password","F123");
 		
 		 this.conn = null;
 		
@@ -71,7 +71,7 @@ public class Connessione{
 		
         try {
 			
-        	String query = "insert into (titolo,testo,"+ table + " values(" + values + ");";
+        	String query = "insert into "+ table + " values(" + values + ");";
 			PreparedStatement st = conn.prepareStatement(query);
 			st.executeUpdate();
 		}
