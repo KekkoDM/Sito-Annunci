@@ -10,6 +10,7 @@ import java.util.Properties;
 import javax.swing.table.DefaultTableModel;
 
 public class ristoranteDAO {
+	private String [] risto;
 	
 	public DefaultTableModel getRistoranti() {
 		String col[] = {"Nome","Città","Via","Civico","Specialità"};
@@ -39,6 +40,14 @@ public class ristoranteDAO {
 		}
 		c.ChiudiConn();
 		return tableModel;
+	}
+
+	public String [] getRisto() {
+		return risto;
+	}
+
+	public void setRisto(String [] risto) {
+		this.risto = risto;
 	}
 
 }

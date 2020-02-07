@@ -24,6 +24,7 @@ public class Accedi_Frame extends JDialog {
 	private UtentiDAO udao = new UtentiDAO();
 
 	public Accedi_Frame(Controller ctr) {
+		setUndecorated(true);
 		setResizable(false);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());

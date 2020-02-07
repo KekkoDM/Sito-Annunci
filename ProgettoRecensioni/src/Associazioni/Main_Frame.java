@@ -46,8 +46,6 @@ public class Main_Frame extends JFrame {
 	private JButton escijb;
 	
 	public Main_Frame(Controller ctr) {
-		
-		UtenteCorrente = new Utente();
 		setTitle("RevHub");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -108,8 +106,6 @@ public class Main_Frame extends JFrame {
 				ctr.main.getAccediButton().setEnabled(true);
 				ctr.main.getUtenteCorrente();
 				ctr.main.getUtenteLabel().setText(" ");
-				Utente nuovo_utente = new Utente();
-				ctr.main.setUtenteCorrente(nuovo_utente);
 			}
 		});
 		escijb.setForeground(new Color(255, 255, 255));
@@ -119,12 +115,12 @@ public class Main_Frame extends JFrame {
 		homepanel.add(escijb);
 		
 		JPanel ristopanel = new JPanel();
-		ristopanel.setBackground(new Color(255, 255, 255));
+		ristopanel.setBackground(new Color(173, 216, 230));
 		layeredPane.add(ristopanel, "name_276109691756800");
 		ristopanel.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(121, 115, 598, 426);
+		scrollPane.setBounds(0, 115, 823, 459);
 		ristopanel.add(scrollPane);
 	
 		//TABELLA RISTORANTE
@@ -145,26 +141,29 @@ public class Main_Frame extends JFrame {
 		
 		JLabel label_1 = new JLabel("");
 		label_1.setIcon(new ImageIcon(Main_Frame.class.getResource("/img/restaurant_alponte_scritta-300x133.png")));
-		label_1.setBounds(12, 0, 316, 95);
+		label_1.setBounds(63, 0, 316, 118);
 		ristopanel.add(label_1);
 		
-		JButton btnAccedi = new JButton("Inserisci");
+		JButton btnAccedi = new JButton("Inserisci Recensione");
+		btnAccedi.setForeground(new Color(255, 255, 255));
+		btnAccedi.setBackground(new Color(46, 139, 87));
 		btnAccedi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				ctr.apriInserisci();
 			}
 		});
-		btnAccedi.setBounds(639, 47, 97, 25);
+		btnAccedi.setBounds(633, 42, 175, 40);
 		ristopanel.add(btnAccedi);
 		
 		
 		//PANEL ALLOGGIO
 		JPanel alloggipanel = new JPanel();
-		alloggipanel.setBackground(new Color(255, 255, 255));
+		alloggipanel.setBackground(new Color(222, 184, 135));
 		layeredPane.add(alloggipanel, "name_276128323411800");
 		alloggipanel.setLayout(null);
 		
 		JScrollPane scrollPane2 = new JScrollPane();
-		scrollPane2.setBounds(120, 78, 598, 426);
+		scrollPane2.setBounds(0, 115, 823, 459);
 		alloggipanel.add(scrollPane2);
 	
 		//TABELLA ALLOGGIO
@@ -175,16 +174,26 @@ public class Main_Frame extends JFrame {
 		alloggiotable.setEnabled(false);
 		alloggiotable.setBackground(new Color(245, 245, 245));
 		alloggiotable.setRowHeight(50);
+		
+		JButton btnAccedi2 = new JButton("Inserisci Recensione");
+		btnAccedi2.setForeground(new Color(255, 255, 255));
+		btnAccedi2.setBackground(new Color(46, 139, 87));
+		btnAccedi2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnAccedi2.setBounds(633, 42, 175, 40);
+		alloggipanel.add(btnAccedi2);
 
 		
 		//PANEL ATTRAZIONE
 		JPanel attrazionepanel = new JPanel();
-		attrazionepanel.setBackground(new Color(255, 255, 255));
+		attrazionepanel.setBackground(new Color(216, 191, 216));
 		layeredPane.add(attrazionepanel, "name_276141316664400");
 		attrazionepanel.setLayout(null);
 		
 		JScrollPane scrollPane3 = new JScrollPane();
-		scrollPane3.setBounds(120, 78, 598, 426);
+		scrollPane3.setBounds(0, 115, 834, 496);
 		attrazionepanel.add(scrollPane3);
 	
 		//TABELLA ATTRAZIONE
@@ -196,9 +205,16 @@ public class Main_Frame extends JFrame {
 		attrazionetable.setBackground(new Color(245, 245, 245));
 		attrazionetable.setRowHeight(50);		
 		
-		JPanel modristopanel = new JPanel();
-		modristopanel.setBackground(Color.WHITE);
-		layeredPane.add(modristopanel, "name_1447936606331700");
+		JButton btnAccedi3 = new JButton("Inserisci Recensione");
+		btnAccedi3.setForeground(new Color(255, 255, 255));
+		btnAccedi3.setBackground(new Color(46, 139, 87));
+		btnAccedi3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
+		btnAccedi3.setBounds(633, 42, 175, 40);
+		attrazionepanel.add(btnAccedi3);
 
 		
 		//BOTTONE RISTORANTE
@@ -206,10 +222,7 @@ public class Main_Frame extends JFrame {
 		ristojb.setBounds(0, 204, 244, 43);
 		ristojb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(ctr.main.getUtenteCorrente().getTipo().equals("moderatore"))
-					ctr.switchPanel(layeredPane, modristopanel);
-				else
-					ctr.switchPanel(layeredPane,ristopanel);
+				ctr.switchPanel(layeredPane,ristopanel);
 			}
 		});
 		ristojb.setForeground(new Color(255, 255, 255));
