@@ -15,19 +15,15 @@ import javax.swing.table.DefaultTableModel;
 public class RecensioneDAO {
 	
 	
-	public void AggiungiRecensione(String valutazione,String titolo,String testo,String data) {
+	public void AggiungiRecensione(String luogo,String titolo,String testo) {
 		
-		String values= valutazione + "," + titolo + "," + testo + "," + data;
+		String values= luogo + "," + titolo + "," + testo;
 		Connessione c = new Connessione();
 		
 		c.ConnessioneDB();
 		c.Insert("recensione", values);
 		c.ChiudiConn();
-		
-		
 	}
-
-	
 	
 	public DefaultTableModel getRistoNonApprovate() {
 		String column[] = {"Nome","Valutazione","Titolo","Testo","Data","Approva"};
@@ -59,7 +55,6 @@ public class RecensioneDAO {
 			System.err.println("Errore SQL");
 			e.printStackTrace();
 		}
-		
 		return tab;
 	}
 }

@@ -71,10 +71,8 @@ public class Connessione{
 		
         try {
 			
-        	String query = "insert into " + table + " values(" + values + ");";
-			
+        	String query = "insert into (titolo,testo,"+ table + " values(" + values + ");";
 			PreparedStatement st = conn.prepareStatement(query);
-			
 			st.executeUpdate();
 		}
 		catch(SQLException e) {
@@ -84,6 +82,24 @@ public class Connessione{
 		
 	}
 	
+	public ResultSet Query(String select,String from ,String where) {
+		String query=" ";
+		try {
+			
+			if(where.contentEquals(" ")) {
+				query = "select "+select +" from "+from;
+			}else {
+				query = "select "+select +" from "+from + " where " + where;
+			}
+			PreparedStatement s = conn.prepareStatement(query);
+			rs = s.executeQuery();
+		}catch(SQLException e) {
+			System.err.println("Errore SQL");
+			e.printStackTrace();
+		}
+		
+		return rs;
+	}
 	
 	
 	
