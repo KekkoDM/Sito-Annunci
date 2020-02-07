@@ -12,7 +12,6 @@ public class Controller {
 	
 	Main_Frame main;
 	Accedi_Frame accedi;
-	Inserisci_recensione inserisci;
 	
 	public static void main(String[] args) {
 		Controller ctr = new Controller();
@@ -43,23 +42,6 @@ public class Controller {
 	}
 	
 	public void chiudiAccedi() {
-		accedi.dispose();
-		main.setEnabled(true);
-	}
-	
-	public void apriInserisci(){
-		inserisci = new Inserisci_recensione(this);
-		inserisci.setVisible(true);
-		main.setEnabled(false);
-		inserisci.addWindowListener(new WindowAdapter(){ //chiudi tramite la X
-		    public void windowClosing(WindowEvent e)
-		    {
-		    	main.setEnabled(true);
-		    }
-		});
-	}
-	
-	public void chiudiInsrisci() {
 		accedi.dispose();
 		main.setEnabled(true);
 	}

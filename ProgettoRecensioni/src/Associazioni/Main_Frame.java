@@ -44,8 +44,12 @@ public class Main_Frame extends JFrame {
 	private JLabel userlabel;
 	private JButton accedijb;
 	private JButton escijb;
+	private JButton inseriscijb;
+	private JButton aggiungijb;
 	
 	public Main_Frame(Controller ctr) {
+		
+		UtenteCorrente = new Utente();
 		setTitle("RevHub");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -106,6 +110,8 @@ public class Main_Frame extends JFrame {
 				ctr.main.getAccediButton().setEnabled(true);
 				ctr.main.getUtenteCorrente();
 				ctr.main.getUtenteLabel().setText(" ");
+				Utente nuovo_utente = new Utente();
+				ctr.main.setUtenteCorrente(nuovo_utente);
 			}
 		});
 		escijb.setForeground(new Color(255, 255, 255));
@@ -115,7 +121,7 @@ public class Main_Frame extends JFrame {
 		homepanel.add(escijb);
 		
 		JPanel ristopanel = new JPanel();
-		ristopanel.setBackground(new Color(173, 216, 230));
+		ristopanel.setBackground(new Color(255, 255, 255));
 		layeredPane.add(ristopanel, "name_276109691756800");
 		ristopanel.setLayout(null);
 		
@@ -125,13 +131,13 @@ public class Main_Frame extends JFrame {
 	
 		//TABELLA RISTORANTE
 		ristotable = new JTable(rdao.getRistoranti());
-	/*	ristotable.addMouseListener(new MouseAdapter() {
+		ristotable.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
 				int index = ristotable.getSelectedRow();
 				JOptionPane.showMessageDialog(null,index);
 			}
-		}); */
+		}); 
 		scrollPane.setViewportView(ristotable);
 		ristotable.setFillsViewportHeight(true);
 		ristotable.setColumnSelectionAllowed(true);
@@ -141,29 +147,34 @@ public class Main_Frame extends JFrame {
 		
 		JLabel label_1 = new JLabel("");
 		label_1.setIcon(new ImageIcon(Main_Frame.class.getResource("/img/restaurant_alponte_scritta-300x133.png")));
-		label_1.setBounds(63, 0, 316, 118);
+		label_1.setBounds(12, 0, 316, 95);
 		ristopanel.add(label_1);
 		
-		JButton btnAccedi = new JButton("Inserisci Recensione");
-		btnAccedi.setForeground(new Color(255, 255, 255));
-		btnAccedi.setBackground(new Color(46, 139, 87));
-		btnAccedi.addActionListener(new ActionListener() {
+		inseriscijb = new JButton("Inserisci");
+		inseriscijb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				ctr.apriInserisci();
 			}
 		});
-		btnAccedi.setBounds(633, 42, 175, 40);
-		ristopanel.add(btnAccedi);
+		inseriscijb.setBounds(639, 47, 97, 25);
+		ristopanel.add(inseriscijb);
+		
+		aggiungijb = new JButton("Aggiungi");
+		aggiungijb.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		aggiungijb.setBounds(506, 48, 89, 23);
+		ristopanel.add(aggiungijb);
 		
 		
 		//PANEL ALLOGGIO
 		JPanel alloggipanel = new JPanel();
-		alloggipanel.setBackground(new Color(222, 184, 135));
+		alloggipanel.setBackground(new Color(255, 255, 255));
 		layeredPane.add(alloggipanel, "name_276128323411800");
 		alloggipanel.setLayout(null);
 		
 		JScrollPane scrollPane2 = new JScrollPane();
-		scrollPane2.setBounds(0, 115, 823, 459);
+		scrollPane2.setBounds(120, 78, 598, 426);
 		alloggipanel.add(scrollPane2);
 	
 		//TABELLA ALLOGGIO
@@ -174,26 +185,16 @@ public class Main_Frame extends JFrame {
 		alloggiotable.setEnabled(false);
 		alloggiotable.setBackground(new Color(245, 245, 245));
 		alloggiotable.setRowHeight(50);
-		
-		JButton btnAccedi2 = new JButton("Inserisci Recensione");
-		btnAccedi2.setForeground(new Color(255, 255, 255));
-		btnAccedi2.setBackground(new Color(46, 139, 87));
-		btnAccedi2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		btnAccedi2.setBounds(633, 42, 175, 40);
-		alloggipanel.add(btnAccedi2);
 
 		
 		//PANEL ATTRAZIONE
 		JPanel attrazionepanel = new JPanel();
-		attrazionepanel.setBackground(new Color(216, 191, 216));
+		attrazionepanel.setBackground(new Color(255, 255, 255));
 		layeredPane.add(attrazionepanel, "name_276141316664400");
 		attrazionepanel.setLayout(null);
 		
 		JScrollPane scrollPane3 = new JScrollPane();
-		scrollPane3.setBounds(0, 115, 834, 496);
+		scrollPane3.setBounds(120, 78, 598, 426);
 		attrazionepanel.add(scrollPane3);
 	
 		//TABELLA ATTRAZIONE
@@ -205,16 +206,9 @@ public class Main_Frame extends JFrame {
 		attrazionetable.setBackground(new Color(245, 245, 245));
 		attrazionetable.setRowHeight(50);		
 		
-		JButton btnAccedi3 = new JButton("Inserisci Recensione");
-		btnAccedi3.setForeground(new Color(255, 255, 255));
-		btnAccedi3.setBackground(new Color(46, 139, 87));
-		btnAccedi3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-			}
-		});
-		btnAccedi3.setBounds(633, 42, 175, 40);
-		attrazionepanel.add(btnAccedi3);
+		JPanel modristopanel = new JPanel();
+		modristopanel.setBackground(Color.WHITE);
+		layeredPane.add(modristopanel, "name_1447936606331700");
 
 		
 		//BOTTONE RISTORANTE
@@ -223,6 +217,22 @@ public class Main_Frame extends JFrame {
 		ristojb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				ctr.switchPanel(layeredPane,ristopanel);
+				if(ctr.main.getUtenteCorrente().getTipo().equals("moderatore"))
+					ctr.switchPanel(layeredPane, modristopanel);
+				else if(ctr.main.getUtenteCorrente().getTipo().equals("admin")) {
+					ctr.main.getAggiungiButton().setVisible(true);
+					ctr.main.getInserisciButton().setVisible(false);
+				}
+				else if(ctr.main.getUtenteCorrente().getTipo().equals("base")) {
+					ctr.main.getAggiungiButton().setVisible(false);
+					ctr.main.getInserisciButton().setVisible(true);
+				}
+				else {
+					ctr.switchPanel(layeredPane,ristopanel);
+					ctr.main.getAggiungiButton().setVisible(false);
+					ctr.main.getInserisciButton().setVisible(false);
+				}
+					
 			}
 		});
 		ristojb.setForeground(new Color(255, 255, 255));
@@ -299,13 +309,24 @@ public class Main_Frame extends JFrame {
 		this.getUtenteLabel().setText("Benvenuto "+this.getUtenteCorrente().getUsername()+"!");
 		this.getAccediButton().setEnabled(false);
 	}
+	
 	public JLabel getUtenteLabel() {
 		return userlabel;
 	}
+	
 	public JButton getAccediButton() {
 		return accedijb;
 	}
+	
 	public JButton getEsciButton() {
 		return escijb;
+	}
+	
+	public JButton getAggiungiButton() {
+		return aggiungijb;
+	}
+	
+	public JButton getInserisciButton() {
+		return inseriscijb;
 	}
 }
