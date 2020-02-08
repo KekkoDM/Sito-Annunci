@@ -97,8 +97,12 @@ public class Inserisci_Frame extends JDialog {
 						String luogo = ristocombo.getSelectedItem().toString();
 						String titolo = titolotext.getText();
 						String testo = textarea.getText();
-						rdao.AggiungiRecensione(luogo,titolo,testo);
-						ctr.chiudiInserisci();
+						String valutazione = getValutazione(oneradio, tworadio, threeradio, fourradio, fiveradio);
+						if(valutazione != "0") {
+						rdao.AggiungiRecensione(luogo,titolo,testo,valutazione);
+						ctr.chiudiInserisci();	
+						}
+						
 					}
 				});
 				okButton.setActionCommand("OK");
@@ -128,5 +132,28 @@ public class Inserisci_Frame extends JDialog {
 	}
 	public JComboBox getComboBox() {
 		return ristocombo;
+	}
+	
+	
+	public String getValutazione(JRadioButton r1,JRadioButton r2,JRadioButton r3,JRadioButton r4,JRadioButton r5)
+	{
+		if(r1.isSelected()) {
+			return "1";
+		}
+		else if (r2.isSelected()) {
+			return "2";
+		}
+		else if (r3.isSelected()) {
+			return "3";
+		}
+		else if (r4.isSelected()) {
+			return "4";
+		}
+		else if (r5.isSelected()) {
+			return "5";
+		}
+		else {
+			return "0";
+		}
 	}
 }

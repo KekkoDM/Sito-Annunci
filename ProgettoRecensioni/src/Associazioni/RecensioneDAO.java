@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
 public class RecensioneDAO {
 	
 	
-	public void AggiungiRecensione(String luogo,String titolo,String testo) {
+	public void AggiungiRecensione(String luogo,String titolo,String testo, String valutazione) {
 		
 		
 		Connessione c = new Connessione();
@@ -37,7 +37,7 @@ public class RecensioneDAO {
 			e.printStackTrace();
 		}
 		
-		String values= "'" + titolo+ "'"  + "," + codri2 + "," + "'" + testo + "'" + ",4,NOW()";
+		String values= "'" + titolo+ "'"  + "," + codri2 + "," + "'" + testo + "'," + valutazione + "," +"NOW()";
 		String attr = "titolo,codri2,testo,valutazione,data";
 		
 		c.Insert("recensione",attr, values);
