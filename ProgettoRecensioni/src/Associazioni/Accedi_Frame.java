@@ -56,12 +56,12 @@ public class Accedi_Frame extends JDialog {
 		usertext.setColumns(10);
 		
 		JLabel lblUsername = new JLabel("Username");
-		lblUsername.setBounds(95, 91, 137, 14);
+		lblUsername.setBounds(79, 92, 74, 14);
 		lblUsername.setFont(new Font("Microsoft YaHei Light", Font.PLAIN, 15));
 		contentPanel.add(lblUsername);
 		
 		JLabel lblPassword = new JLabel("Password");
-		lblPassword.setBounds(95, 140, 137, 14);
+		lblPassword.setBounds(79, 142, 74, 14);
 		lblPassword.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 15));
 		contentPanel.add(lblPassword);
 		
