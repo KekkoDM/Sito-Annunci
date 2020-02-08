@@ -124,12 +124,12 @@ public class Main_Frame extends JFrame {
 		homepanel.add(escijb);
 		
 		JPanel ristopanel = new JPanel();
-		ristopanel.setBackground(new Color(224, 255, 255));
+		ristopanel.setBackground(new Color(255, 255, 255));
 		layeredPane.add(ristopanel, "name_276109691756800");
 		ristopanel.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 115, 823, 459);
+		scrollPane.setBounds(0, 132, 823, 453);
 		ristopanel.add(scrollPane);
 	
 		//TABELLA RISTORANTE
@@ -150,40 +150,36 @@ public class Main_Frame extends JFrame {
 		
 		JLabel label_1 = new JLabel("");
 		label_1.setIcon(new ImageIcon(Main_Frame.class.getResource("/img/restaurant_alponte_scritta-300x133.png")));
-		label_1.setBounds(65, 0, 316, 116);
+		label_1.setBounds(12, 0, 316, 95);
 		ristopanel.add(label_1);
 		
 		inseriscijb = new JButton("Inserisci");
-		inseriscijb.setForeground(new Color(255, 255, 255));
-		inseriscijb.setBackground(new Color(46, 139, 87));
 		inseriscijb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				ctr.apriInserisci();
+				String from = "ristorante";
+				ctr.apriInserisci(from);
 			}
 		});
-		inseriscijb.setBounds(624, 32, 125, 45);
+		inseriscijb.setBounds(639, 47, 97, 25);
 		ristopanel.add(inseriscijb);
 		
 		aggiungijb = new JButton("Aggiungi");
-		aggiungijb.setForeground(new Color(255, 255, 255));
-		aggiungijb.setBackground(new Color(46, 139, 87));
 		aggiungijb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
 			}
 		});
-		aggiungijb.setBounds(452, 32, 125, 45);
+		aggiungijb.setBounds(489, 48, 89, 23);
 		ristopanel.add(aggiungijb);
 		
 		
 		//PANEL ALLOGGIO
 		JPanel alloggipanel = new JPanel();
-		alloggipanel.setBackground(new Color(245, 222, 179));
+		alloggipanel.setBackground(new Color(255, 255, 255));
 		layeredPane.add(alloggipanel, "name_276128323411800");
 		alloggipanel.setLayout(null);
 		
 		JScrollPane scrollPane2 = new JScrollPane();
-		scrollPane2.setBounds(0, 115, 823, 496);
+		scrollPane2.setBounds(120, 78, 598, 426);
 		alloggipanel.add(scrollPane2);
 	
 		//TABELLA ALLOGGIO
@@ -195,32 +191,25 @@ public class Main_Frame extends JFrame {
 		alloggiotable.setBackground(new Color(245, 245, 245));
 		alloggiotable.setRowHeight(50);
 		
-		JButton btnNewButton = new JButton("Aggiungi");
-		btnNewButton.setBackground(new Color(46, 139, 87));
-		btnNewButton.setForeground(new Color(255, 255, 255));
-		btnNewButton.setBounds(467, 48, 125, 45);
-		alloggipanel.add(btnNewButton);
-		
-		JButton btnNewButton_1 = new JButton("Inserisci");
-		btnNewButton_1.setBackground(new Color(46, 139, 87));
-		btnNewButton_1.setForeground(new Color(255, 255, 255));
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JButton btnInserisci = new JButton("Inserisci");
+		btnInserisci.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				ctr.apriInserisci();
+				String from = "alloggio";
+				ctr.apriInserisci(from);
 			}
 		});
-		btnNewButton_1.setBounds(639, 48, 125, 45);
-		alloggipanel.add(btnNewButton_1);
+		btnInserisci.setBounds(535, 30, 89, 23);
+		alloggipanel.add(btnInserisci);
 
 		
 		//PANEL ATTRAZIONE
 		JPanel attrazionepanel = new JPanel();
-		attrazionepanel.setBackground(new Color(255, 248, 220));
+		attrazionepanel.setBackground(new Color(255, 255, 255));
 		layeredPane.add(attrazionepanel, "name_276141316664400");
 		attrazionepanel.setLayout(null);
 		
 		JScrollPane scrollPane3 = new JScrollPane();
-		scrollPane3.setBounds(0, 115, 823, 496);
+		scrollPane3.setBounds(120, 78, 598, 426);
 		attrazionepanel.add(scrollPane3);
 	
 		//TABELLA ATTRAZIONE
@@ -231,23 +220,6 @@ public class Main_Frame extends JFrame {
 		attrazionetable.setEnabled(false);
 		attrazionetable.setBackground(new Color(245, 245, 245));
 		attrazionetable.setRowHeight(50);		
-		
-		JButton btnNewButton_2 = new JButton("Aggiungi");
-		btnNewButton_2.setBackground(new Color(46, 139, 87));
-		btnNewButton_2.setForeground(new Color(255, 255, 255));
-		btnNewButton_2.setBounds(467, 48, 125, 45);
-		attrazionepanel.add(btnNewButton_2);
-		
-		JButton btnNewButton_3 = new JButton("Inserisci");
-		btnNewButton_3.setBackground(new Color(46, 139, 87));
-		btnNewButton_3.setForeground(new Color(255, 255, 255));
-		btnNewButton_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ctr.apriInserisci();
-			}
-		});
-		btnNewButton_3.setBounds(639, 48, 125, 45);
-		attrazionepanel.add(btnNewButton_3);
 		
 		
 		//PANEL RISTORANTE MODERATORE

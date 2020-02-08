@@ -18,7 +18,6 @@ import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
-import java.awt.Font;
 
 public class Inserisci_Frame extends JDialog {
 
@@ -31,9 +30,10 @@ public class Inserisci_Frame extends JDialog {
 	private JRadioButton threeradio;
 	private JRadioButton fourradio;
 	private JRadioButton fiveradio;
+	String Codice = new String(" ");
 
-	public Inserisci_Frame(Controller ctr) {
-		setTitle("DACCI UNA VALUTAZIONE !");
+	public Inserisci_Frame(Controller ctr,String from) {
+		setResizable(false);
 		RecensioneDAO rdao = new RecensioneDAO();
 		setBounds(100, 100, 401, 405);
 		getContentPane().setLayout(new BorderLayout());
@@ -43,54 +43,49 @@ public class Inserisci_Frame extends JDialog {
 		contentPanel.setLayout(null);
 		
 		textarea = new JTextArea();
-		textarea.setFont(new Font("Monospaced", Font.PLAIN, 16));
-		textarea.setBounds(10, 212, 358, 98);
+		textarea.setBounds(10, 212, 342, 113);
 		contentPanel.add(textarea);
 		
 		ristocombo = new JComboBox();
-		ristocombo.setFont(new Font("Tahoma", Font.PLAIN, 19));
-		ristocombo.setBounds(172, 32, 180, 30);
+		ristocombo.setBounds(172, 37, 180, 20);
 		contentPanel.add(ristocombo);
-		this.updateComboBox();
+		this.updateComboBox(from);
 		
 		titolotext = new JTextField();
-		titolotext.setFont(new Font("Tahoma", Font.PLAIN, 19));
-		titolotext.setBounds(171, 72, 180, 30);
+		titolotext.setBounds(171, 72, 180, 20);
 		contentPanel.add(titolotext);
 		titolotext.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Scegli il Ristorante");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		lblNewLabel.setBounds(10, 40, 147, 14);
+		lblNewLabel.setBounds(27, 40, 92, 14);
 		contentPanel.add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("Inserisci il Titolo");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		lblNewLabel_1.setBounds(10, 74, 146, 17);
+		JLabel lblNewLabel_1 = new JLabel("Inserire il titolo");
+		lblNewLabel_1.setBounds(41, 74, 77, 17);
 		contentPanel.add(lblNewLabel_1);
 		
 		oneradio = new JRadioButton("*");
-		oneradio.setBounds(10, 139, 50, 23);
+		oneradio.setBounds(20, 139, 38, 23);
 		contentPanel.add(oneradio);
 		
 		threeradio = new JRadioButton("***");
-		threeradio.setBounds(136, 139, 62, 23);
+		threeradio.setBounds(151, 139, 50, 23);
 		contentPanel.add(threeradio);
 		
 		fourradio = new JRadioButton("****");
-		fourradio.setBounds(207, 139, 74, 23);
+		fourradio.setBounds(236, 140, 50, 23);
 		contentPanel.add(fourradio);
 		
 		tworadio = new JRadioButton("**");
-		tworadio.setBounds(67, 139, 62, 23);
+		tworadio.setBounds(74, 139, 62, 23);
 		contentPanel.add(tworadio);
 		
 		fiveradio = new JRadioButton("*****");
-		fiveradio.setBounds(288, 139, 80, 23);
+		fiveradio.setBounds(312, 139, 55, 23);
 		contentPanel.add(fiveradio);
 		
 		JLabel lblNewLabel_2 = new JLabel("Inserisci recensione");
-		lblNewLabel_2.setBounds(12, 187, 145, 14);
+		lblNewLabel_2.setBounds(12, 187, 124, 14);
 		contentPanel.add(lblNewLabel_2);
 		{
 			JPanel buttonPane = new JPanel();
@@ -105,9 +100,15 @@ public class Inserisci_Frame extends JDialog {
 						String titolo = titolotext.getText();
 						String testo = textarea.getText();
 						String valutazione = getValutazione(oneradio, tworadio, threeradio, fourradio, fiveradio);
-						if(valutazione != "0") {
-						rdao.AggiungiRecensione(luogo,titolo,testo,valutazione);
-						ctr.chiudiInserisci();	
+						if(valutazione != "0" && from.equals("ristorante")) {
+							rdao.AggiungiRecensione(luogo,titolo,testo,valutazione,from,"codri");
+							ctr.chiudiInserisci();	
+						}else if(valutazione != "0" && from.equals("alloggio")){
+							rdao.AggiungiRecensione(luogo,titolo,testo,valutazione,from,"codal");
+							ctr.chiudiInserisci();	
+						}else if(valutazione != "0" && from.equals("attrazione")){
+							rdao.AggiungiRecensione(luogo,titolo,testo,valutazione,from,"codat");
+							ctr.chiudiInserisci();
 						}
 						
 					}
@@ -117,23 +118,18 @@ public class Inserisci_Frame extends JDialog {
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
-				JButton cancelButton = new JButton("Cancella");
-				cancelButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-					   textarea.setText("");
-					
-					}
-				});
+				JButton cancelButton = new JButton("Cancel");
+				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
 		}
 	}
 	
-	public void updateComboBox() {
+	public void updateComboBox(String from) {
 		Connessione c = new Connessione();
 		c.ConnessioneDB();
 		try {
-			ResultSet rs= c.Query("*","ristorante"," ");
+			ResultSet rs= c.Query("*",from," ");
 			while(rs.next()) {
 				this.getComboBox().addItem(rs.getString("nome"));
 			}

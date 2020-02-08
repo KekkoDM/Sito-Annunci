@@ -1,6 +1,6 @@
 package Associazioni;
 
-public class Alloggio {
+public class Alloggio{
 	
 	private int codal;
 	private String nome;

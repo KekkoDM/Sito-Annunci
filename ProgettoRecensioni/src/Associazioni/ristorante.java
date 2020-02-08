@@ -1,6 +1,6 @@
 package Associazioni;
 
-public class ristorante {
+public class ristorante{
 	
 	private int codri;
 	private String nome;

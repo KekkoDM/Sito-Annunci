@@ -47,8 +47,8 @@ public class Controller {
 		main.setEnabled(true);
 	}
 	
-	public void apriInserisci(){
-		inserisci = new Inserisci_Frame(this);
+	public void apriInserisci(String from){
+		inserisci = new Inserisci_Frame(this,from);
 		inserisci.setVisible(true);
 		main.setEnabled(false);
 		inserisci.addWindowListener(new WindowAdapter(){ //chiudi tramite la X

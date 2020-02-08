@@ -15,31 +15,23 @@ import javax.swing.table.DefaultTableModel;
 public class RecensioneDAO {
 	
 	
-	public void AggiungiRecensione(String luogo,String titolo,String testo, String valutazione) {
-		
-		
+	public void AggiungiRecensione(String luogo,String titolo,String testo, String valutazione,String from,String codi) {
 		Connessione c = new Connessione();
-		String codri2 = "";
+		String codice = "";
 		c.ConnessioneDB();
-		
 		try {
-			
-			ResultSet rs =c.Query("codri", "ristorante", "nome = '" + luogo + "'" );
-			
+			ResultSet rs =c.Query(codi,from, "nome = '" + luogo + "'" );
 			while(rs.next()) {
 				int cod = rs.getInt(1);
-				codri2= String.valueOf(cod);
-			}
-			
+				codice= String.valueOf(cod);
+			}	
 		}
 		catch(SQLException e) {
 			System.err.println("Errore SQL");
 			e.printStackTrace();
 		}
-		
-		String values= "'" + titolo+ "'"  + "," + codri2 + "," + "'" + testo + "'," + valutazione + "," +"NOW()";
-		String attr = "titolo,codri2,testo,valutazione,data";
-		
+		String values= "'" +titolo+ "'"  + "," + codice + "," + "'" + testo + "'," + valutazione + "," +"NOW()";
+		String attr = "titolo,"+codi+"2,testo,valutazione,data";
 		c.Insert("recensione",attr, values);
 		c.ChiudiConn();
 	}
