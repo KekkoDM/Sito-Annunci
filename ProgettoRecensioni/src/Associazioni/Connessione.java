@@ -67,11 +67,11 @@ public class Connessione{
 
 	
 	
-	public void Insert (String table ,String values) {
+	public void Insert (String table ,String attr,String values) {
 		
         try {
 			
-        	String query = "insert into "+ table + " values(" + values + ");";
+        	String query = "insert into "+ table + "(" + attr + ") values(" + values + ");";
 			PreparedStatement st = conn.prepareStatement(query);
 			st.executeUpdate();
 		}

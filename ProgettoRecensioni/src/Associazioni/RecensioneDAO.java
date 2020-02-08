@@ -17,13 +17,35 @@ public class RecensioneDAO {
 	
 	public void AggiungiRecensione(String luogo,String titolo,String testo) {
 		
-		String values= luogo + "," + titolo + "," + testo;
-		Connessione c = new Connessione();
 		
+		Connessione c = new Connessione();
+		String codri2 = "";
 		c.ConnessioneDB();
-		c.Insert("recensione", values);
+		
+		try {
+			
+			ResultSet rs =c.Query("codri", "ristorante", "nome = '" + luogo + "'" );
+			
+			while(rs.next()) {
+				int cod = rs.getInt(1);
+				codri2= String.valueOf(cod);
+			}
+			
+		}
+		catch(SQLException e) {
+			System.err.println("Errore SQL");
+			e.printStackTrace();
+		}
+		
+		String values= "'" + titolo+ "'"  + "," + codri2 + "," + "'" + testo + "'" + ",4,NOW()";
+		String attr = "titolo,codri2,testo,valutazione,data";
+		
+		c.Insert("recensione",attr, values);
 		c.ChiudiConn();
 	}
+	
+	
+	
 	
 	public DefaultTableModel getRistoNonApprovate() {
 		String column[] = {"Nome","Valutazione","Titolo","Testo","Data","Approva"};

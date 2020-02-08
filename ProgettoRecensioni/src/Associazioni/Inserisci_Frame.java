@@ -98,6 +98,7 @@ public class Inserisci_Frame extends JDialog {
 						String titolo = titolotext.getText();
 						String testo = textarea.getText();
 						rdao.AggiungiRecensione(luogo,titolo,testo);
+						ctr.chiudiInserisci();
 					}
 				});
 				okButton.setActionCommand("OK");
