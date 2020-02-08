@@ -61,7 +61,7 @@ public class ristoranteDAO {
 				String specialita = rs.getString(3);
 				String valutazione = rs.getString(4);
 				String titolo = rs.getString(5);
-				String testo = rs.getString(5);
+				String testo = rs.getString(6);
 				
 				Object[] riga = {nome, citta,specialita,valutazione,titolo,testo};
 				tableModel.addRow(riga);

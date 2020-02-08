@@ -22,11 +22,11 @@ public class Recensioni_Frame extends JDialog {
 	private JComboBox ristocombo;
 	private JTable ristotable;
 	private ristoranteDAO rdao= new ristoranteDAO();
-    
+    private JScrollPane scrollPane4 = new JScrollPane();    
 
 	public Recensioni_Frame(Controller ctr) {
 		
-		setBounds(100, 100, 525, 357);
+		setBounds(100, 100, 672, 470);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -45,14 +45,15 @@ public class Recensioni_Frame extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("OK");
+				buttonPane.add(okButton);
 				okButton.addActionListener(new ActionListener() {
 					
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						String luogo = ristocombo.getSelectedItem().toString();
 						
-						JScrollPane scrollPane4 = new JScrollPane();
-						scrollPane4.setBounds(120, 78, 598, 426);
+						
+						scrollPane4.setBounds(20, 78, 550, 200);
 						contentPanel.add(scrollPane4);
 					
 						//TABELLA MODERATORE
@@ -71,6 +72,14 @@ public class Recensioni_Frame extends JDialog {
 				JButton cancelButton = new JButton("Cancel");
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
+				cancelButton.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						contentPanel.remove(scrollPane4);
+						
+					}
+				});
 			}
 		}
 	}
