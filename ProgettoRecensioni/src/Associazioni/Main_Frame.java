@@ -177,9 +177,7 @@ public class Main_Frame extends JFrame {
 		JButton btnNewButton = new JButton("Recensioni");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				
-				
+				ctr.apriRecensioni();
 			}
 		});
 		btnNewButton.setBounds(639, 85, 97, 25);

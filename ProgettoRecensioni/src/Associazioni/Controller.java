@@ -65,5 +65,21 @@ public class Controller {
 		main.setEnabled(true);
 	}
 	
+	public void apriRecensioni(){
+		rframe = new Recensioni_Frame(this);
+		rframe.setVisible(true);
+		main.setEnabled(false);
+		rframe.addWindowListener(new WindowAdapter(){ //chiudi tramite la X
+		    public void windowClosing(WindowEvent e)
+		    {
+		    	main.setEnabled(true);
+		    }
+		});
+	}
+	
+	public void chiudiRecensioni() {
+		inserisci.dispose();
+		main.setEnabled(true);
+	}
 	
 }
