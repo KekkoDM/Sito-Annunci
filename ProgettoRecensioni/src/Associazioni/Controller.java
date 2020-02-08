@@ -13,6 +13,7 @@ public class Controller {
 	Main_Frame main;
 	Accedi_Frame accedi;
 	Inserisci_Frame inserisci;
+	Recensioni_Frame rframe;
 	
 	public static void main(String[] args) {
 		Controller ctr = new Controller();
@@ -63,5 +64,6 @@ public class Controller {
 		inserisci.dispose();
 		main.setEnabled(true);
 	}
+	
 	
 }

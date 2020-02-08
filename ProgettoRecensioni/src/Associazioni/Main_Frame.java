@@ -39,6 +39,7 @@ public class Main_Frame extends JFrame {
     AlloggioDAO adao = new AlloggioDAO();
     AttrazioneDAO tdao = new AttrazioneDAO();
     RecensioneDAO recDAO = new RecensioneDAO();
+    
 	private JTable ristotable;
 	private JTable modristotable;
 	private JTable alloggiotable;
@@ -49,6 +50,8 @@ public class Main_Frame extends JFrame {
 	private JButton escijb;
 	private JButton aggiungijb;
 	private JButton inseriscijb;
+	
+	
 	
 	public Main_Frame(Controller ctr) {
 		
@@ -170,6 +173,17 @@ public class Main_Frame extends JFrame {
 		});
 		aggiungijb.setBounds(489, 48, 89, 23);
 		ristopanel.add(aggiungijb);
+		
+		JButton btnNewButton = new JButton("Recensioni");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				
+				
+			}
+		});
+		btnNewButton.setBounds(639, 85, 97, 25);
+		ristopanel.add(btnNewButton);
 		
 		
 		//PANEL ALLOGGIO
