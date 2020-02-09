@@ -127,12 +127,13 @@ public class Main_Frame extends JFrame {
 		homepanel.add(escijb);
 		
 		JPanel ristopanel = new JPanel();
-		ristopanel.setBackground(new Color(255, 255, 255));
+		ristopanel.setForeground(new Color(255, 255, 255));
+		ristopanel.setBackground(new Color(224, 255, 255));
 		layeredPane.add(ristopanel, "name_276109691756800");
 		ristopanel.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 132, 823, 453);
+		scrollPane.setBounds(0, 149, 823, 436);
 		ristopanel.add(scrollPane);
 	
 		//TABELLA RISTORANTE
@@ -151,47 +152,56 @@ public class Main_Frame extends JFrame {
 		ristotable.setBackground(new Color(245, 245, 220));
 		ristotable.setRowHeight(50);
 		
-		JLabel label_1 = new JLabel("");
-		label_1.setIcon(new ImageIcon(Main_Frame.class.getResource("/img/restaurant_alponte_scritta-300x133.png")));
-		label_1.setBounds(12, 0, 316, 95);
-		ristopanel.add(label_1);
-		
 		inseriscijb = new JButton("Inserisci");
+		inseriscijb.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		inseriscijb.setBackground(new Color(46, 139, 87));
+		inseriscijb.setForeground(new Color(255, 255, 255));
 		inseriscijb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String from = "ristorante";
 				ctr.apriInserisci(from);
 			}
 		});
-		inseriscijb.setBounds(639, 47, 97, 25);
+		inseriscijb.setBounds(639, 48, 125, 30);
 		ristopanel.add(inseriscijb);
 		
 		aggiungijb = new JButton("Aggiungi");
+		aggiungijb.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		aggiungijb.setForeground(new Color(255, 255, 255));
+		aggiungijb.setBackground(new Color(46, 139, 87));
 		aggiungijb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		aggiungijb.setBounds(489, 48, 89, 23);
+		aggiungijb.setBounds(489, 48, 125, 30);
 		ristopanel.add(aggiungijb);
 		
 		JButton btnNewButton = new JButton("Recensioni");
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnNewButton.setForeground(new Color(255, 255, 255));
+		btnNewButton.setBackground(new Color(46, 139, 87));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				ctr.apriRecensioni();
 			}
 		});
-		btnNewButton.setBounds(639, 85, 97, 25);
+		btnNewButton.setBounds(639, 103, 125, 30);
 		ristopanel.add(btnNewButton);
+		
+		JLabel lblNewLabel_5 = new JLabel("New label");
+		lblNewLabel_5.setIcon(new ImageIcon(Main_Frame.class.getResource("/img/Ristoranti.png")));
+		lblNewLabel_5.setBounds(15, 0, 300, 149);
+		ristopanel.add(lblNewLabel_5);
 		
 		
 		//PANEL ALLOGGIO
 		JPanel alloggipanel = new JPanel();
-		alloggipanel.setBackground(new Color(255, 255, 255));
+		alloggipanel.setBackground(new Color(230, 230, 250));
 		layeredPane.add(alloggipanel, "name_276128323411800");
 		alloggipanel.setLayout(null);
 		
 		JScrollPane scrollPane2 = new JScrollPane();
-		scrollPane2.setBounds(120, 78, 598, 426);
+		scrollPane2.setBounds(0, 149, 836, 423);
 		alloggipanel.add(scrollPane2);
 	
 		//TABELLA ALLOGGIO
@@ -200,28 +210,59 @@ public class Main_Frame extends JFrame {
 		alloggiotable.setFillsViewportHeight(true);
 		alloggiotable.setColumnSelectionAllowed(true);
 		alloggiotable.setEnabled(false);
-		alloggiotable.setBackground(new Color(245, 245, 245));
+		alloggiotable.setBackground(new Color(245, 245, 220));
 		alloggiotable.setRowHeight(50);
 		
 		JButton btnInserisci = new JButton("Inserisci");
+		btnInserisci.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnInserisci.setBackground(new Color(46, 139, 87));
+		btnInserisci.setForeground(new Color(255, 255, 255));
 		btnInserisci.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String from = "alloggio";
+				String from = "Alloggio";
 				ctr.apriInserisci(from);
 			}
 		});
-		btnInserisci.setBounds(535, 30, 89, 23);
+		btnInserisci.setBounds(489, 48, 125, 30);
 		alloggipanel.add(btnInserisci);
+		
+		JButton btnNewButton_1 = new JButton("Aggiungi");
+		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnNewButton_1.setBackground(new Color(46, 139, 87));
+		btnNewButton_1.setForeground(new Color(255, 255, 255));
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnNewButton_1.setBounds(639, 48, 125, 30);
+		alloggipanel.add(btnNewButton_1);
+		
+		JButton btnNewButton_2 = new JButton("Recensioni");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ctr.apriRecensioni();
+			}
+		});
+		btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnNewButton_2.setBackground(new Color(46, 139, 87));
+		btnNewButton_2.setForeground(new Color(255, 255, 255));
+		btnNewButton_2.setBounds(639, 103, 125, 30);
+		alloggipanel.add(btnNewButton_2);
+		
+		JLabel lblNewLabel_1 = new JLabel("New label");
+		lblNewLabel_1.setIcon(new ImageIcon(Main_Frame.class.getResource("/img/Alloggi.png")));
+		lblNewLabel_1.setBounds(15, 0, 300, 150);
+		alloggipanel.add(lblNewLabel_1);
 
 		
 		//PANEL ATTRAZIONE
 		JPanel attrazionepanel = new JPanel();
-		attrazionepanel.setBackground(new Color(255, 255, 255));
+		attrazionepanel.setBackground(new Color(255, 228, 225));
 		layeredPane.add(attrazionepanel, "name_276141316664400");
 		attrazionepanel.setLayout(null);
 		
 		JScrollPane scrollPane3 = new JScrollPane();
-		scrollPane3.setBounds(120, 78, 598, 426);
+		scrollPane3.setBounds(0, 149, 839, 430);
 		attrazionepanel.add(scrollPane3);
 	
 		//TABELLA ATTRAZIONE
@@ -230,8 +271,49 @@ public class Main_Frame extends JFrame {
 		attrazionetable.setFillsViewportHeight(true);
 		attrazionetable.setColumnSelectionAllowed(true);
 		attrazionetable.setEnabled(false);
-		attrazionetable.setBackground(new Color(245, 245, 245));
+		attrazionetable.setBackground(new Color(245, 245, 220));
 		attrazionetable.setRowHeight(50);		
+		
+		JButton btnNewButton_3 = new JButton("Aggiungi");
+		btnNewButton_3.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnNewButton_3.setForeground(new Color(255, 255, 255));
+		btnNewButton_3.setBackground(new Color(46, 139, 87));
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnNewButton_3.setBounds(489, 48, 115, 29);
+		attrazionepanel.add(btnNewButton_3);
+		
+		JButton btnNewButton_4 = new JButton("Inserisci");
+		btnNewButton_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String from = "Attrazione";
+				ctr.apriInserisci(from);
+			}
+		});
+		btnNewButton_4.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnNewButton_4.setForeground(new Color(255, 255, 255));
+		btnNewButton_4.setBackground(new Color(46, 139, 87));
+		btnNewButton_4.setBounds(639, 48, 125, 30);
+		attrazionepanel.add(btnNewButton_4);
+		
+		JButton btnNewButton_5 = new JButton("Recensioni");
+		btnNewButton_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ctr.apriRecensioni();
+			}
+		});
+		btnNewButton_5.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnNewButton_5.setForeground(new Color(255, 255, 255));
+		btnNewButton_5.setBackground(new Color(46, 139, 87));
+		btnNewButton_5.setBounds(639, 103, 125, 30);
+		attrazionepanel.add(btnNewButton_5);
+		
+		JLabel lblNewLabel_4 = new JLabel("New label");
+		lblNewLabel_4.setIcon(new ImageIcon(Main_Frame.class.getResource("/img/Attrazioni.png")));
+		lblNewLabel_4.setBounds(15, 0, 300, 151);
+		attrazionepanel.add(lblNewLabel_4);
 		
 		
 		//PANEL RISTORANTE MODERATORE
