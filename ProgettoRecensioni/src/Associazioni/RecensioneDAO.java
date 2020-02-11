@@ -1,26 +1,28 @@
 package Associazioni;
 
 import java.awt.Checkbox;
+import java.awt.List;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import javax.swing.JCheckBox;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class RecensioneDAO {
-	
-	
-	public void AggiungiRecensione(String luogo,String titolo,String testo, String valutazione,String from,String codi) {
+		
+	public void AggiungiRecensione(Recensione r,String from,String codi) {
 		Connessione c = new Connessione();
 		String codice = "";
 		c.ConnessioneDB();
 		try {
-			ResultSet rs =c.Query(codi,from, "nome = '" + luogo + "'" );
+			ResultSet rs =c.Query(codi,from, "nome = '" + r.getLuogo() + "'" );
 			while(rs.next()) {
 				int cod = rs.getInt(1);
 				codice= String.valueOf(cod);
@@ -30,15 +32,57 @@ public class RecensioneDAO {
 			System.err.println("Errore SQL");
 			e.printStackTrace();
 		}
-		String values= "'" +titolo+ "'"  + "," + codice + "," + "'" + testo + "'," + valutazione + "," +"NOW()";
+		String values= "'" +r.getTitolo()+ "'"  + "," + codice + "," + "'" + r.getTitolo() + "'," + r.getValutazione() + "," +"NOW()";
 		String attr = "titolo,"+codi+"2,testo,valutazione,data";
 		c.Insert("recensione",attr, values);
 		c.ChiudiConn();
 	}
 	
+	public ArrayList<Recensione> getAllRecensioniNA(){
+		try {
+			Connessione c = new Connessione();
+			c.ConnessioneDB();
+			ResultSet rs= c.Query("*","recensione","approvata = 'f'");
+			ArrayList<Recensione> lista = new ArrayList();
+			while(rs.next()) {
+				Recensione r = new Recensione();
+				r.setCodice(rs.getString("codre"));
+				r.setTitolo(rs.getString("titolo"));
+				r.setValutazione(rs.getString("valutazione"));
+				r.setTesto(rs.getString("testo"));
+				r.setData(rs.getString("data"));
+				r.setCodAl(rs.getString("codal2"));
+				r.setCodAt(rs.getString("codat2"));
+				r.setCodRi(rs.getString("codri2"));
+				lista.add(r);
+			}
+			return lista;
+		}catch(SQLException e){
+			System.err.println("Errore SQL");
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public void approvaRecensione(Recensione r) {
+		try {
+			Connessione c = new Connessione();
+			c.ConnessioneDB();
+			ResultSet rs= c.Query("*","recensione AS R","R.codre = "+r.getCodice());
+			while(rs.next()) {
+				int recensione = rs.getInt("codre");
+				String query = "UPDATE recensione SET Approvata = 't' WHERE codre = "+rs.getInt("codre");
+				PreparedStatement st =  c.getConn().prepareStatement(query);
+				st.executeUpdate();
+			}	
+		}catch(SQLException e){
+			System.err.println("Errore SQL");
+			e.printStackTrace();
+		}
+	}
 	
 	
-	
+/*
 	public DefaultTableModel getRistoNonApprovate() {
 		String column[] = {"Nome","Valutazione","Titolo","Testo","Data","Approva"};
 		DefaultTableModel tab = new DefaultTableModel(column, 0);
@@ -71,9 +115,5 @@ public class RecensioneDAO {
 		}
 		return tab;
 	}
-	
-	
-	
-	
-
+	*/
 }

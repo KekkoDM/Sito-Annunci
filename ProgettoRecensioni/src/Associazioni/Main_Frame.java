@@ -15,6 +15,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.List;
 import java.awt.ScrollPane;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -30,19 +31,21 @@ import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+
 import javax.swing.JCheckBox;
 
 public class Main_Frame extends JFrame {
 
 	private JPanel main_panel;
-    ristoranteDAO rdao = new ristoranteDAO();
+	ristoranteDAO rdao = new ristoranteDAO();
     AlloggioDAO adao = new AlloggioDAO();
     AttrazioneDAO tdao = new AttrazioneDAO();
-    RecensioneDAO recDAO = new RecensioneDAO();
+    RecensioneDAO recdao = new RecensioneDAO();
     
-	private JTable ristotable;
+	JTable ristotable;
 	private JTable modristotable;
-	private JTable alloggiotable;
+	JTable alloggiotable;
 	private JTable attrazionetable;
 	private Utente UtenteCorrente;
 	private JLabel userlabel;
@@ -128,7 +131,7 @@ public class Main_Frame extends JFrame {
 		
 		JPanel ristopanel = new JPanel();
 		ristopanel.setForeground(new Color(255, 255, 255));
-		ristopanel.setBackground(new Color(224, 255, 255));
+		ristopanel.setBackground(new Color(255, 255, 255));
 		layeredPane.add(ristopanel, "name_276109691756800");
 		ristopanel.setLayout(null);
 		
@@ -137,18 +140,20 @@ public class Main_Frame extends JFrame {
 		ristopanel.add(scrollPane);
 	
 		//TABELLA RISTORANTE
-		ristotable = new JTable(rdao.getRistoranti());
-	/*	ristotable.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(java.awt.event.MouseEvent evt) {
-				int index = ristotable.getSelectedRow();
-				JOptionPane.showMessageDialog(null,index);
+		ristotable = new JTable();
+		ristotable.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Nome", "Città", "Via", "Civico", "Specialità"
 			}
-		}); */
+		));
+		ArrayList<ristorante> lista = new ArrayList<ristorante>();
+		lista = rdao.getAllRistoranti();
+		populateJTableRisto(lista,ristotable);
 		scrollPane.setViewportView(ristotable);
 		ristotable.setFillsViewportHeight(true);
 		ristotable.setColumnSelectionAllowed(true);
-		ristotable.setEnabled(false);
 		ristotable.setBackground(new Color(245, 245, 220));
 		ristotable.setRowHeight(50);
 		
@@ -196,7 +201,7 @@ public class Main_Frame extends JFrame {
 		
 		//PANEL ALLOGGIO
 		JPanel alloggipanel = new JPanel();
-		alloggipanel.setBackground(new Color(230, 230, 250));
+		alloggipanel.setBackground(new Color(255, 255, 255));
 		layeredPane.add(alloggipanel, "name_276128323411800");
 		alloggipanel.setLayout(null);
 		
@@ -205,7 +210,17 @@ public class Main_Frame extends JFrame {
 		alloggipanel.add(scrollPane2);
 	
 		//TABELLA ALLOGGIO
-		alloggiotable = new JTable(adao.getAlloggio());
+		alloggiotable = new JTable();
+		alloggiotable.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Nome", "Città", "Via", "Civico", "Bagni" ,"Camere"
+			}
+		));
+		ArrayList<Alloggio> listal = new ArrayList<Alloggio>();
+		listal = adao.getAllAlloggi();
+		populateJTableAllo(listal,alloggiotable);
 		scrollPane2.setViewportView(alloggiotable);
 		alloggiotable.setFillsViewportHeight(true);
 		alloggiotable.setColumnSelectionAllowed(true);
@@ -251,7 +266,7 @@ public class Main_Frame extends JFrame {
 		
 		JLabel lblNewLabel_1 = new JLabel("New label");
 		lblNewLabel_1.setIcon(new ImageIcon(Main_Frame.class.getResource("/img/Alloggi.png")));
-		lblNewLabel_1.setBounds(15, 0, 300, 150);
+		lblNewLabel_1.setBounds(15, 0, 300, 133);
 		alloggipanel.add(lblNewLabel_1);
 
 		
@@ -266,13 +281,23 @@ public class Main_Frame extends JFrame {
 		attrazionepanel.add(scrollPane3);
 	
 		//TABELLA ATTRAZIONE
-		attrazionetable = new JTable(tdao.getAttrazione());
+		attrazionetable = new JTable();
+		attrazionetable.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Nome", "Città", "Via", "Civico", "Bagni" ,"Camere"
+			}
+		));
+		ArrayList<Attrazione> listat = new ArrayList<Attrazione>();
+		listat = tdao.getAllAttrazioni();
+		populateJTableAttr(listat,attrazionetable);
 		scrollPane3.setViewportView(attrazionetable);
 		attrazionetable.setFillsViewportHeight(true);
 		attrazionetable.setColumnSelectionAllowed(true);
 		attrazionetable.setEnabled(false);
 		attrazionetable.setBackground(new Color(245, 245, 220));
-		attrazionetable.setRowHeight(50);		
+		attrazionetable.setRowHeight(50);	
 		
 		JButton btnNewButton_3 = new JButton("Aggiungi");
 		btnNewButton_3.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -327,13 +352,42 @@ public class Main_Frame extends JFrame {
 		modristopanel.add(scrollPane4);
 	
 		//TABELLA MODERATORE
-		modristotable = new JTable(recDAO.getRistoNonApprovate());
+		modristotable = new JTable();
+		modristotable.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Titolo", "Testo", "Valutazione", "Data","CodiceRec"
+			}
+		));
+		ArrayList<Recensione> listar = new ArrayList<Recensione>();
+		listar = recdao.getAllRecensioniNA();
+		populateJTableRece(listar,modristotable);
 		scrollPane4.setViewportView(modristotable);
 		modristotable.setFillsViewportHeight(true);
 		modristotable.setColumnSelectionAllowed(true);
-		modristotable.setEnabled(false);
 		modristotable.setBackground(new Color(245, 245, 245));
 		modristotable.setRowHeight(50);
+		
+		JButton btnConferma = new JButton("Conferma");
+		btnConferma.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (modristotable.getSelectedRow() != -1) {
+		            Recensione r = new Recensione();
+					r.setTitolo((String) modristotable.getValueAt(modristotable.getSelectedRow(), 0));
+		            r.setTesto((String) modristotable.getValueAt(modristotable.getSelectedRow(), 1));
+		            r.setValutazione((String) modristotable.getValueAt(modristotable.getSelectedRow(), 2));
+		            r.setData((String) modristotable.getValueAt(modristotable.getSelectedRow(), 3));
+		            r.setCodice((String) modristotable.getValueAt(modristotable.getSelectedRow(), 4));
+		            recdao.approvaRecensione(r);
+		            //System.out.println("Stai eliminando "+titolo+ " " +testo);
+		            ((DefaultTableModel) modristotable.getModel()).removeRow(modristotable.getSelectedRow());
+		          
+			}
+			}
+		});
+		btnConferma.setBounds(629, 540, 89, 23);
+		modristopanel.add(btnConferma);
 		
 		
 		
@@ -341,10 +395,10 @@ public class Main_Frame extends JFrame {
 		JButton ristojb = new JButton("Ristorante");
 		ristojb.setBounds(0, 204, 244, 43);
 		ristojb.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent arg0) { // DA MODIFICARE
 				ctr.switchPanel(layeredPane,ristopanel);
 				if(ctr.main.getUtenteCorrente().getTipo().equals("moderatore")) 
-					ctr.switchPanel(layeredPane, modristopanel);
+					ctr.switchPanel(layeredPane, ristopanel);
 				else if(ctr.main.getUtenteCorrente().getTipo().equals("admin")){
 					ctr.main.getAggiungiButton().setVisible(true);
 					ctr.main.getInserisciButton().setVisible(false);
@@ -419,6 +473,77 @@ public class Main_Frame extends JFrame {
 		lblNewLabel_3.setBounds(76, 89, 104, 26);
 		lblNewLabel_3.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 28));
 		main_panel.add(lblNewLabel_3);
+		
+		JButton modjb = new JButton("Area Mod");
+		modjb.setBackground(new Color(46, 139, 87));
+		Border emptyBorder5 = BorderFactory.createEmptyBorder();
+		modjb.setBorder(emptyBorder5);
+		modjb.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(UtenteCorrente.getTipo().contentEquals("moderatore"))
+					ctr.switchPanel(layeredPane, modristopanel);
+				else
+					JOptionPane.showMessageDialog(null, "Non sei moderatore!!");
+			}
+		});
+		modjb.setForeground(Color.WHITE);
+		modjb.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 23));
+		modjb.setBounds(0, 366, 244, 43);
+		main_panel.add(modjb);
+	}
+	
+	
+	
+	
+	public void populateJTableRisto(ArrayList<ristorante> list,JTable ristotable) {
+		DefaultTableModel model = (DefaultTableModel) ristotable.getModel();
+		Object[] riga = new Object[6];
+		for(int i=0;i<list.size();i++) {
+			riga[0] = list.get(i).getNome();
+			riga[1] = list.get(i).getCittà();
+			riga[2] = list.get(i).getVia();
+			riga[3] = list.get(i).getCivico();
+			riga[4] = list.get(i).getSpecialita();
+			model.addRow(riga);
+		}
+	}
+	public void populateJTableAllo(ArrayList<Alloggio> list,JTable alloggiotable) {
+		DefaultTableModel model = (DefaultTableModel) alloggiotable.getModel();
+		Object[] riga = new Object[6];
+		for(int i=0;i<list.size();i++) {
+			riga[0] = list.get(i).getNome();
+			riga[1] = list.get(i).getCittà();
+			riga[2] = list.get(i).getVia();
+			riga[3] = list.get(i).getCivico();
+			riga[4] = list.get(i).getBagni();
+			riga[5] = list.get(i).getCamere();
+			model.addRow(riga);
+		}
+	}
+	public void populateJTableAttr(ArrayList<Attrazione> list,JTable attrazionetable) {
+		DefaultTableModel model = (DefaultTableModel) attrazionetable.getModel();
+		Object[] riga = new Object[6];
+		for(int i=0;i<list.size();i++) {
+			riga[0] = list.get(i).getNome();
+			riga[1] = list.get(i).getCittà();
+			riga[2] = list.get(i).getVia();
+			riga[3] = list.get(i).getCivico();
+			riga[4] = list.get(i).getDescrizione();
+			riga[5] = list.get(i).getTelefono();
+			model.addRow(riga);
+		}
+	}
+	public void populateJTableRece(ArrayList<Recensione> list,JTable modrecetable) {
+		DefaultTableModel model = (DefaultTableModel) modrecetable.getModel();
+		Object[] riga = new Object[5];
+		for(int i=0;i<list.size();i++) {
+			riga[0] = list.get(i).getTitolo();
+			riga[1] = list.get(i).getTesto();
+			riga[2] = list.get(i).getValutazione();
+			riga[3] = list.get(i).getData();
+			riga[4] = list.get(i).getCodice();
+			model.addRow(riga);
+		}
 	}
 
 	public Utente getUtenteCorrente() {

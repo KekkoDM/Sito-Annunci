@@ -1,13 +1,8 @@
 package Associazioni;
 
-public class Alloggio{
+public class Alloggio extends Luogo{
 	
 	private int codal;
-	private String nome;
-	private String città;
-	private String via;
-	private int civico;
-	private String telefono;
 	private int bagni;
 	private int camere;
 	private int metriq;
@@ -18,36 +13,6 @@ public class Alloggio{
 	}
 	public void setCodal(int codal) {
 		this.codal = codal;
-	}
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	public String getCittà() {
-		return città;
-	}
-	public void setCittà(String città) {
-		this.città = città;
-	}
-	public String getVia() {
-		return via;
-	}
-	public void setVia(String via) {
-		this.via = via;
-	}
-	public int getCivico() {
-		return civico;
-	}
-	public void setCivico(int civico) {
-		this.civico = civico;
-	}
-	public String getTelefono() {
-		return telefono;
-	}
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
 	}
 	public int getBagni() {
 		return bagni;

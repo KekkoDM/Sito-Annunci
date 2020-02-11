@@ -57,7 +57,7 @@ public class Recensioni_Frame extends JDialog {
 						contentPanel.add(scrollPane4);
 					
 						//TABELLA MODERATORE
-						ristotable = new JTable(rdao.getRecRistoranti(luogo));
+						//ristotable = new JTable(rdao.getRecRistoranti(luogo));
 						scrollPane4.setViewportView(ristotable);
 						ristotable.setFillsViewportHeight(true);
 						ristotable.setColumnSelectionAllowed(true);

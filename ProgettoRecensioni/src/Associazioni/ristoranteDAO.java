@@ -5,13 +5,39 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
-
 import javax.swing.table.DefaultTableModel;
 
 public class ristoranteDAO {
 	
-	public DefaultTableModel getRistoranti() {
+	public ArrayList<ristorante> getAllRistoranti() {
+		try {
+			Connessione c = new Connessione();
+			c.ConnessioneDB();
+			ResultSet rs= c.Query("*","ristorante"," ");
+			ArrayList<ristorante> lista = new ArrayList();
+			while(rs.next()) {
+				ristorante r = new ristorante();
+				r.setNome(rs.getString("nome"));
+				r.setCittà(rs.getString("citta"));
+				r.setVia(rs.getString("via"));
+				r.setCivico(rs.getString("civico"));
+				r.setSpecialita(rs.getString("specialita"));
+				lista.add(r);
+			}
+			return lista;
+		}catch(SQLException e){
+			System.err.println("Errore SQL");
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+
+/*	public DefaultTableModel getRistoranti() {
 		String col[] = {"Nome","Città","Via","Civico","Specialità"};
 		DefaultTableModel tableModel = new DefaultTableModel(col, 0);
 		
@@ -19,7 +45,7 @@ public class ristoranteDAO {
 					
 		c.ConnessioneDB();
 		String select = "nome, citta, via, civico, specialita";
-		
+		ristorante r = new ristorante();
 		try {
 			ResultSet rs=c.Query(select, "ristorante", "", tableModel);
 			while(rs.next()) {
@@ -28,10 +54,8 @@ public class ristoranteDAO {
 				String via = rs.getString(3);
 				int civico = rs.getInt(4);
 				String specialita = rs.getString(5);
-				
 				Object[] riga = {nome, citta, via, civico, specialita};
 				tableModel.addRow(riga);
-				
 			}
 		}catch(SQLException e) {
 			System.err.println("Errore SQL");
@@ -73,6 +97,6 @@ public class ristoranteDAO {
 		}
 		c.ChiudiConn();
 		return tableModel;
-	}
+	}*/
 
 }

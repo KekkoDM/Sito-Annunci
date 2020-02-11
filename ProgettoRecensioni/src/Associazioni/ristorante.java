@@ -1,13 +1,8 @@
 package Associazioni;
 
-public class ristorante{
+public class ristorante extends Luogo{
 	
 	private int codri;
-	private String nome;
-	private String via;
-	private String citta;
-	private int civico;
-	private String telefono;
 	private String specialita;
 	private String provenienza;
 	private String qualita;
@@ -21,47 +16,6 @@ public class ristorante{
 	public void setCodri(int codri) {
 		this.codri = codri;
 	}
-	
-	
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	
-	
-	public String getVia() {
-		return via;
-	}
-	public void setVia(String via) {
-		this.via = via;
-	}
-	
-	
-	public String getCitta() {
-		return citta;
-	}
-	public void setCitta(String citta) {
-		this.citta = citta;
-	}
-	
-	
-	public int getCivico() {
-		return civico;
-	}
-	public void setCivico(int civico) {
-		this.civico = civico;
-	}
-	
-	
-	public String getTelefono() {
-		return telefono;
-	}
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
-	}
-	
 	
 	public String getSpecialita() {
 		return specialita;

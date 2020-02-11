@@ -7,11 +7,36 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Properties;
 import javax.swing.table.DefaultTableModel;
 
 public class AttrazioneDAO {
-		
+	public ArrayList<Attrazione> getAllAttrazioni() {
+		try {
+			Connessione c = new Connessione();
+			c.ConnessioneDB();
+			ResultSet rs= c.Query("*","attrazione"," ");
+			ArrayList<Attrazione> lista = new ArrayList();
+			while(rs.next()) {
+				Attrazione r = new Attrazione();
+				r.setNome(rs.getString("nome"));
+				r.setCittà(rs.getString("citta"));
+				r.setVia(rs.getString("via"));
+				r.setCivico(rs.getString("civico"));
+				r.setDescrizione(rs.getString("descrizione"));
+				r.setTelefono(rs.getString("telefono"));
+				lista.add(r);
+			}
+			return lista;
+		}catch(SQLException e){
+			System.err.println("Errore SQL");
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+/*
 		public DefaultTableModel getAttrazione() {
 			String column[] = {"Nome","città","Via","Civico","Descrizione","Telefono","Orario"};
 			DefaultTableModel tableModel = new DefaultTableModel(column, 0);
@@ -43,5 +68,6 @@ public class AttrazioneDAO {
 			c.ChiudiConn();
 			return tableModel;
 		}
+*/
 
 	}

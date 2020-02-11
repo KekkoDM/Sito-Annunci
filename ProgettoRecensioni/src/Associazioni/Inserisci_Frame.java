@@ -96,18 +96,20 @@ public class Inserisci_Frame extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						String luogo = ristocombo.getSelectedItem().toString();
-						String titolo = titolotext.getText();
-						String testo = textarea.getText();
-						String valutazione = getValutazione(oneradio, tworadio, threeradio, fourradio, fiveradio);
+						Recensione r = new Recensione();
+						r.setLuogo(ristocombo.getSelectedItem().toString());
+						r.setTitolo(titolotext.getText());
+						r.setTesto(textarea.getText());
+						r.setValutazione(getValutazione(oneradio, tworadio, threeradio, fourradio, fiveradio));
+						String valutazione = r.getValutazione();
 						if(valutazione != "0" && from.equals("ristorante")) {
-							rdao.AggiungiRecensione(luogo,titolo,testo,valutazione,from,"codri");
+							rdao.AggiungiRecensione(r,from,"codri");
 							ctr.chiudiInserisci();	
 						}else if(valutazione != "0" && from.equals("alloggio")){
-							rdao.AggiungiRecensione(luogo,titolo,testo,valutazione,from,"codal");
+							rdao.AggiungiRecensione(r,from,"codal");
 							ctr.chiudiInserisci();	
 						}else if(valutazione != "0" && from.equals("attrazione")){
-							rdao.AggiungiRecensione(luogo,titolo,testo,valutazione,from,"codat");
+							rdao.AggiungiRecensione(r,from,"codat");
 							ctr.chiudiInserisci();
 						}
 						

@@ -1,9 +1,11 @@
 package Associazioni;
 
 public class Recensione {
+	private String Codice;
+	private String Luogo;
 	private String Titolo;
 	private String Testo;
-	private int Valutazione;
+	private String Valutazione;
 	private String Data;
 	private String CodU;
 	private String CodRi;
@@ -23,10 +25,10 @@ public class Recensione {
 	public void setTesto(String testo) {
 		Testo = testo;
 	}
-	public int getValutazione() {
+	public String getValutazione() {
 		return Valutazione;
 	}
-	public void setValutazione(int valutazione) {
+	public void setValutazione(String valutazione) {
 		Valutazione = valutazione;
 	}
 	public String getData() {
@@ -64,5 +66,17 @@ public class Recensione {
 	}
 	public void setApprovata(boolean approvata) {
 		Approvata = approvata;
+	}
+	public String getLuogo() {
+		return Luogo;
+	}
+	public void setLuogo(String luogo) {
+		Luogo = luogo;
+	}
+	public String getCodice() {
+		return Codice;
+	}
+	public void setCodice(String codice) {
+		Codice = codice;
 	}
 }
