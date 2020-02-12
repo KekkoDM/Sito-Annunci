@@ -7,6 +7,8 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+
 import java.awt.Color;
 import javax.swing.JTextArea;
 import javax.swing.JComboBox;
@@ -14,9 +16,12 @@ import javax.swing.UIManager;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
+import javax.swing.JTable;
+
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 public class Inserisci_Frame extends JDialog {
@@ -143,6 +148,8 @@ public class Inserisci_Frame extends JDialog {
 	public JComboBox getComboBox() {
 		return ristocombo;
 	}
+	
+	
 	
 	
 	public String getValutazione(JRadioButton r1,JRadioButton r2,JRadioButton r3,JRadioButton r4,JRadioButton r5)

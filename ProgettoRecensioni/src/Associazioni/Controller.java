@@ -65,8 +65,8 @@ public class Controller {
 		main.setEnabled(true);
 	}
 	
-	public void apriRecensioni(){
-		rframe = new Recensioni_Frame(this);
+	public void apriRecensioni(String from){
+		rframe = new Recensioni_Frame(this,from);
 		rframe.setVisible(true);
 		main.setEnabled(false);
 		rframe.addWindowListener(new WindowAdapter(){ //chiudi tramite la X

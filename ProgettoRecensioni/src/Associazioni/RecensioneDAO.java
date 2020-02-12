@@ -64,6 +64,84 @@ public class RecensioneDAO {
 		}
 	}
 	
+	public ArrayList<Recensione> getRecensioniRistorante(String l){
+		try {
+			Connessione c = new Connessione();
+			c.ConnessioneDB();
+			ResultSet rs= c.Query("*","recensione AS re join ristorante AS ri on codri = codri2","re.approvata = 't' AND ri.nome = '"+l+"'");
+			ArrayList<Recensione> lista = new ArrayList();
+			while(rs.next()) {
+				Recensione r = new Recensione();
+				r.setCodice(rs.getString("codre"));
+				r.setTitolo(rs.getString("titolo"));
+				r.setValutazione(rs.getString("valutazione"));
+				r.setTesto(rs.getString("testo"));
+				r.setData(rs.getString("data"));
+				r.setCodAl(rs.getString("codal2"));
+				r.setCodAt(rs.getString("codat2"));
+				r.setCodRi(rs.getString("codri2"));
+				lista.add(r);
+			}
+			return lista;
+		}catch(SQLException e){
+			System.err.println("Errore SQL");
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public ArrayList<Recensione> getRecensioniAlloggio(String l){
+		try {
+			Connessione c = new Connessione();
+			c.ConnessioneDB();
+			ResultSet rs= c.Query("*","recensione AS re join alloggio AS al on codal = codal2","re.approvata = 't' AND al.nome = '"+l+"'");
+			ArrayList<Recensione> lista = new ArrayList();
+			while(rs.next()) {
+				Recensione r = new Recensione();
+				r.setCodice(rs.getString("codre"));
+				r.setTitolo(rs.getString("titolo"));
+				r.setValutazione(rs.getString("valutazione"));
+				r.setTesto(rs.getString("testo"));
+				r.setData(rs.getString("data"));
+				r.setCodAl(rs.getString("codal2"));
+				r.setCodAt(rs.getString("codat2"));
+				r.setCodRi(rs.getString("codri2"));
+				lista.add(r);
+			}
+			return lista;
+		}catch(SQLException e){
+			System.err.println("Errore SQL");
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public ArrayList<Recensione> getRecensioniAttrazione(String l){
+		try {
+			Connessione c = new Connessione();
+			c.ConnessioneDB();
+			ResultSet rs= c.Query("*","recensione AS re join attrazione AS at on codri = codri2","re.approvata = 't' AND at.nome = '"+l+"'");
+			ArrayList<Recensione> lista = new ArrayList();
+			while(rs.next()) {
+				Recensione r = new Recensione();
+				r.setCodice(rs.getString("codre"));
+				r.setTitolo(rs.getString("titolo"));
+				r.setValutazione(rs.getString("valutazione"));
+				r.setTesto(rs.getString("testo"));
+				r.setData(rs.getString("data"));
+				r.setCodAl(rs.getString("codal2"));
+				r.setCodAt(rs.getString("codat2"));
+				r.setCodRi(rs.getString("codri2"));
+				lista.add(r);
+			}
+			return lista;
+		}catch(SQLException e){
+			System.err.println("Errore SQL");
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 	public void approvaRecensione(Recensione r) {
 		try {
 			Connessione c = new Connessione();

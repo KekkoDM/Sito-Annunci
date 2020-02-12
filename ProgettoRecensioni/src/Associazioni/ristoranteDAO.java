@@ -36,6 +36,79 @@ public class ristoranteDAO {
 		}
 	}
 	
+	public ArrayList<ristorante> getAllRistorantiTerra() {
+		try {
+			Connessione c = new Connessione();
+			c.ConnessioneDB();
+			ResultSet rs= c.Query("*","ristorante join terra on codt2=codt"," ");
+			ArrayList<ristorante> lista = new ArrayList();
+			while(rs.next()) {
+				Terra r = new Terra();
+				r.setNome(rs.getString("nome"));
+				r.setCittà(rs.getString("citta"));
+				r.setVia(rs.getString("via"));
+				r.setCivico(rs.getString("civico"));
+				r.setSpecialita(rs.getString("specialita"));
+				r.setTipo(rs.getString("tipot"));
+				lista.add(r);
+			}
+			return lista;
+		}catch(SQLException e){
+			System.err.println("Errore SQL");
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public ArrayList<ristorante> getAllRistorantiMare() {
+		try {
+			Connessione c = new Connessione();
+			c.ConnessioneDB();
+			ResultSet rs= c.Query("*","ristorante join mare on codm2=codm"," ");
+			ArrayList<ristorante> lista = new ArrayList();
+			while(rs.next()) {
+				Terra r = new Terra();
+				r.setNome(rs.getString("nome"));
+				r.setCittà(rs.getString("citta"));
+				r.setVia(rs.getString("via"));
+				r.setCivico(rs.getString("civico"));
+				r.setSpecialita(rs.getString("specialita"));
+				r.setTipo(rs.getString("tipom"));
+				lista.add(r);
+			}
+			return lista;
+		}catch(SQLException e){
+			System.err.println("Errore SQL");
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public ArrayList<ristorante> getAllRistorantiVegan() {
+		try {
+			Connessione c = new Connessione();
+			c.ConnessioneDB();
+			ResultSet rs= c.Query("*","ristorante join vegan on codv2=codv"," ");
+			ArrayList<ristorante> lista = new ArrayList();
+			while(rs.next()) {
+				ristorante r = new ristorante();
+				r.setNome(rs.getString("nome"));
+				r.setCittà(rs.getString("citta"));
+				r.setVia(rs.getString("via"));
+				r.setCivico(rs.getString("civico"));
+				r.setSpecialita(rs.getString("specialita"));
+				r.setTipo(rs.getString("tipov"));
+				lista.add(r);
+			}
+			return lista;
+		}catch(SQLException e){
+			System.err.println("Errore SQL");
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	
 
 /*	public DefaultTableModel getRistoranti() {
 		String col[] = {"Nome","Città","Via","Civico","Specialità"};
