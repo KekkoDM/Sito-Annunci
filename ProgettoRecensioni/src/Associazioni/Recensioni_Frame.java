@@ -49,7 +49,7 @@ public class Recensioni_Frame extends JDialog {
 			new Object[][] {
 			},
 			new String[] {
-				"Codice", "Titolo", "Testo", "Valutazione", "Data" ,"Utente"
+				"Titolo", "Testo", "Valutazione", "Data" ,"Utente"
 			}
 		));
 		
@@ -132,7 +132,7 @@ public class Recensioni_Frame extends JDialog {
 			riga[1] = list.get(i).getTesto();
 			riga[2] = list.get(i).getValutazione();
 			riga[3] = list.get(i).getData();
-			riga[4] = list.get(i).getCodice();
+			riga[4] = list.get(i).getCodU();
 			model.addRow(riga);
 		}
 	}

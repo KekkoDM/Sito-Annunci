@@ -67,7 +67,7 @@ public class AlloggioDAO {
 			Connessione c = new Connessione();
 			c.ConnessioneDB();
 			ResultSet rs= c.Query("*","alloggio join beb on codal=codal4"," ");
-			ArrayList<Alloggio> lista = new ArrayList();
+			ArrayList<Alloggio> lista = new ArrayList<Alloggio>();
 			while(rs.next()) {
 				Hotel r = new Hotel();
 				r.setNome(rs.getString("nome"));
@@ -92,7 +92,7 @@ public class AlloggioDAO {
 			Connessione c = new Connessione();
 			c.ConnessioneDB();
 			ResultSet rs= c.Query("*","alloggio join casa on codal=codal5"," ");
-			ArrayList<Alloggio> lista = new ArrayList();
+			ArrayList<Alloggio> lista = new ArrayList<Alloggio>();
 			while(rs.next()) {
 				Casa r = new Casa();
 				r.setNome(rs.getString("nome"));
@@ -111,40 +111,5 @@ public class AlloggioDAO {
 			e.printStackTrace();
 			return null;
 		}
-	}
-	
-/*
-	public DefaultTableModel getAlloggio() {
-		String column[] = {"Nome","Città","Via","Civico","Bagni","Camere","Letti"};
-		DefaultTableModel tableModel = new DefaultTableModel(column, 0);
-		
-		Connessione c = new Connessione();
-		
-		c.ConnessioneDB();
-		String select = "nome, citta, via, civico, bagni,camere,letti";
-		
-		try {
-			ResultSet rs=c.Query(select, "alloggio", "", tableModel);
-			while(rs.next()) {
-				String nome = rs.getString(1);
-				String citta = rs.getString(2);
-				String via = rs.getString(3);
-				int civico = rs.getInt(4);
-				int bagni = rs.getInt(5);
-				int camere = rs.getInt(6);
-				int letti = rs.getInt(7);
-				
-				Object[] riga = {nome, citta, via, civico, bagni,camere,letti};
-				tableModel.addRow(riga);
-				
-			}
-		}catch(SQLException e) {
-			System.err.println("Errore SQL");
-			e.printStackTrace();
-		}
-		c.ChiudiConn();
-		return tableModel;
-	}
-*/
-
+	}	
 }

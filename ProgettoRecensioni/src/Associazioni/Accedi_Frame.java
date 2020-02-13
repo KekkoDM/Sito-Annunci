@@ -77,8 +77,8 @@ public class Accedi_Frame extends JDialog {
 				}
 				else {
 					ctr.chiudiAccedi();
-					ctr.main.setUtenteCorrente(user);
-					ctr.main.setUtenteLabel();
+					ctr.setUtenteCorrente(user);
+					ctr.main.setUtenteLabel(ctr);
 				}
 			}
 		});

@@ -37,7 +37,7 @@ public class Inserisci_Frame extends JDialog {
 	private JRadioButton fiveradio;
 	String Codice = new String(" ");
 
-	public Inserisci_Frame(Controller ctr,String from) {
+	public Inserisci_Frame(Controller ctr,String from,Utente UtenteCorrente) {
 		setResizable(false);
 		RecensioneDAO rdao = new RecensioneDAO();
 		setBounds(100, 100, 401, 405);
@@ -102,6 +102,7 @@ public class Inserisci_Frame extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						Recensione r = new Recensione();
+						r.setCodU(UtenteCorrente.getCodu());
 						r.setLuogo(ristocombo.getSelectedItem().toString());
 						r.setTitolo(titolotext.getText());
 						r.setTesto(textarea.getText());

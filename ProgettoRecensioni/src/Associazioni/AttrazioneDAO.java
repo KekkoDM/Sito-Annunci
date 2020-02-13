@@ -17,7 +17,7 @@ public class AttrazioneDAO {
 			Connessione c = new Connessione();
 			c.ConnessioneDB();
 			ResultSet rs= c.Query("*","attrazione"," ");
-			ArrayList<Attrazione> lista = new ArrayList();
+			ArrayList<Attrazione> lista = new ArrayList<Attrazione>();
 			while(rs.next()) {
 				Attrazione r = new Attrazione();
 				r.setNome(rs.getString("nome"));
@@ -26,6 +26,85 @@ public class AttrazioneDAO {
 				r.setCivico(rs.getString("civico"));
 				r.setDescrizione(rs.getString("descrizione"));
 				r.setTelefono(rs.getString("telefono"));
+				lista.add(r);
+			}
+			return lista;
+		}catch(SQLException e){
+			System.err.println("Errore SQL");
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public ArrayList<Attrazione> getAllAttrazioniCinema() {
+		try {
+			Connessione c = new Connessione();
+			c.ConnessioneDB();
+			ResultSet rs= c.Query("*","attrazione join cinema on codat = codat3"," ");
+			ArrayList<Attrazione> lista = new ArrayList<Attrazione>();
+			while(rs.next()) {
+				Cinema r = new Cinema();
+				r.setNome(rs.getString("nome"));
+				r.setCittà(rs.getString("citta"));
+				r.setVia(rs.getString("via"));
+				r.setCivico(rs.getString("civico"));
+				r.setDescrizione(rs.getString("descrizione"));
+				r.setTelefono(rs.getString("telefono"));
+				r.setCapienza(rs.getInt("capienza"));
+				r.setNSale(rs.getInt("nsale"));
+				lista.add(r);
+			}
+			return lista;
+		}catch(SQLException e){
+			System.err.println("Errore SQL");
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public ArrayList<Attrazione> getAllAttrazioniMuseo() {
+		try {
+			Connessione c = new Connessione();
+			c.ConnessioneDB();
+			ResultSet rs= c.Query("*","attrazione join museo on codat = codat4"," ");
+			ArrayList<Attrazione> lista = new ArrayList<Attrazione>();
+			while(rs.next()) {
+				Museo r = new Museo();
+				r.setNome(rs.getString("nome"));
+				r.setCittà(rs.getString("citta"));
+				r.setVia(rs.getString("via"));
+				r.setCivico(rs.getString("civico"));
+				r.setDescrizione(rs.getString("descrizione"));
+				r.setTelefono(rs.getString("telefono"));
+				r.setPatrimonio(rs.getString("patrimonio"));
+				r.setGuida(rs.getBoolean("guida"));
+				lista.add(r);
+			}
+			return lista;
+		}catch(SQLException e){
+			System.err.println("Errore SQL");
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public ArrayList<Attrazione> getAllAttrazioniParco() {
+		try {
+			Connessione c = new Connessione();
+			c.ConnessioneDB();
+			ResultSet rs= c.Query("*","attrazione join parco on codat = codat5"," ");
+			ArrayList<Attrazione> lista = new ArrayList<Attrazione>();
+			while(rs.next()) {
+				Parco r = new Parco();
+				r.setNome(rs.getString("nome"));
+				r.setCittà(rs.getString("citta"));
+				r.setVia(rs.getString("via"));
+				r.setCivico(rs.getString("civico"));
+				r.setDescrizione(rs.getString("descrizione"));
+				r.setTelefono(rs.getString("telefono"));
+				r.setNGiostre(rs.getInt("ngiostre"));
+				r.setZoo(rs.getBoolean("zoo"));
+				r.setSpettacoli(rs.getBoolean("spettacoli"));
 				lista.add(r);
 			}
 			return lista;

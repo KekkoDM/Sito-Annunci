@@ -18,7 +18,7 @@ public class ristoranteDAO {
 			Connessione c = new Connessione();
 			c.ConnessioneDB();
 			ResultSet rs= c.Query("*","ristorante"," ");
-			ArrayList<ristorante> lista = new ArrayList();
+			ArrayList<ristorante> lista = new ArrayList<ristorante>();
 			while(rs.next()) {
 				ristorante r = new ristorante();
 				r.setNome(rs.getString("nome"));
@@ -41,7 +41,7 @@ public class ristoranteDAO {
 			Connessione c = new Connessione();
 			c.ConnessioneDB();
 			ResultSet rs= c.Query("*","ristorante join terra on codt2=codt"," ");
-			ArrayList<ristorante> lista = new ArrayList();
+			ArrayList<ristorante> lista = new ArrayList<ristorante>();
 			while(rs.next()) {
 				Terra r = new Terra();
 				r.setNome(rs.getString("nome"));
@@ -65,7 +65,7 @@ public class ristoranteDAO {
 			Connessione c = new Connessione();
 			c.ConnessioneDB();
 			ResultSet rs= c.Query("*","ristorante join mare on codm2=codm"," ");
-			ArrayList<ristorante> lista = new ArrayList();
+			ArrayList<ristorante> lista = new ArrayList<ristorante>();
 			while(rs.next()) {
 				Terra r = new Terra();
 				r.setNome(rs.getString("nome"));
@@ -89,7 +89,7 @@ public class ristoranteDAO {
 			Connessione c = new Connessione();
 			c.ConnessioneDB();
 			ResultSet rs= c.Query("*","ristorante join vegan on codv2=codv"," ");
-			ArrayList<ristorante> lista = new ArrayList();
+			ArrayList<ristorante> lista = new ArrayList<ristorante>();
 			while(rs.next()) {
 				ristorante r = new ristorante();
 				r.setNome(rs.getString("nome"));

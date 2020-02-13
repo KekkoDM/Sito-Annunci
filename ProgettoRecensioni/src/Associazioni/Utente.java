@@ -1,6 +1,7 @@
 package Associazioni;
 
 public class Utente {
+	private String Codu;
 	private String Username;
 	private String Password;
 	private String Nome;
@@ -50,6 +51,12 @@ public class Utente {
 	}
 	public void setTipo(String tipo) {
 		Tipo = tipo;
+	}
+	public String getCodu() {
+		return Codu;
+	}
+	public void setCodu(String codu) {
+		Codu = codu;
 	}
 
 }

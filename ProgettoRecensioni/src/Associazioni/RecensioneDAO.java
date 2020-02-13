@@ -32,8 +32,8 @@ public class RecensioneDAO {
 			System.err.println("Errore SQL");
 			e.printStackTrace();
 		}
-		String values= "'" +r.getTitolo()+ "'"  + "," + codice + "," + "'" + r.getTitolo() + "'," + r.getValutazione() + "," +"NOW()";
-		String attr = "titolo,"+codi+"2,testo,valutazione,data";
+		String values= "'" +r.getTitolo()+ "'"  + "," + codice + "," + "'" + r.getTitolo() + "'," + r.getValutazione() + "," +"NOW(), "+r.getCodU();
+		String attr = "titolo,"+codi+"2,testo,valutazione,data,codu2";
 		c.Insert("recensione",attr, values);
 		c.ChiudiConn();
 	}
@@ -54,6 +54,7 @@ public class RecensioneDAO {
 				r.setCodAl(rs.getString("codal2"));
 				r.setCodAt(rs.getString("codat2"));
 				r.setCodRi(rs.getString("codri2"));
+				r.setCodU(rs.getString("codu2"));
 				lista.add(r);
 			}
 			return lista;
@@ -70,18 +71,16 @@ public class RecensioneDAO {
 			c.ConnessioneDB();
 			String from="recensione AS re join ristorante AS ri on codri = codri2";
 			String where="re.approvata = 't' AND ri.nome = '"+l+"'";
-			ResultSet rs= c.Query("*",from,where);
+			ResultSet rs= c.Query("titolo,testo,valutazione,data,codu2",from,where);
 			ArrayList<Recensione> lista = new ArrayList();
 			while(rs.next()) {
 				Recensione r = new Recensione();
-				r.setCodice(rs.getString("codre"));
+				
 				r.setTitolo(rs.getString("titolo"));
 				r.setValutazione(rs.getString("valutazione"));
 				r.setTesto(rs.getString("testo"));
 				r.setData(rs.getString("data"));
-				r.setCodAl(rs.getString("codal2"));
-				r.setCodAt(rs.getString("codat2"));
-				r.setCodRi(rs.getString("codri2"));
+				r.setCodU(rs.getString("codu2"));
 				lista.add(r);
 			}
 			return lista;
@@ -110,6 +109,7 @@ public class RecensioneDAO {
 				r.setCodAl(rs.getString("codal2"));
 				r.setCodAt(rs.getString("codat2"));
 				r.setCodRi(rs.getString("codri2"));
+				r.setCodU(rs.getString("codu2"));
 				lista.add(r);
 			}
 			return lista;
@@ -124,7 +124,7 @@ public class RecensioneDAO {
 		try {
 			Connessione c = new Connessione();
 			c.ConnessioneDB();
-			String from ="recensione AS re join attrazione AS at on codri = codri2";
+			String from ="recensione AS re join attrazione AS at on codat = codat2";
 			String where = "re.approvata = 't' AND at.nome = '"+l+"'";
 			ResultSet rs= c.Query("*",from,where);
 			ArrayList<Recensione> lista = new ArrayList();
@@ -138,6 +138,7 @@ public class RecensioneDAO {
 				r.setCodAl(rs.getString("codal2"));
 				r.setCodAt(rs.getString("codat2"));
 				r.setCodRi(rs.getString("codri2"));
+				r.setCodU(rs.getString("codu2"));
 				lista.add(r);
 			}
 			return lista;

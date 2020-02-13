@@ -49,17 +49,15 @@ public class Main_Frame extends JFrame {
 	private JTable modristotable;
 	JTable alloggiotable;
 	private JTable attrazionetable;
-	private Utente UtenteCorrente;
 	private JLabel userlabel;
 	private JButton accedijb;
 	private JButton escijb;
 	private JButton inseriscijb;
-	
+	private String from;
 	
 	
 	public Main_Frame(Controller ctr) {
 		
-		UtenteCorrente = new Utente();
 		setTitle("RevHub");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -118,10 +116,10 @@ public class Main_Frame extends JFrame {
 		escijb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				ctr.main.getAccediButton().setEnabled(true);
-				ctr.main.getUtenteCorrente();
 				ctr.main.getUtenteLabel().setText(" ");
 				Utente nuovo_utente = new Utente();
-				ctr.main.setUtenteCorrente(nuovo_utente);
+				ctr.setUtenteCorrente(nuovo_utente);
+				
 			}
 		});
 		escijb.setForeground(new Color(255, 255, 255));
@@ -142,6 +140,7 @@ public class Main_Frame extends JFrame {
 	
 		//TABELLA RISTORANTE
 		ristotable = new JTable();
+		ristotable.setEnabled(false);
 		ristotable.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
@@ -149,13 +148,14 @@ public class Main_Frame extends JFrame {
 				"Nome", "Città", "Via", "Civico", "Specialità"
 			}
 		));
-		ArrayList<ristorante> lista = new ArrayList<ristorante>();
-		lista = rdao.getAllRistoranti();
-		populateJTableRisto(lista,ristotable);
+		
+		populateJTableRisto(ctr.getAllRistoranti(),ristotable);
+		
+		
 		scrollPane.setViewportView(ristotable);
 		ristotable.setFillsViewportHeight(true);
 		ristotable.setColumnSelectionAllowed(true);
-		ristotable.setBackground(new Color(245, 245, 220));
+		ristotable.setBackground(new Color(245, 245, 245));
 		ristotable.setRowHeight(50);
 		
 		inseriscijb = new JButton("Inserisci");
@@ -164,12 +164,12 @@ public class Main_Frame extends JFrame {
 		inseriscijb.setForeground(new Color(255, 255, 255));
 		inseriscijb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String from = "ristorante";
+				
 				ctr.apriInserisci(from);
 			}
 		});
 		inseriscijb.setBounds(639, 30, 125, 30);
-		ristopanel.add(inseriscijb);
+		
 		
 		JButton btnNewButton = new JButton("Recensioni");
 		btnNewButton.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 18));
@@ -190,15 +190,18 @@ public class Main_Frame extends JFrame {
 		ristopanel.add(lblNewLabel_5);
 		
 		JRadioButton terrarb = new JRadioButton("Terra");
+		terrarb.setBackground(new Color(222, 184, 135));
 		terrarb.setBounds(364, 30, 71, 23);
 		ristopanel.add(terrarb);
 		
 		JRadioButton marerb = new JRadioButton("Mare");
+		marerb.setBackground(new Color(175, 238, 238));
 		marerb.setBounds(441, 30, 71, 23);
 		ristopanel.add(marerb);
 		
 		JRadioButton veganrb = new JRadioButton("Vegan");
-		veganrb.setBounds(525, 30, 71, 23);
+		veganrb.setBackground(new Color(144, 238, 144));
+		veganrb.setBounds(521, 30, 71, 23);
 		ristopanel.add(veganrb);
 		
 		ButtonGroup bgroup1 = new ButtonGroup();
@@ -218,24 +221,26 @@ public class Main_Frame extends JFrame {
 					}
 				));
 				scrollPane.setViewportView(ristotable);
+				ristotable.setEnabled(false);
 				ristotable.setFillsViewportHeight(true);
 				ristotable.setColumnSelectionAllowed(true);
-				ristotable.setBackground(new Color(245, 245, 220));
 				ristotable.setRowHeight(50);
-				ArrayList<ristorante> lista = new ArrayList<ristorante>();
 				
 				if(terrarb.isSelected()==true) {
-					lista = rdao.getAllRistorantiTerra();
-					populateJTableRisto(lista,ristotable);
+					populateJTableRisto(ctr.getAllRistorantiTerra(),ristotable);
+					ristotable.setBackground(new Color(222, 184, 135));
 				}
+					
 				else if(marerb.isSelected()==true) {
-					lista = rdao.getAllRistorantiMare();
-					populateJTableRisto(lista,ristotable);
+					populateJTableRisto(ctr.getAllRistorantiMare(),ristotable);
+					ristotable.setBackground(new Color(175, 238, 238));
 				}
+					
 				else if(veganrb.isSelected()==true) {
-					lista = rdao.getAllRistorantiVegan();
-					populateJTableRisto(lista,ristotable);
+					populateJTableRisto(ctr.getAllRistorantiVegan(),ristotable);
+					ristotable.setBackground(new Color(144, 238, 144));
 				}
+					
 				else {
 					ristotable.setModel(new DefaultTableModel(
 							new Object[][] {
@@ -244,8 +249,8 @@ public class Main_Frame extends JFrame {
 								"Nome", "Città", "Via", "Civico", "Specialità"
 							}
 						));
-					lista = rdao.getAllRistoranti();
-					populateJTableRisto(lista,ristotable);
+					populateJTableRisto(ctr.getAllRistoranti(),ristotable);
+					ristotable.setBackground(new Color(245, 245, 245));
 				}
 			}
 		});
@@ -287,19 +292,6 @@ public class Main_Frame extends JFrame {
 		alloggiotable.setEnabled(false);
 		alloggiotable.setBackground(new Color(245, 245, 220));
 		alloggiotable.setRowHeight(50);
-		
-		JButton btnInserisci = new JButton("Inserisci");
-		btnInserisci.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 18));
-		btnInserisci.setBackground(new Color(46, 139, 87));
-		btnInserisci.setForeground(new Color(255, 255, 255));
-		btnInserisci.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				String from = "Alloggio";
-				ctr.apriInserisci(from);
-			}
-		});
-		btnInserisci.setBounds(639, 48, 125, 30);
-		alloggipanel.add(btnInserisci);
 		
 		JButton btnNewButton_2 = new JButton("Recensioni");
 		btnNewButton_2.addActionListener(new ActionListener() {
@@ -353,7 +345,6 @@ public class Main_Frame extends JFrame {
 						"Nome", "Città", "Via", "Civico", "Bagni" ,"Camere"
 					}
 				));
-				ArrayList<Alloggio> listal = new ArrayList<Alloggio>();
 				scrollPane2.setViewportView(alloggiotable);
 				alloggiotable.setFillsViewportHeight(true);
 				alloggiotable.setColumnSelectionAllowed(true);
@@ -370,9 +361,7 @@ public class Main_Frame extends JFrame {
 							}
 						));
 					tipo = "hotel";
-					ArrayList<Alloggio> listalh = new ArrayList<Alloggio>();
-					listalh = adao.getAllAlloggiHotel();
-					populateJTableAllo(listalh,alloggiotable,tipo);
+					populateJTableAllo(ctr.getAllAlloggioHotel(),alloggiotable,tipo);
 				}
 				else if(bbrb.isSelected()==true) {
 					alloggiotable.setModel(new DefaultTableModel(
@@ -383,8 +372,7 @@ public class Main_Frame extends JFrame {
 							}
 						));
 					tipo = "bb";
-					listal = adao.getAllAlloggiBandB();
-					populateJTableAllo(listal,alloggiotable,tipo);
+					populateJTableAllo(ctr.getAllAlloggioBB(),alloggiotable,tipo);
 				}
 				else if(casarb.isSelected()==true) {
 					alloggiotable.setModel(new DefaultTableModel(
@@ -395,8 +383,7 @@ public class Main_Frame extends JFrame {
 							}
 						));
 					tipo = "casa";
-					listal = adao.getAllAlloggiCasa();
-					populateJTableAllo(listal,alloggiotable,tipo);
+					populateJTableAllo(ctr.getAllAlloggioCasa(),alloggiotable,tipo);
 				}
 				else {
 					alloggiotable.setModel(new DefaultTableModel(
@@ -406,8 +393,7 @@ public class Main_Frame extends JFrame {
 								"Nome", "Città", "Via", "Civico", "Bagni" ,"Camere"
 							}
 						));
-					listal = adao.getAllAlloggi();
-					populateJTableAllo(listal,alloggiotable,tipo);
+					populateJTableAllo(ctr.getAllAlloggio(),alloggiotable,tipo);
 				}
 			}
 			
@@ -435,28 +421,14 @@ public class Main_Frame extends JFrame {
 				"Nome", "Città", "Via", "Civico", "Bagni" ,"Camere"
 			}
 		));
-		ArrayList<Attrazione> listat = new ArrayList<Attrazione>();
-		listat = tdao.getAllAttrazioni();
-		populateJTableAttr(listat,attrazionetable);
+		String tipo2 = " ";
+		populateJTableAttr(ctr.getAllAttrazioni(),attrazionetable,tipo2);
 		scrollPane3.setViewportView(attrazionetable);
 		attrazionetable.setFillsViewportHeight(true);
 		attrazionetable.setColumnSelectionAllowed(true);
 		attrazionetable.setEnabled(false);
 		attrazionetable.setBackground(new Color(245, 245, 220));
 		attrazionetable.setRowHeight(50);
-		
-		JButton btnNewButton_4 = new JButton("Inserisci");
-		btnNewButton_4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String from = "Attrazione";
-				ctr.apriInserisci(from);
-			}
-		});
-		btnNewButton_4.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 18));
-		btnNewButton_4.setForeground(new Color(255, 255, 255));
-		btnNewButton_4.setBackground(new Color(46, 139, 87));
-		btnNewButton_4.setBounds(639, 48, 125, 30);
-		attrazionepanel.add(btnNewButton_4);
 		
 		JButton btnNewButton_5 = new JButton("Recensioni");
 		btnNewButton_5.addActionListener(new ActionListener() {
@@ -476,6 +448,94 @@ public class Main_Frame extends JFrame {
 		lblNewLabel_4.setBounds(15, 0, 300, 151);
 		attrazionepanel.add(lblNewLabel_4);
 		
+		JRadioButton cinemarb = new JRadioButton("Cinema");
+		cinemarb.setBounds(367, 48, 61, 23);
+		attrazionepanel.add(cinemarb);
+		
+		JRadioButton museorb = new JRadioButton("Museo");
+		museorb.setBounds(448, 48, 57, 23);
+		attrazionepanel.add(museorb);
+		
+		JRadioButton parcorb = new JRadioButton("Parco");
+		parcorb.setBounds(521, 48, 61, 23);
+		attrazionepanel.add(parcorb);
+		
+		JRadioButton tuttirb3 = new JRadioButton("Tutti");
+		tuttirb3.setBounds(306, 48, 47, 23);
+		attrazionepanel.add(tuttirb3);
+		
+		JButton btnCerca = new JButton("Cerca");
+		btnCerca.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String tipo = "";
+				attrazionetable = new JTable();
+				attrazionetable.setModel(new DefaultTableModel(
+					new Object[][] {
+					},
+					new String[] {
+						"Nome", "Città", "Via", "Civico", "Descrizione" ,"Orario" , "Telefono"
+					}
+				));
+				scrollPane3.setViewportView(attrazionetable);
+				attrazionetable.setFillsViewportHeight(true);
+				attrazionetable.setColumnSelectionAllowed(true);
+				attrazionetable.setEnabled(false);
+				attrazionetable.setBackground(new Color(245, 245, 220));
+				attrazionetable.setRowHeight(50);
+				
+				if(cinemarb.isSelected()==true) {
+					attrazionetable.setModel(new DefaultTableModel(
+							new Object[][] {
+							},
+							new String[] {
+								"Nome", "Città", "Via", "Civico", "Descrizione" ,"Orario" , "Telefono"
+							}
+						));
+					tipo = "cinema";
+					populateJTableAttr(ctr.getAllAttrazioniCinema(),attrazionetable,tipo);
+				}
+				else if(museorb.isSelected()==true) {
+					attrazionetable.setModel(new DefaultTableModel(
+							new Object[][] {
+							},
+							new String[] {
+								"Nome", "Città", "Via", "Civico", "Descrizione" ,"Orario" , "Telefono","Guida","Patrimonio"
+							}
+						));
+					tipo = "museo";
+					populateJTableAttr(ctr.getAllAttrazioniMuseo(),attrazionetable,tipo);
+				}
+				else if(parcorb.isSelected()==true) {
+					attrazionetable.setModel(new DefaultTableModel(
+							new Object[][] {
+							},
+							new String[] {
+								"Nome", "Città", "Via", "Civico", "Descrizione" ,"Orario" , "Telefono", "N°Giostre", "Zoo","Spettacoli"
+							}
+						));
+					tipo = "parco";
+					populateJTableAttr(ctr.getAllAttrazioniParco(),attrazionetable,tipo);
+				}
+				else {
+					attrazionetable.setModel(new DefaultTableModel(
+							new Object[][] {
+							},
+							new String[] {
+								"Nome", "Città", "Via", "Civico", "Descrizione" ,"Orario" , "Telefono"
+							}
+						));
+					populateJTableAttr(ctr.getAllAttrazioni(),attrazionetable,tipo);
+				}
+			}
+		});
+		btnCerca.setBounds(397, 89, 89, 23);
+		attrazionepanel.add(btnCerca);
+		
+		ButtonGroup bgroup3 = new ButtonGroup();
+        bgroup3.add(tuttirb3);
+        bgroup3.add(cinemarb);
+        bgroup3.add(museorb);
+        bgroup3.add(parcorb);
 		
 		//PANEL RISTORANTE MODERATORE
 		JPanel modristopanel = new JPanel();
@@ -493,7 +553,7 @@ public class Main_Frame extends JFrame {
 			new Object[][] {
 			},
 			new String[] {
-				"Titolo", "Testo", "Valutazione", "Data","CodiceRec"
+				"Titolo", "Testo", "Valutazione", "Data","CodiceRec","CodU"
 			}
 		));
 		ArrayList<Recensione> listar = new ArrayList<Recensione>();
@@ -544,17 +604,17 @@ public class Main_Frame extends JFrame {
 		JButton ristojb = new JButton("Ristorante");
 		ristojb.setBounds(0, 204, 244, 43);
 		ristojb.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) { // DA MODIFICARE
+			public void actionPerformed(ActionEvent arg0) {
+				from="ristorante";// DA MODIFICARE
 				ctr.switchPanel(layeredPane,ristopanel);
-				if(ctr.main.getUtenteCorrente().getTipo().equals("moderatore")) 
+				if(ctr.getUtenteCorrente().getTipo().equals("moderatore")) 
 					ctr.switchPanel(layeredPane, ristopanel);
-				else if(ctr.main.getUtenteCorrente().getTipo().equals("admin"))
-					ctr.main.getInserisciButton().setVisible(false);
-				else if(ctr.main.getUtenteCorrente().getTipo().equals("base"))
-					ctr.main.getInserisciButton().setVisible(true);
 				
-				else 
-					ctr.main.getInserisciButton().setVisible(false);
+				else if(ctr.getUtenteCorrente().getTipo().equals("base"))
+					ctr.main.getInserisciButton(ristopanel,inseriscijb);
+				else
+					ctr.main.removeInserisciButton(ristopanel,inseriscijb);
+				
 				
 			}
 		});
@@ -569,7 +629,15 @@ public class Main_Frame extends JFrame {
 		alloggijb.setBounds(0, 258, 244, 43);
 		alloggijb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				from="alloggio";// DA MODIFICARE
 				ctr.switchPanel(layeredPane,alloggipanel);
+				if(ctr.getUtenteCorrente().getTipo().equals("moderatore")) 
+					ctr.switchPanel(layeredPane, alloggipanel);
+				
+				else if(ctr.getUtenteCorrente().getTipo().equals("base"))
+					ctr.main.getInserisciButton(alloggipanel,inseriscijb);
+				else
+					ctr.main.removeInserisciButton(alloggipanel,inseriscijb);
 			}
 		});
 		alloggijb.setBackground(new Color(46, 139, 87));
@@ -598,7 +666,17 @@ public class Main_Frame extends JFrame {
 		attrazionijb.setBounds(0, 312, 244, 43);
 		attrazionijb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				from="attrazione";// DA MODIFICARE
 				ctr.switchPanel(layeredPane,attrazionepanel);
+				if(ctr.getUtenteCorrente().getTipo().equals("moderatore")) 
+					ctr.switchPanel(layeredPane, attrazionepanel);
+				
+				else if(ctr.getUtenteCorrente().getTipo().equals("base"))
+					ctr.main.getInserisciButton(attrazionepanel,inseriscijb);
+				else
+					ctr.main.removeInserisciButton(attrazionepanel,inseriscijb);
+				
+				
 			}
 		});
 		attrazionijb.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 23));
@@ -625,7 +703,7 @@ public class Main_Frame extends JFrame {
 		modjb.setBorder(emptyBorder5);
 		modjb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(UtenteCorrente.getTipo().contentEquals("moderatore"))
+				if(ctr.getUtenteCorrente().getTipo().contentEquals("moderatore"))
 					ctr.switchPanel(layeredPane, modristopanel);
 				else
 					JOptionPane.showMessageDialog(null, "Non sei moderatore!!");
@@ -635,10 +713,7 @@ public class Main_Frame extends JFrame {
 		modjb.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 23));
 		modjb.setBounds(0, 366, 244, 43);
 		main_panel.add(modjb);
-	}
-	
-	
-	
+	}	
 	
 	public void populateJTableRisto(ArrayList<ristorante> list,JTable ristotable) {
 		DefaultTableModel model = (DefaultTableModel) ristotable.getModel();
@@ -680,9 +755,9 @@ public class Main_Frame extends JFrame {
 			model.addRow(riga);
 		}
 	}
-	public void populateJTableAttr(ArrayList<Attrazione> list,JTable attrazionetable) {
+	public void populateJTableAttr(ArrayList<Attrazione> list,JTable attrazionetable,String tipo) {
 		DefaultTableModel model = (DefaultTableModel) attrazionetable.getModel();
-		Object[] riga = new Object[6];
+		Object[] riga = new Object[10];
 		for(int i=0;i<list.size();i++) {
 			riga[0] = list.get(i).getNome();
 			riga[1] = list.get(i).getCittà();
@@ -690,32 +765,50 @@ public class Main_Frame extends JFrame {
 			riga[3] = list.get(i).getCivico();
 			riga[4] = list.get(i).getDescrizione();
 			riga[5] = list.get(i).getTelefono();
+			switch(tipo) {
+				case "cinema": {
+					Cinema a =  (Cinema) list.get(i);
+					riga[6] = a.getNSale();
+					riga[7] = a.getCapienza();
+					break;
+				}
+				
+				case "museo": {
+					Museo a =  (Museo) list.get(i);
+					riga[6] = a.isGuida();
+					riga[7] = a.getPatrimonio();
+					break;
+				}
+				
+				case "parco":{
+					Parco a =  (Parco) list.get(i);
+					riga[6] = a.getNGiostre();
+					riga[7] = a.isZoo();
+					riga[8] = a.isSpettacoli();
+					break;
+				}
+				
+			}
 			model.addRow(riga);
 		}
 	}
 	public void populateJTableRece(ArrayList<Recensione> list,JTable modrecetable) {
 		DefaultTableModel model = (DefaultTableModel) modrecetable.getModel();
-		Object[] riga = new Object[5];
+		Object[] riga = new Object[6];
 		for(int i=0;i<list.size();i++) {
 			riga[0] = list.get(i).getTitolo();
 			riga[1] = list.get(i).getTesto();
 			riga[2] = list.get(i).getValutazione();
 			riga[3] = list.get(i).getData();
 			riga[4] = list.get(i).getCodice();
+			riga[5] = list.get(i).getCodU();
 			model.addRow(riga);
 		}
 	}
 
-	public Utente getUtenteCorrente() {
-		return UtenteCorrente;
-	}
-
-	public void setUtenteCorrente(Utente utenteCorrente) {
-		UtenteCorrente = utenteCorrente;
-	}
 	
-	public void setUtenteLabel() {
-		this.getUtenteLabel().setText("Benvenuto "+this.getUtenteCorrente().getUsername()+"!");
+	public void setUtenteLabel(Controller ctr) {
+		this.getUtenteLabel().setText(ctr.getUtenteCorrente().getUsername());
 		this.getAccediButton().setEnabled(false);
 	}
 	public JLabel getUtenteLabel() {
@@ -727,7 +820,10 @@ public class Main_Frame extends JFrame {
 	public JButton getEsciButton() {
 		return escijb;
 	}
-	public JButton getInserisciButton() {
-		return inseriscijb;
+	public void getInserisciButton(JPanel panel, JButton button) {
+		panel.add(button);
+	}
+	public void removeInserisciButton(JPanel panel, JButton button) {
+		panel.remove(button);
 	}
 }

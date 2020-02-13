@@ -14,7 +14,7 @@ public class UtentiDAO {
 		c.ConnessioneDB();
 		
 		Utente user = new Utente();
-		String select = "username,password,nome,cognome,tipo";
+		String select = "username,password,nome,cognome,tipo,codu";
 		String where = "username='" + u + "' and password ='" + p +"'";
 		try {
 			
@@ -25,7 +25,9 @@ public class UtentiDAO {
 				String nome = rs.getString(3);
 				String cognome = rs.getString(4);
 				String tipo = rs.getString(5);
+				String codu = rs.getString(6);
 				if(p.equals(password) && u.equals(username)) {
+					user.setCodu(codu);
 					user.setUsername(username);
 					user.setPassword(password);
 					user.setNome(nome);
