@@ -22,9 +22,7 @@ public class Recensioni_Frame extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JComboBox ristocombo;
-	private JTable ristotable;
 	private ristoranteDAO rdao= new ristoranteDAO();
-    private JScrollPane scrollPane4 = new JScrollPane();    
     private RecensioneDAO recdao = new RecensioneDAO();
 	
     public Recensioni_Frame(Controller ctr, String from) {
@@ -62,6 +60,7 @@ public class Recensioni_Frame extends JDialog {
 		rectable.setBackground(new Color(245, 245, 220));
 		rectable.setRowHeight(50);	
 		
+		
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -75,6 +74,9 @@ public class Recensioni_Frame extends JDialog {
 						String luogo=(ristocombo.getSelectedItem().toString());
 						ArrayList<Recensione> lista = new ArrayList<Recensione>();
 						
+						DefaultTableModel model = (DefaultTableModel) rectable.getModel();
+						model.setRowCount(0);
+						
 						if(from.equals("ristorante")) {
 							lista = recdao.getRecensioniRistorante(luogo);
 							populateJTableRece(lista,rectable);
@@ -85,6 +87,7 @@ public class Recensioni_Frame extends JDialog {
 							lista = recdao.getRecensioniAttrazione(luogo);
 							populateJTableRece(lista,rectable);
 						}
+						
 					}
 				});
 			}
@@ -96,7 +99,8 @@ public class Recensioni_Frame extends JDialog {
 					
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						contentPanel.remove(scrollPane4);
+						DefaultTableModel model = (DefaultTableModel) rectable.getModel();
+						model.setRowCount(0);
 						
 					}
 				});

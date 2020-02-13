@@ -68,7 +68,9 @@ public class RecensioneDAO {
 		try {
 			Connessione c = new Connessione();
 			c.ConnessioneDB();
-			ResultSet rs= c.Query("*","recensione AS re join ristorante AS ri on codri = codri2","re.approvata = 't' AND ri.nome = '"+l+"'");
+			String from="recensione AS re join ristorante AS ri on codri = codri2";
+			String where="re.approvata = 't' AND ri.nome = '"+l+"'";
+			ResultSet rs= c.Query("*",from,where);
 			ArrayList<Recensione> lista = new ArrayList();
 			while(rs.next()) {
 				Recensione r = new Recensione();
@@ -94,7 +96,9 @@ public class RecensioneDAO {
 		try {
 			Connessione c = new Connessione();
 			c.ConnessioneDB();
-			ResultSet rs= c.Query("*","recensione AS re join alloggio AS al on codal = codal2","re.approvata = 't' AND al.nome = '"+l+"'");
+			String from ="recensione AS re join alloggio AS al on codal = codal2";
+			String where ="re.approvata = 't' AND al.nome = '"+l+"'";
+			ResultSet rs= c.Query("*",from,where);
 			ArrayList<Recensione> lista = new ArrayList();
 			while(rs.next()) {
 				Recensione r = new Recensione();
@@ -120,7 +124,9 @@ public class RecensioneDAO {
 		try {
 			Connessione c = new Connessione();
 			c.ConnessioneDB();
-			ResultSet rs= c.Query("*","recensione AS re join attrazione AS at on codri = codri2","re.approvata = 't' AND at.nome = '"+l+"'");
+			String from ="recensione AS re join attrazione AS at on codri = codri2";
+			String where = "re.approvata = 't' AND at.nome = '"+l+"'";
+			ResultSet rs= c.Query("*",from,where);
 			ArrayList<Recensione> lista = new ArrayList();
 			while(rs.next()) {
 				Recensione r = new Recensione();
@@ -143,23 +149,20 @@ public class RecensioneDAO {
 	}
 	
 	public void approvaRecensione(Recensione r) {
-		try {
-			Connessione c = new Connessione();
-			c.ConnessioneDB();
-			ResultSet rs= c.Query("*","recensione AS R","R.codre = "+r.getCodice());
-			while(rs.next()) {
-				int recensione = rs.getInt("codre");
-				String query = "UPDATE recensione SET Approvata = 't' WHERE codre = "+rs.getInt("codre");
-				PreparedStatement st =  c.getConn().prepareStatement(query);
-				st.executeUpdate();
-			}	
-		}catch(SQLException e){
-			System.err.println("Errore SQL");
-			e.printStackTrace();
-		}
+		
+		Connessione c = new Connessione();
+		c.ConnessioneDB();
+		c.Update("recensione", "approvata = true", "codre = "+ r.getCodice());
+		c.ChiudiConn();
 	}
 	
-	
+	public void cancellaRecensione(Recensione r) {
+		
+		Connessione c =new Connessione();
+		c.ConnessioneDB();
+		c.Delete("recensione", "codre = "+r.getCodice());
+		c.ChiudiConn();
+	}
 /*
 	public DefaultTableModel getRistoNonApprovate() {
 		String column[] = {"Nome","Valutazione","Titolo","Testo","Data","Approva"};

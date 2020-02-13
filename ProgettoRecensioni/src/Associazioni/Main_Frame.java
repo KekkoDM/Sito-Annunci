@@ -520,8 +520,23 @@ public class Main_Frame extends JFrame {
 			}
 			}
 		});
-		btnConferma.setBounds(629, 540, 89, 23);
+		btnConferma.setBounds(601, 538, 89, 23);
 		modristopanel.add(btnConferma);
+		
+		JButton btnElimina = new JButton("Elimina");
+		btnElimina.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (modristotable.getSelectedRow() != -1) {
+		            Recensione r = new Recensione();
+					
+		            r.setCodice((String) modristotable.getValueAt(modristotable.getSelectedRow(), 4));
+		            recdao.cancellaRecensione(r);
+		            ((DefaultTableModel) modristotable.getModel()).removeRow(modristotable.getSelectedRow()); 
+			}
+			}
+		});
+		btnElimina.setBounds(714, 537, 97, 25);
+		modristopanel.add(btnElimina);
 		
 		
 		

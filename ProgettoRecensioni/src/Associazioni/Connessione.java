@@ -26,7 +26,7 @@ public class Connessione{
 		String url = "jdbc:postgresql://localhost/progetto";
 		Properties props = new Properties();
 		props.setProperty("user","postgres");
-		props.setProperty("password","ale123");
+		props.setProperty("password","F123");
 		
 		 this.conn = null;
 		
@@ -101,6 +101,38 @@ public class Connessione{
 		return rs;
 	}
 	
+	
+	
+	public void Delete(String from, String where) {
+		
+		 try {
+				
+	        	String query = "delete from "+ from + " where "+ where;
+				PreparedStatement st = conn.prepareStatement(query);
+				st.executeUpdate();
+			}
+			catch(SQLException e) {
+				System.err.println("Errore");
+				e.printStackTrace();
+			}
+	}
+	
+	
+	
+	public void Update(String table,String values, String where) {
+		
+		try {
+			
+        	String query = "update "+ table + " set " + values + " where "+ where;
+			PreparedStatement st = conn.prepareStatement(query);
+			st.executeUpdate();
+		}
+		catch(SQLException e) {
+			System.err.println("Errore");
+			e.printStackTrace();
+		}
+		
+	}
 	
 	
 	public void ChiudiConn() {
