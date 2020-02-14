@@ -22,15 +22,16 @@ public class Controller {
 	
 	private Utente UtenteCorrente;
 	
-	Main_Frame main;
-	Accedi_Frame accedi;
-	Inserisci_Frame inserisci;
-	Recensioni_Frame rframe;
+	Main_Frame main; //Frame principale del programma
+	Accedi_Frame accedi; // Frame di accesso per i vari utenti
+	Inserisci_Frame inserisci; // Frame di inserimento della recensione
+	Recensioni_Frame rframe; // Frame di visualizzazione delle recensioni
 	
 	public static void main(String[] args) {
 		Controller ctr = new Controller();
 	}
 	
+	//costruttore Controller
 	public Controller() {
 		UtenteCorrente = new Utente();
 		ListaR = new ArrayList<ristorante>();
@@ -43,6 +44,7 @@ public class Controller {
 		main.setVisible(true);
 	}
 	
+	//metodi che permettono di recuperare ristoranti attraverso oggetto DAO
 	public ArrayList<ristorante> getAllRistoranti(){
 		ListaR = Rdao.getAllRistoranti();
 		return ListaR;
@@ -59,7 +61,7 @@ public class Controller {
 		ListaR = Rdao.getAllRistorantiVegan();
 		return ListaR;
 	}
-	
+	//metodi che permettono di recuperare Alloggi attraverso oggetto DAO
 	public ArrayList<Alloggio> getAllAlloggio(){
 		ListaAl = Adao.getAllAlloggi();
 		return ListaAl;
@@ -76,7 +78,7 @@ public class Controller {
 		ListaAl = Adao.getAllAlloggiCasa();
 		return ListaAl;
 	}
-	
+	//metodi che permettono di recuperare Attrazioni attraverso oggetto DAO
 	public ArrayList<Attrazione> getAllAttrazioni(){
 		ListaAt = Atdao.getAllAttrazioni();
 		return ListaAt;
@@ -102,14 +104,14 @@ public class Controller {
 		return UtenteCorrente;
 	}
 	
-	public void switchPanel(JLayeredPane panel,JPanel newpanel) {
+	public void switchPanel(JLayeredPane panel,JPanel newpanel) { //Metodo che permette di cambiare il panel 
 		panel.removeAll();
 		panel.add(newpanel);
 		panel.repaint();
 		panel.revalidate();
 	}
 	
-	public void apriAccedi(){
+	public void apriAccedi(){ // Metodo che permette di poter aprire il Frame di Accesso bloccano il MainFrame
 		accedi = new Accedi_Frame(this);
 		accedi.setVisible(true);
 		main.setEnabled(false);
@@ -121,12 +123,12 @@ public class Controller {
 		});
 	}
 	
-	public void chiudiAccedi() {
+	public void chiudiAccedi() {//Chiude Frame di Accesso
 		accedi.dispose();
 		main.setEnabled(true);
 	}
 	
-	public void apriInserisci(String from){
+	public void apriInserisci(String from){ //Apre il frame per poter inserire una recensione
 		inserisci = new Inserisci_Frame(this,from,this.getUtenteCorrente());
 		inserisci.setVisible(true);
 		main.setEnabled(false);
@@ -138,12 +140,12 @@ public class Controller {
 		});
 	}
 	
-	public void chiudiInserisci() {
+	public void chiudiInserisci() { //chiude il frame di inserimento
 		inserisci.dispose();
 		main.setEnabled(true);
 	}
 	
-	public void apriRecensioni(String from){
+	public void apriRecensioni(String from){//apre il frame che permette di visualizzare le recensioni dei vari elementi
 		rframe = new Recensioni_Frame(this,from);
 		rframe.setVisible(true);
 		main.setEnabled(false);
@@ -155,7 +157,7 @@ public class Controller {
 		});
 	}
 	
-	public void chiudiRecensioni() {
+	public void chiudiRecensioni() {//chiude il frame di visualizzazione delle recensioni
 		inserisci.dispose();
 		main.setEnabled(true);
 	}

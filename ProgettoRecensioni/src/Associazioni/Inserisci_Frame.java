@@ -9,12 +9,15 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import org.postgresql.util.PSQLException;
+
 import java.awt.Color;
 import javax.swing.JTextArea;
 import javax.swing.JComboBox;
 import javax.swing.UIManager;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.JTable;
 
@@ -108,9 +111,10 @@ public class Inserisci_Frame extends JDialog {
 						r.setTesto(textarea.getText());
 						r.setValutazione(getValutazione(oneradio, tworadio, threeradio, fourradio, fiveradio));
 						String valutazione = r.getValutazione();
+		
 						if(valutazione != "0" && from.equals("ristorante")) {
 							rdao.AggiungiRecensione(r,from,"codri");
-							ctr.chiudiInserisci();	
+							ctr.chiudiInserisci();
 						}else if(valutazione != "0" && from.equals("alloggio")){
 							rdao.AggiungiRecensione(r,from,"codal");
 							ctr.chiudiInserisci();	

@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -76,8 +77,8 @@ public class Connessione{
 			st.executeUpdate();
 		}
 		catch(SQLException e) {
-			System.err.println("Errore");
-			e.printStackTrace();
+			System.err.println("Errore: vincolo di limite utente non rispettato");
+			JOptionPane.showMessageDialog(null,"Errore, questo utente ha già inserito una recensione per questo elemento");
 		}
 		
 	}

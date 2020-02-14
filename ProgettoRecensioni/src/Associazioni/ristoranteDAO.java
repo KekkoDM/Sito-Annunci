@@ -9,6 +9,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class ristoranteDAO {
@@ -54,6 +56,7 @@ public class ristoranteDAO {
 			}
 			return lista;
 		}catch(SQLException e){
+			JOptionPane.showMessageDialog(null,"Aa");
 			System.err.println("Errore SQL");
 			e.printStackTrace();
 			return null;
