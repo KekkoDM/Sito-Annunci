@@ -30,6 +30,7 @@ public class Controller {
 	Accedi_Frame accedi; // Frame di accesso per i vari utenti
 	Inserisci_Frame inserisci; // Frame di inserimento della recensione
 	Recensioni_Frame rframe; // Frame di visualizzazione delle recensioni
+	InserisciAdmin_Frame admin_frame;
 	
 	public static void main(String[] args) {
 		Controller ctr = new Controller();
@@ -186,6 +187,19 @@ public class Controller {
 	public void chiudiRecensioni() {//chiude il frame di visualizzazione delle recensioni
 		inserisci.dispose();
 		main.setEnabled(true);
+	}
+	
+	
+	public void apriInserisciAdmin(String from){ //Apre il frame per poter inserire una recensione
+		admin_frame = new InserisciAdmin_Frame(this);
+		admin_frame.setVisible(true);
+		main.setEnabled(false);
+		admin_frame.addWindowListener(new WindowAdapter(){ //chiudi tramite la X
+		    public void windowClosing(WindowEvent e)
+		    {
+		    	main.setEnabled(true);
+		    }
+		});
 	}
 	
 }

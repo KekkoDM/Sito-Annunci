@@ -54,6 +54,7 @@ public class Main_Frame extends JFrame {
 	private JButton accedijb;
 	private JButton escijb;
 	private JButton inseriscijb;
+	private JButton admininseriscijb;
 	private String from;
 	private JPanel main_panel;
 	
@@ -172,6 +173,19 @@ public class Main_Frame extends JFrame {
 			}
 		});
 		inseriscijb.setBounds(639, 30, 125, 30);
+		
+		
+		admininseriscijb = new JButton("Inserisci"); //Bottone per inserire le recensioni per un certo elemento 
+		admininseriscijb.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 18));
+		admininseriscijb.setBackground(new Color(46, 139, 87));
+		admininseriscijb.setForeground(new Color(255, 255, 255));
+		admininseriscijb.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				ctr.apriInserisciAdmin(from); //chiamata al frame di insrimento
+			}
+		});
+		admininseriscijb.setBounds(639, 30, 125, 30);
 		
 		
 		JButton btnNewButton = new JButton("Recensioni"); //bottone per visualizzare le recensioni
@@ -581,11 +595,12 @@ public class Main_Frame extends JFrame {
 				ctr.switchPanel(layeredPane,ristopanel);
 				if(ctr.getUtenteCorrente().getTipo().equals("moderatore")) 
 					ctr.switchPanel(layeredPane, ristopanel);
+					
 				
 				else if(ctr.getUtenteCorrente().getTipo().equals("base"))
 					ctr.main.getInserisciButton(ristopanel,inseriscijb);
 				else
-					ctr.main.removeInserisciButton(ristopanel,inseriscijb);	
+					ctr.main.getInserisciButton(ristopanel,admininseriscijb);
 			}
 		});
 		ristojb.setForeground(new Color(255, 255, 255));
@@ -607,7 +622,7 @@ public class Main_Frame extends JFrame {
 				else if(ctr.getUtenteCorrente().getTipo().equals("base"))
 					ctr.main.getInserisciButton(alloggipanel,inseriscijb);
 				else
-					ctr.main.removeInserisciButton(alloggipanel,inseriscijb);
+					ctr.main.getInserisciButton(alloggipanel,admininseriscijb);
 			}
 		});
 		alloggijb.setBackground(new Color(46, 139, 87));
@@ -644,7 +659,7 @@ public class Main_Frame extends JFrame {
 				else if(ctr.getUtenteCorrente().getTipo().equals("base"))
 					ctr.main.getInserisciButton(attrazionepanel,inseriscijb);
 				else
-					ctr.main.removeInserisciButton(attrazionepanel,inseriscijb);
+					ctr.main.getInserisciButton(attrazionepanel,admininseriscijb);
 			}
 		});
 		attrazionijb.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 23));

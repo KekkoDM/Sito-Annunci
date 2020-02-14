@@ -30,7 +30,7 @@ public class Connessione{
 		String url = "jdbc:postgresql://localhost/progetto";
 		Properties props = new Properties();
 		props.setProperty("user","postgres");
-		props.setProperty("password","ale123");
+		props.setProperty("password","F123");
 		
 		 this.conn = null;
 		
