@@ -11,11 +11,14 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+
+//CLASSE UTILIZZATA PER INTERFACCIARSI CON IL DATABASE
 public class Connessione{
 	
 	private Connection conn;
 	private ResultSet rs;
 	
+	//METODO CHE SI COLLEGA AL DATABASE
 	public void ConnessioneDB() {
 		
 		try {
@@ -27,7 +30,7 @@ public class Connessione{
 		String url = "jdbc:postgresql://localhost/progetto";
 		Properties props = new Properties();
 		props.setProperty("user","postgres");
-		props.setProperty("password","ale123");
+		props.setProperty("password","F123");
 		
 		 this.conn = null;
 		
@@ -67,7 +70,7 @@ public class Connessione{
 	}
 
 	
-	
+	//METODO CHE PERMETTE DI AGGIUNGERE ELEMENTI NEL DATABASE
 	public void Insert (String table ,String attr,String values) {
 		
         try {
@@ -83,6 +86,7 @@ public class Connessione{
 		
 	}
 	
+	//METODO CHE RECUPERA GLI ELEMENTI DAL DATABASE
 	public ResultSet Query(String select,String from ,String where) {
 		String query=" ";
 		try {
@@ -103,7 +107,7 @@ public class Connessione{
 	}
 	
 	
-	
+	//METODO CHE PERMETTE DI ELIMINARE ELEMENTI DAL DATABASE
 	public void Delete(String from, String where) {
 		
 		 try {
@@ -119,7 +123,7 @@ public class Connessione{
 	}
 	
 	
-	
+	//METODO CHE PERMETTE DI AGGIORNRNARE GLI ELEMENTI DEL DATABASE
 	public void Update(String table,String values, String where) {
 		
 		try {

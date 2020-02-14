@@ -557,9 +557,7 @@ public class Main_Frame extends JFrame {
 				"Titolo", "Testo", "Valutazione", "Data","CodiceRec","CodU"
 			}
 		));
-		ArrayList<Recensione> listar = new ArrayList<Recensione>();
-		listar = recdao.getAllRecensioniNA();
-		populateJTableRece(listar,modristotable);
+		
 		scrollPane4.setViewportView(modristotable);
 		modristotable.setFillsViewportHeight(true);
 		modristotable.setColumnSelectionAllowed(true);
@@ -700,8 +698,13 @@ public class Main_Frame extends JFrame {
 		modjb.setBorder(emptyBorder5);
 		modjb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(ctr.getUtenteCorrente().getTipo().contentEquals("moderatore"))
+				if(ctr.getUtenteCorrente().getTipo().contentEquals("moderatore")) {
 					ctr.switchPanel(layeredPane, modristopanel);
+					ArrayList<Recensione> listar = new ArrayList<Recensione>();
+					listar = recdao.getAllRecensioniNA();
+					populateJTableRece(listar,modristotable);
+				}
+					
 				else
 					JOptionPane.showMessageDialog(null, "Non sei moderatore!!");
 			}
