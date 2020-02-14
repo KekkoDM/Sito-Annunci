@@ -27,6 +27,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
+//Classe che rappresenta il frame per inserire una determinata recensione per un particolare elemento
 public class Inserisci_Frame extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
@@ -104,22 +105,22 @@ public class Inserisci_Frame extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						Recensione r = new Recensione();
+						Recensione r = new Recensione();//creo l'oggetto recensione settando i suoi valori con quelli inseriti nelle varie aree di inserimento
 						r.setCodU(UtenteCorrente.getCodu());
 						r.setLuogo(ristocombo.getSelectedItem().toString());
 						r.setTitolo(titolotext.getText());
 						r.setTesto(textarea.getText());
 						r.setValutazione(getValutazione(oneradio, tworadio, threeradio, fourradio, fiveradio));
 						String valutazione = r.getValutazione();
-		
-						if(valutazione != "0" && from.equals("ristorante")) {
-							rdao.AggiungiRecensione(r,from,"codri");
+						//una volta settato, controllo il valore del flag passato al costruttore
+						if(valutazione != "0" && from.equals("ristorante")) {//se il valore è ristorante , allora aggiunge la recensione con il codice corrispondente alla chiave esterna di ristorante
+							ctr.inserisciRecensione(r, from, "codri");
 							ctr.chiudiInserisci();
 						}else if(valutazione != "0" && from.equals("alloggio")){
-							rdao.AggiungiRecensione(r,from,"codal");
+							ctr.inserisciRecensione(r,from,"codal");
 							ctr.chiudiInserisci();	
 						}else if(valutazione != "0" && from.equals("attrazione")){
-							rdao.AggiungiRecensione(r,from,"codat");
+							ctr.inserisciRecensione(r,from,"codat");
 							ctr.chiudiInserisci();
 						}
 						
@@ -137,7 +138,7 @@ public class Inserisci_Frame extends JDialog {
 		}
 	}
 	
-	public void updateComboBox(String from) {
+	public void updateComboBox(String from) {//prende dal DB tutti i nomi degli elementi interessati (ristoranti, alloggi o attrazioni)
 		Connessione c = new Connessione();
 		c.ConnessioneDB();
 		try {

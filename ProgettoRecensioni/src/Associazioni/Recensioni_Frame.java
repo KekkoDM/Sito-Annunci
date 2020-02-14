@@ -18,6 +18,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JComboBox;
 
+//Classe che rappresenta il frame per visualizzare le recensioni di un particolare elemento
 public class Recensioni_Frame extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
@@ -72,20 +73,17 @@ public class Recensioni_Frame extends JDialog {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						String luogo=(ristocombo.getSelectedItem().toString());
-						ArrayList<Recensione> lista = new ArrayList<Recensione>();
 						
 						DefaultTableModel model = (DefaultTableModel) rectable.getModel();
 						model.setRowCount(0);
 						
 						if(from.equals("ristorante")) {
-							lista = recdao.getRecensioniRistorante(luogo);
-							populateJTableRece(lista,rectable);
+							populateJTableRece(ctr.getRecensioniRistorante(luogo),rectable);
 						}else if(from.equals("alloggio")) {
-							lista = recdao.getRecensioniAlloggio(luogo);
-							populateJTableRece(lista,rectable);
+							populateJTableRece(ctr.getRecensioniAlloggio(luogo),rectable);
 						}else {
-							lista = recdao.getRecensioniAttrazione(luogo);
-							populateJTableRece(lista,rectable);
+							ctr.getRecensioniAttrazione(luogo);
+							populateJTableRece(ctr.getRecensioniAttrazione(luogo),rectable);
 						}
 						
 					}

@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class RecensioneDAO {
 		
-	public void AggiungiRecensione(Recensione r,String from,String codi) {
+	public void AggiungiRecensione(Recensione r,String from,String codi) {//aggiunge una recensione richiamando altre funzioni della classe Connessione
 		Connessione c = new Connessione();
 		String codice = "";
 		c.ConnessioneDB();
@@ -32,13 +32,13 @@ public class RecensioneDAO {
 			System.err.println("Errore SQL");
 			e.printStackTrace();
 		}
-		String values= "'" +r.getTitolo()+ "'"  + "," + codice + "," + "'" + r.getTitolo() + "'," + r.getValutazione() + "," +"NOW(), "+r.getCodU();
+		String values= "'" +r.getTitolo()+ "'"  + "," + codice + "," + "'" + r.getTesto() + "'," + r.getValutazione() + "," +"NOW(), "+r.getCodU();
 		String attr = "titolo,"+codi+"2,testo,valutazione,data,codu2";
 		c.Insert("recensione",attr, values);
 		c.ChiudiConn();
 	}
 	
-	public ArrayList<Recensione> getAllRecensioniNA(){
+	public ArrayList<Recensione> getAllRecensioniNA(){//prende le recensioni non approvate e le mette in un arraylist
 		try {
 			Connessione c = new Connessione();
 			c.ConnessioneDB();
@@ -65,7 +65,7 @@ public class RecensioneDAO {
 		}
 	}
 	
-	public ArrayList<Recensione> getRecensioniRistorante(String l){
+	public ArrayList<Recensione> getRecensioniRistorante(String l){//prende le recensioni esclusive per i ristoranti
 		try {
 			Connessione c = new Connessione();
 			c.ConnessioneDB();
@@ -91,7 +91,7 @@ public class RecensioneDAO {
 		}
 	}
 	
-	public ArrayList<Recensione> getRecensioniAlloggio(String l){
+	public ArrayList<Recensione> getRecensioniAlloggio(String l){//prende le recensioni esclusive per gli alloggi
 		try {
 			Connessione c = new Connessione();
 			c.ConnessioneDB();
@@ -120,7 +120,7 @@ public class RecensioneDAO {
 		}
 	}
 	
-	public ArrayList<Recensione> getRecensioniAttrazione(String l){
+	public ArrayList<Recensione> getRecensioniAttrazione(String l){//prende le recensioni esclusive per le attrazioni
 		try {
 			Connessione c = new Connessione();
 			c.ConnessioneDB();
@@ -149,7 +149,7 @@ public class RecensioneDAO {
 		}
 	}
 	
-	public void approvaRecensione(Recensione r) {
+	public void approvaRecensione(Recensione r) { //si occupa di cambiare il valore dell'attributo "approvata" richiamando una funzione di Connessione
 		
 		Connessione c = new Connessione();
 		c.ConnessioneDB();
@@ -157,7 +157,7 @@ public class RecensioneDAO {
 		c.ChiudiConn();
 	}
 	
-	public void cancellaRecensione(Recensione r) {
+	public void cancellaRecensione(Recensione r) {//si occupa di eliminare la recensione
 		
 		Connessione c =new Connessione();
 		c.ConnessioneDB();

@@ -12,7 +12,7 @@ import java.util.Properties;
 import javax.swing.table.DefaultTableModel;
 
 public class AttrazioneDAO {
-	public ArrayList<Attrazione> getAllAttrazioni() {
+	public ArrayList<Attrazione> getAllAttrazioni() {//funzione che permette di recuperare tutti gli elementi dal DB in un arraylist
 		try {
 			Connessione c = new Connessione();
 			c.ConnessioneDB();
@@ -36,7 +36,7 @@ public class AttrazioneDAO {
 		}
 	}
 	
-	public ArrayList<Attrazione> getAllAttrazioniCinema() {
+	public ArrayList<Attrazione> getAllAttrazioniCinema() {//funzione che permette di recuperare tutti gli elementi dal DB in un arraylist
 		try {
 			Connessione c = new Connessione();
 			c.ConnessioneDB();
@@ -62,7 +62,7 @@ public class AttrazioneDAO {
 		}
 	}
 	
-	public ArrayList<Attrazione> getAllAttrazioniMuseo() {
+	public ArrayList<Attrazione> getAllAttrazioniMuseo() {//funzione che permette di recuperare tutti gli elementi dal DB in un arraylist
 		try {
 			Connessione c = new Connessione();
 			c.ConnessioneDB();
@@ -88,7 +88,7 @@ public class AttrazioneDAO {
 		}
 	}
 	
-	public ArrayList<Attrazione> getAllAttrazioniParco() {
+	public ArrayList<Attrazione> getAllAttrazioniParco() {//funzione che permette di recuperare tutti gli elementi dal DB in un arraylist
 		try {
 			Connessione c = new Connessione();
 			c.ConnessioneDB();

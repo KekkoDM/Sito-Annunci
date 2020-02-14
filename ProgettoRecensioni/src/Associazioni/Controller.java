@@ -9,7 +9,11 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
+//Classe controller 
 public class Controller {
+	
+	ArrayList<Recensione> ListaRec;
+	RecensioneDAO Recdao;
 	
 	ArrayList<ristorante> ListaR;
 	ristoranteDAO Rdao;
@@ -20,7 +24,7 @@ public class Controller {
 	ArrayList<Attrazione> ListaAt;
 	AttrazioneDAO Atdao;
 	
-	private Utente UtenteCorrente;
+	private Utente UtenteCorrente;//Utente che ha appena loggato 
 	
 	Main_Frame main; //Frame principale del programma
 	Accedi_Frame accedi; // Frame di accesso per i vari utenti
@@ -40,8 +44,30 @@ public class Controller {
 		Adao = new AlloggioDAO();
 		ListaAt = new ArrayList<Attrazione>();
 		Atdao = new AttrazioneDAO();
+		ListaRec = new ArrayList<Recensione>();
+		Recdao = new RecensioneDAO();
 		main = new Main_Frame(this);
 		main.setVisible(true);
+	}
+	
+	
+	public void inserisciRecensione(Recensione r, String from, String codi) {
+		Recdao.AggiungiRecensione(r, from, codi);
+	}
+	public void approvaRecensione(Recensione r) {
+		Recdao.approvaRecensione(r);
+	}
+	public ArrayList<Recensione> getRecensioniRistorante(String l){
+		ListaRec = Recdao.getRecensioniRistorante(l);
+		return ListaRec;
+	}
+	public ArrayList<Recensione> getRecensioniAlloggio(String l){
+		ListaRec = Recdao.getRecensioniAlloggio(l);
+		return ListaRec;
+	}
+	public ArrayList<Recensione> getRecensioniAttrazione(String l){
+		ListaRec = Recdao.getRecensioniAttrazione(l);
+		return ListaRec;
 	}
 	
 	//metodi che permettono di recuperare ristoranti attraverso oggetto DAO

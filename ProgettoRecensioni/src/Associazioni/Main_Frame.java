@@ -37,6 +37,7 @@ import java.util.ArrayList;
 import javax.swing.JCheckBox;
 import javax.swing.JRadioButton;
 
+//Classe che rappresenta il frame principale
 public class Main_Frame extends JFrame {
 
 	ristoranteDAO rdao = new ristoranteDAO();
@@ -327,7 +328,7 @@ public class Main_Frame extends JFrame {
 		casarb.setBounds(512, 29, 58, 23);
 		alloggipanel.add(casarb);
 		
-		//gruppo di radio button 
+		//gruppo di radio button con i tipi di alloggi
 		ButtonGroup bgroup2 = new ButtonGroup();
         bgroup2.add(tuttirb2);
         bgroup2.add(hotelrb);
@@ -338,22 +339,7 @@ public class Main_Frame extends JFrame {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String tipo = "";
-				alloggiotable = new JTable();
-				alloggiotable.setModel(new DefaultTableModel(
-					new Object[][] {
-					},
-					new String[] {
-						"Nome", "Città", "Via", "Civico", "Bagni" ,"Camere"
-					}
-				));
-				scrollPane2.setViewportView(alloggiotable);
-				alloggiotable.setFillsViewportHeight(true);
-				alloggiotable.setColumnSelectionAllowed(true);
-				alloggiotable.setEnabled(false);
-				alloggiotable.setBackground(new Color(245, 245, 220));
-				alloggiotable.setRowHeight(50);
-				
-				if(hotelrb.isSelected()==true) {
+				if(hotelrb.isSelected()==true) { //se il rb è selezionato, crea la tabella con le colonne di quella determinata specializzazione
 					alloggiotable.setModel(new DefaultTableModel(
 							new Object[][] {
 							},
@@ -364,7 +350,7 @@ public class Main_Frame extends JFrame {
 					tipo = "hotel";
 					populateJTableAllo(ctr.getAllAlloggioHotel(),alloggiotable,tipo);
 				}
-				else if(bbrb.isSelected()==true) {
+				else if(bbrb.isSelected()==true) {//se il rb è selezionato, crea la tabella con le colonne di quella determinata specializzazione
 					alloggiotable.setModel(new DefaultTableModel(
 							new Object[][] {
 							},
@@ -375,7 +361,7 @@ public class Main_Frame extends JFrame {
 					tipo = "bb";
 					populateJTableAllo(ctr.getAllAlloggioBB(),alloggiotable,tipo);
 				}
-				else if(casarb.isSelected()==true) {
+				else if(casarb.isSelected()==true) {//se il rb è selezionato, crea la tabella con le colonne di quella determinata specializzazione
 					alloggiotable.setModel(new DefaultTableModel(
 							new Object[][] {
 							},
@@ -386,7 +372,7 @@ public class Main_Frame extends JFrame {
 					tipo = "casa";
 					populateJTableAllo(ctr.getAllAlloggioCasa(),alloggiotable,tipo);
 				}
-				else {
+				else {//se il rb è selezionato, crea la tabella "generale"
 					alloggiotable.setModel(new DefaultTableModel(
 							new Object[][] {
 							},
@@ -431,7 +417,7 @@ public class Main_Frame extends JFrame {
 		attrazionetable.setBackground(new Color(245, 245, 220));
 		attrazionetable.setRowHeight(50);
 		
-		JButton btnNewButton_5 = new JButton("Recensioni");
+		JButton btnNewButton_5 = new JButton("Recensioni");//bottone che permette di accedere alle recensioni
 		btnNewButton_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String from = "Attrazione";
@@ -465,26 +451,19 @@ public class Main_Frame extends JFrame {
 		tuttirb3.setBounds(306, 48, 47, 23);
 		attrazionepanel.add(tuttirb3);
 		
+		//gruppo con i bottoni delle specializziazioni di attrazione
+		ButtonGroup bgroup3 = new ButtonGroup();
+        bgroup3.add(tuttirb3);
+        bgroup3.add(cinemarb);
+        bgroup3.add(museorb);
+        bgroup3.add(parcorb);
+		
 		JButton btnCerca = new JButton("Cerca");
 		btnCerca.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String tipo = "";
-				attrazionetable = new JTable();
-				attrazionetable.setModel(new DefaultTableModel(
-					new Object[][] {
-					},
-					new String[] {
-						"Nome", "Città", "Via", "Civico", "Descrizione" ,"Orario" , "Telefono"
-					}
-				));
-				scrollPane3.setViewportView(attrazionetable);
-				attrazionetable.setFillsViewportHeight(true);
-				attrazionetable.setColumnSelectionAllowed(true);
-				attrazionetable.setEnabled(false);
-				attrazionetable.setBackground(new Color(245, 245, 220));
-				attrazionetable.setRowHeight(50);
+				String tipo = "";//flag che permette di indicare il tipo specializzato
 				
-				if(cinemarb.isSelected()==true) {
+				if(cinemarb.isSelected()==true) {//se il rb è selezionato, crea la tabella con le colonne di quella determinata specializzazione
 					attrazionetable.setModel(new DefaultTableModel(
 							new Object[][] {
 							},
@@ -495,7 +474,7 @@ public class Main_Frame extends JFrame {
 					tipo = "cinema";
 					populateJTableAttr(ctr.getAllAttrazioniCinema(),attrazionetable,tipo);
 				}
-				else if(museorb.isSelected()==true) {
+				else if(museorb.isSelected()==true) {//se il rb è selezionato, crea la tabella con le colonne di quella determinata specializzazione
 					attrazionetable.setModel(new DefaultTableModel(
 							new Object[][] {
 							},
@@ -506,7 +485,7 @@ public class Main_Frame extends JFrame {
 					tipo = "museo";
 					populateJTableAttr(ctr.getAllAttrazioniMuseo(),attrazionetable,tipo);
 				}
-				else if(parcorb.isSelected()==true) {
+				else if(parcorb.isSelected()==true) {//se il rb è selezionato, crea la tabella con le colonne di quella determinata specializzazione
 					attrazionetable.setModel(new DefaultTableModel(
 							new Object[][] {
 							},
@@ -517,7 +496,7 @@ public class Main_Frame extends JFrame {
 					tipo = "parco";
 					populateJTableAttr(ctr.getAllAttrazioniParco(),attrazionetable,tipo);
 				}
-				else {
+				else {//se il rb è selezionato, crea la tabella "generale"
 					attrazionetable.setModel(new DefaultTableModel(
 							new Object[][] {
 							},
@@ -531,12 +510,6 @@ public class Main_Frame extends JFrame {
 		});
 		btnCerca.setBounds(397, 89, 89, 23);
 		attrazionepanel.add(btnCerca);
-		
-		ButtonGroup bgroup3 = new ButtonGroup();
-        bgroup3.add(tuttirb3);
-        bgroup3.add(cinemarb);
-        bgroup3.add(museorb);
-        bgroup3.add(parcorb);
 		
 		//PANEL RISTORANTE MODERATORE
 		JPanel modristopanel = new JPanel();
@@ -564,17 +537,17 @@ public class Main_Frame extends JFrame {
 		modristotable.setBackground(new Color(245, 245, 245));
 		modristotable.setRowHeight(50);
 		
-		JButton btnConferma = new JButton("Conferma");
+		JButton btnConferma = new JButton("Conferma");//bottone che permette di accettare una recensione
 		btnConferma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (modristotable.getSelectedRow() != -1) {
-		            Recensione r = new Recensione();
+		            Recensione r = new Recensione();//creo l'oggetto recensione e lo setto con tutti i parametri presi dalla tabella
 					r.setTitolo((String) modristotable.getValueAt(modristotable.getSelectedRow(), 0));
 		            r.setTesto((String) modristotable.getValueAt(modristotable.getSelectedRow(), 1));
 		            r.setValutazione((String) modristotable.getValueAt(modristotable.getSelectedRow(), 2));
 		            r.setData((String) modristotable.getValueAt(modristotable.getSelectedRow(), 3));
 		            r.setCodice((String) modristotable.getValueAt(modristotable.getSelectedRow(), 4));
-		            recdao.approvaRecensione(r);
+		            ctr.approvaRecensione(r); //chiamo la funzione di "approvazione"
 		            ((DefaultTableModel) modristotable.getModel()).removeRow(modristotable.getSelectedRow()); 
 			}
 			}
@@ -582,14 +555,14 @@ public class Main_Frame extends JFrame {
 		btnConferma.setBounds(601, 538, 89, 23);
 		modristopanel.add(btnConferma);
 		
-		JButton btnElimina = new JButton("Elimina");
+		JButton btnElimina = new JButton("Elimina");//permette di non approvare una determinata funzione
 		btnElimina.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (modristotable.getSelectedRow() != -1) {
 		            Recensione r = new Recensione();
 					
 		            r.setCodice((String) modristotable.getValueAt(modristotable.getSelectedRow(), 4));
-		            recdao.cancellaRecensione(r);
+		            recdao.cancellaRecensione(r); //la recensione viene tolta di mezzo attraverso il suo codice
 		            ((DefaultTableModel) modristotable.getModel()).removeRow(modristotable.getSelectedRow()); 
 			}
 			}
@@ -715,7 +688,7 @@ public class Main_Frame extends JFrame {
 		main_panel.add(modjb);
 	}	
 	
-	public void populateJTableRisto(ArrayList<ristorante> list,JTable ristotable) {
+	public void populateJTableRisto(ArrayList<ristorante> list,JTable ristotable) {//popola la jtable con gli elementi di un arraylist
 		DefaultTableModel model = (DefaultTableModel) ristotable.getModel();
 		Object[] riga = new Object[6];
 		for(int i=0;i<list.size();i++) {
@@ -728,7 +701,7 @@ public class Main_Frame extends JFrame {
 			model.addRow(riga);
 		}
 	}
-	public void populateJTableAllo(ArrayList<Alloggio> listalh,JTable alloggiotable,String tipo) {
+	public void populateJTableAllo(ArrayList<Alloggio> listalh,JTable alloggiotable,String tipo) {//popola la jtable con gli elementi di un arraylist
 		DefaultTableModel model = (DefaultTableModel) alloggiotable.getModel();
 		Object[] riga = new Object[10];
 		for(int i=0;i<listalh.size();i++) {
@@ -738,7 +711,7 @@ public class Main_Frame extends JFrame {
 			riga[3] = listalh.get(i).getCivico();
 			riga[4] = listalh.get(i).getBagni();
 			riga[5] = listalh.get(i).getCamere();
-			if(tipo.equals("hotel")) {
+			if(tipo.equals("hotel")) {//in base al valore del flag(tipo) vengono aggiunte determinate colonne alla jtable 
 				Hotel a =  (Hotel) listalh.get(i);
 				riga[6] = a.getStelle();
 				riga[7] = a.getServizio();
@@ -755,7 +728,7 @@ public class Main_Frame extends JFrame {
 			model.addRow(riga);
 		}
 	}
-	public void populateJTableAttr(ArrayList<Attrazione> list,JTable attrazionetable,String tipo) {
+	public void populateJTableAttr(ArrayList<Attrazione> list,JTable attrazionetable,String tipo) {//popola la jtable con gli elementi di un arraylist
 		DefaultTableModel model = (DefaultTableModel) attrazionetable.getModel();
 		Object[] riga = new Object[10];
 		for(int i=0;i<list.size();i++) {
@@ -765,7 +738,7 @@ public class Main_Frame extends JFrame {
 			riga[3] = list.get(i).getCivico();
 			riga[4] = list.get(i).getDescrizione();
 			riga[5] = list.get(i).getTelefono();
-			switch(tipo) {
+			switch(tipo) {//in base al valore del flag(tipo) vengono aggiunte determinate colonne alla jtable 
 				case "cinema": {
 					Cinema a =  (Cinema) list.get(i);
 					riga[6] = a.getNSale();
@@ -789,7 +762,7 @@ public class Main_Frame extends JFrame {
 			model.addRow(riga);
 		}
 	}
-	public void populateJTableRece(ArrayList<Recensione> list,JTable modrecetable) {
+	public void populateJTableRece(ArrayList<Recensione> list,JTable modrecetable) {//popola la jtable con gli elementi di un arraylist 
 		DefaultTableModel model = (DefaultTableModel) modrecetable.getModel();
 		Object[] riga = new Object[6];
 		for(int i=0;i<list.size();i++) {
@@ -804,7 +777,7 @@ public class Main_Frame extends JFrame {
 	}
 
 	
-	public void setUtenteLabel(Controller ctr) {
+	public void setUtenteLabel(Controller ctr) {//modifica la label con l'username dell'utente corrente
 		this.getUtenteLabel().setText("Bentornato "+ctr.getUtenteCorrente().getUsername()+"!!!!");
 		this.getAccediButton().setEnabled(false);
 	}
@@ -817,10 +790,10 @@ public class Main_Frame extends JFrame {
 	public JButton getEsciButton() {
 		return escijb;
 	}
-	public void getInserisciButton(JPanel panel, JButton button) {
+	public void getInserisciButton(JPanel panel, JButton button) {//permette di mostrare il bottone per inserire recensioni
 		panel.add(button);
 	}
-	public void removeInserisciButton(JPanel panel, JButton button) {
+	public void removeInserisciButton(JPanel panel, JButton button) {//permette di eliminare il bottone per inserire recensioni
 		panel.remove(button);
 	}
 }

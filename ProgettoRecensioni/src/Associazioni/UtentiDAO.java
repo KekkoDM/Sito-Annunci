@@ -13,7 +13,7 @@ public class UtentiDAO {
 		Connessione c = new Connessione();
 		c.ConnessioneDB();
 		
-		Utente user = new Utente();
+		Utente user = new Utente(); //creo l'oggetto utente
 		String select = "username,password,nome,cognome,tipo,codu";
 		String where = "username='" + u + "' and password ='" + p +"'";
 		try {

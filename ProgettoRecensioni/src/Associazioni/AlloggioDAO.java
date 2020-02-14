@@ -12,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class AlloggioDAO {
 
-	public ArrayList<Alloggio> getAllAlloggi() {
+	public ArrayList<Alloggio> getAllAlloggi() {//funzione che permette di recuperare tutti gli elementi dal DB in un arraylist
 		try {
 			Connessione c = new Connessione();
 			c.ConnessioneDB();
@@ -36,7 +36,7 @@ public class AlloggioDAO {
 		}	
 	}
 	
-	public ArrayList<Alloggio> getAllAlloggiHotel() {
+	public ArrayList<Alloggio> getAllAlloggiHotel() {//funzione che permette di recuperare tutti gli elementi dal DB in un arraylist
 		try {
 			Connessione c = new Connessione();
 			c.ConnessioneDB();
@@ -62,7 +62,7 @@ public class AlloggioDAO {
 		}
 	}
 	
-	public ArrayList<Alloggio> getAllAlloggiBandB() {
+	public ArrayList<Alloggio> getAllAlloggiBandB() {//funzione che permette di recuperare tutti gli elementi dal DB in un arraylist
 		try {
 			Connessione c = new Connessione();
 			c.ConnessioneDB();
@@ -87,7 +87,7 @@ public class AlloggioDAO {
 			return null;
 		}
 	}
-	public ArrayList<Alloggio> getAllAlloggiCasa() {
+	public ArrayList<Alloggio> getAllAlloggiCasa() {//funzione che permette di recuperare tutti gli elementi dal DB in un arraylist
 		try {
 			Connessione c = new Connessione();
 			c.ConnessioneDB();

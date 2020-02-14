@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class ristoranteDAO {
 	
-	public ArrayList<ristorante> getAllRistoranti() {
+	public ArrayList<ristorante> getAllRistoranti() {//funzione che permette di recuperare tutti gli elementi dal DB in un arraylist
 		try {
 			Connessione c = new Connessione();
 			c.ConnessioneDB();
@@ -38,14 +38,14 @@ public class ristoranteDAO {
 		}
 	}
 	
-	public ArrayList<ristorante> getAllRistorantiTerra() {
+	public ArrayList<ristorante> getAllRistorantiTerra() {//funzione che permette di recuperare tutti gli elementi specializzati dal DB in un arraylist
 		try {
 			Connessione c = new Connessione();
 			c.ConnessioneDB();
 			ResultSet rs= c.Query("*","ristorante join terra on codt2=codt"," ");
 			ArrayList<ristorante> lista = new ArrayList<ristorante>();
 			while(rs.next()) {
-				Terra r = new Terra();
+				ristorante r = new ristorante();//viene creato l'oggetto ristorante e viene settato con il valori presi dalla query
 				r.setNome(rs.getString("nome"));
 				r.setCittà(rs.getString("citta"));
 				r.setVia(rs.getString("via"));
@@ -63,14 +63,14 @@ public class ristoranteDAO {
 		}
 	}
 	
-	public ArrayList<ristorante> getAllRistorantiMare() {
+	public ArrayList<ristorante> getAllRistorantiMare() {//funzione che permette di recuperare tutti gli elementi specializzati dal DB in un arraylist
 		try {
 			Connessione c = new Connessione();
 			c.ConnessioneDB();
 			ResultSet rs= c.Query("*","ristorante join mare on codm2=codm"," ");
 			ArrayList<ristorante> lista = new ArrayList<ristorante>();
 			while(rs.next()) {
-				Terra r = new Terra();
+				ristorante r = new ristorante();//viene creato l'oggetto ristorante e viene settato con il valori presi dalla query
 				r.setNome(rs.getString("nome"));
 				r.setCittà(rs.getString("citta"));
 				r.setVia(rs.getString("via"));
@@ -87,14 +87,14 @@ public class ristoranteDAO {
 		}
 	}
 	
-	public ArrayList<ristorante> getAllRistorantiVegan() {
+	public ArrayList<ristorante> getAllRistorantiVegan() {//funzione che permette di recuperare tutti gli elementi specializzati dal DB in un arraylist
 		try {
 			Connessione c = new Connessione();
 			c.ConnessioneDB();
 			ResultSet rs= c.Query("*","ristorante join vegan on codv2=codv"," ");
 			ArrayList<ristorante> lista = new ArrayList<ristorante>();
 			while(rs.next()) {
-				ristorante r = new ristorante();
+				ristorante r = new ristorante();//viene creato l'oggetto ristorante e viene settato con il valori presi dalla query
 				r.setNome(rs.getString("nome"));
 				r.setCittà(rs.getString("citta"));
 				r.setVia(rs.getString("via"));
