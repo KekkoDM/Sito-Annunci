@@ -5399,7 +5399,7 @@
 											"top": 162,
 											"width": 86.72802734375,
 											"height": 13,
-											"text": "Braceria",
+											"text": "Pub",
 											"horizontalAlignment": 0
 										},
 										{
@@ -5665,7 +5665,7 @@
 											"top": 162,
 											"width": 106.21533203125,
 											"height": 13,
-											"text": "Giapponese",
+											"text": "Pescheria",
 											"horizontalAlignment": 0
 										},
 										{
@@ -5683,7 +5683,7 @@
 											"top": 177,
 											"width": 106.21533203125,
 											"height": 13,
-											"text": "SpecializzatoMare",
+											"text": "Mediterraneo",
 											"horizontalAlignment": 0
 										}
 									],
@@ -5913,7 +5913,7 @@
 											"top": 147,
 											"width": 86.72802734375,
 											"height": 13,
-											"text": "Bistrot-Vegani",
+											"text": "Cruderia",
 											"horizontalAlignment": 0
 										},
 										{
@@ -5933,6 +5933,24 @@
 											"height": 13,
 											"text": "Pizzeria",
 											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLEnumerationLiteralView",
+											"_id": "AAAAAAFwQ0m4BwOlj78=",
+											"_parent": {
+												"$ref": "AAAAAAFvoD/y8uQWhYU="
+											},
+											"model": {
+												"$ref": "AAAAAAFwQ0m3IgOWsHc="
+											},
+											"fillColor": "#59b200",
+											"font": "Arial;13;0",
+											"left": 901,
+											"top": 177,
+											"width": 86.72802734375,
+											"height": 13,
+											"text": "Bistrot-vegano",
+											"horizontalAlignment": 0
 										}
 									],
 									"fillColor": "#59b200",
@@ -5940,7 +5958,7 @@
 									"left": 896,
 									"top": 142,
 									"width": 96.72802734375,
-									"height": 38
+									"height": 53
 								}
 							],
 							"fillColor": "#59b200",
@@ -10318,7 +10336,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFvoDw58t1JGwg="
 							},
-							"name": "Braceria"
+							"name": "Pub"
 						},
 						{
 							"_type": "UMLEnumerationLiteral",
@@ -10352,7 +10370,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFvoD1w6OCTQGU="
 							},
-							"name": "Giapponese"
+							"name": "Pescheria"
 						},
 						{
 							"_type": "UMLEnumerationLiteral",
@@ -10360,7 +10378,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFvoD1w6OCTQGU="
 							},
-							"name": "SpecializzatoMare"
+							"name": "Mediterraneo"
 						}
 					]
 				},
@@ -10378,7 +10396,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFvoD/y7uQKuxY="
 							},
-							"name": "Bistrot-Vegani"
+							"name": "Cruderia"
 						},
 						{
 							"_type": "UMLEnumerationLiteral",
@@ -10387,6 +10405,14 @@
 								"$ref": "AAAAAAFvoD/y7uQKuxY="
 							},
 							"name": "Pizzeria"
+						},
+						{
+							"_type": "UMLEnumerationLiteral",
+							"_id": "AAAAAAFwQ0m3IgOWsHc=",
+							"_parent": {
+								"$ref": "AAAAAAFvoD/y7uQKuxY="
+							},
+							"name": "Bistrot-vegano"
 						}
 					]
 				}
