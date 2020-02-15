@@ -191,7 +191,7 @@ public class Controller {
 	
 	
 	public void apriInserisciAdmin(String from){ //Apre il frame per poter inserire una recensione
-		admin_frame = new InserisciAdmin_Frame(this);
+		admin_frame = new InserisciAdmin_Frame(this,from);
 		admin_frame.setVisible(true);
 		main.setEnabled(false);
 		admin_frame.addWindowListener(new WindowAdapter(){ //chiudi tramite la X

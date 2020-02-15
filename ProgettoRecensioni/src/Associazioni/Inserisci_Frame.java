@@ -151,8 +151,8 @@ public class Inserisci_Frame extends JDialog {
 			e.printStackTrace();
 		}
 	}
-	public JComboBox getComboBox() {
-		return ristocombo;
+	public JComboBox<String> getComboBox() {
+		return ristocombo; 	
 	}
 	
 	

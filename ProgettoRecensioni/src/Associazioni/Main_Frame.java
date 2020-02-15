@@ -599,7 +599,8 @@ public class Main_Frame extends JFrame {
 				
 				else if(ctr.getUtenteCorrente().getTipo().equals("base"))
 					ctr.main.getInserisciButton(ristopanel,inseriscijb);
-				else
+				
+				else if(ctr.getUtenteCorrente().getTipo().equals("admin"))
 					ctr.main.getInserisciButton(ristopanel,admininseriscijb);
 			}
 		});
@@ -621,7 +622,8 @@ public class Main_Frame extends JFrame {
 				
 				else if(ctr.getUtenteCorrente().getTipo().equals("base"))
 					ctr.main.getInserisciButton(alloggipanel,inseriscijb);
-				else
+				
+				else if(ctr.getUtenteCorrente().getTipo().equals("admin"))
 					ctr.main.getInserisciButton(alloggipanel,admininseriscijb);
 			}
 		});
@@ -658,7 +660,8 @@ public class Main_Frame extends JFrame {
 				
 				else if(ctr.getUtenteCorrente().getTipo().equals("base"))
 					ctr.main.getInserisciButton(attrazionepanel,inseriscijb);
-				else
+				
+				else if(ctr.getUtenteCorrente().getTipo().equals("admin"))
 					ctr.main.getInserisciButton(attrazionepanel,admininseriscijb);
 			}
 		});
