@@ -2,6 +2,8 @@ package Associazioni;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -34,8 +36,11 @@ public class InserisciAdmin_Frame extends Inserisci_Frame {
 	private JComboBox<Integer> letti;
 	private JComboBox<Integer> metriq;
 	
+    
+    
+    Connessione c = new Connessione();
+	ristorante risto = new ristorante();
 	
-    private String vuoto ="";
 	
 	public InserisciAdmin_Frame(Controller ctr, String from) {
 		
@@ -97,6 +102,7 @@ public class InserisciAdmin_Frame extends Inserisci_Frame {
 		switch (from) {
 		case "ristorante":
 			this.addSchermataRistorante();
+			
 			break;
 
 			
@@ -115,7 +121,36 @@ public class InserisciAdmin_Frame extends Inserisci_Frame {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("OK");
+				JButton okButton = new JButton("Inserisci");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						
+						if(from.equals("ristorante")) {//se il valore è ristorante , allora aggiunge la recensione con il codice corrispondente alla chiave esterna di ristorante
+							risto.setNome(nome.getText());
+							risto.setCittà(citta.getText());
+							risto.setCivico(civico.toString());
+							risto.setProvenienza(provenienza.getText());
+							risto.setQualita(qualita.getText());
+							risto.setSpecialita(specialita.getText());
+							risto.setCodm2(mare.getSelectedIndex());
+							risto.setCodt2(terra.getSelectedIndex());
+							risto.setCodv2(vegan.getSelectedIndex());
+							ctr.inserisciRistorante(risto, from);
+						}
+							
+							
+//						}else if(valutazione != "0" && from.equals("alloggio")){
+//							ctr.inserisciRecensione(r,from,"codal");
+//							ctr.chiudiInserisci();	
+//						}else if(valutazione != "0" && from.equals("attrazione")){
+//							ctr.inserisciRecensione(r,from,"codat");
+//							ctr.chiudiInserisci();
+//						}
+//						
+					}
+				});
+				
+				
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
@@ -180,7 +215,7 @@ public class InserisciAdmin_Frame extends Inserisci_Frame {
 		mare = new JComboBox<String>();
 		mare.setBounds(240, 22, 100, 22);
 		contentPanel.add(mare);
-		mare.addItem(vuoto);
+		mare.addItem(null);
 		this.updateComboBox(mare,"mare","tipom");
 		
 		
@@ -192,7 +227,7 @@ public class InserisciAdmin_Frame extends Inserisci_Frame {
 		terra = new JComboBox<String>();
 		terra.setBounds(240, 62, 100, 22);
 		contentPanel.add(terra);
-		terra.addItem(vuoto);
+		terra.addItem(null);
 		this.updateComboBox(terra,"terra","tipot");
 		
 		
@@ -203,7 +238,7 @@ public class InserisciAdmin_Frame extends Inserisci_Frame {
 		vegan = new JComboBox<String>();
 		vegan.setBounds(240, 92, 100, 22);
 		contentPanel.add(vegan);
-		vegan.addItem(vuoto);
+		vegan.addItem(null);
 		this.updateComboBox(vegan,"vegan","tipov");
 		
 	}

@@ -51,6 +51,10 @@ public class Controller {
 		main.setVisible(true);
 	}
 	
+	public void inserisciRistorante(ristorante risto, String from) {
+		Rdao.AggiungiRistorante(risto, from);
+	}
+	
 	
 	public void inserisciRecensione(Recensione r, String from, String codi) {
 		Recdao.AggiungiRecensione(r, from, codi);

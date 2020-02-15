@@ -112,67 +112,13 @@ public class ristoranteDAO {
 	}
 	
 	
-
-/*	public DefaultTableModel getRistoranti() {
-		String col[] = {"Nome","Città","Via","Civico","Specialità"};
-		DefaultTableModel tableModel = new DefaultTableModel(col, 0);
-		
-		Connessione c = new Connessione();
-					
+    public void AggiungiRistorante(ristorante risto, String from) {
+    	Connessione c = new Connessione();
 		c.ConnessioneDB();
-		String select = "nome, citta, via, civico, specialita";
-		ristorante r = new ristorante();
-		try {
-			ResultSet rs=c.Query(select, "ristorante", "", tableModel);
-			while(rs.next()) {
-				String nome = rs.getString(1);
-				String citta = rs.getString(2);
-				String via = rs.getString(3);
-				int civico = rs.getInt(4);
-				String specialita = rs.getString(5);
-				Object[] riga = {nome, citta, via, civico, specialita};
-				tableModel.addRow(riga);
-			}
-		}catch(SQLException e) {
-			System.err.println("Errore SQL");
-			e.printStackTrace();
-		}
-		c.ChiudiConn();
-		return tableModel;
-	}
-	
-	
-	public DefaultTableModel getRecRistoranti(String luogo) {
-		String col[] = {"Nome","Città","Specialità","Valutazione","Titolo" ,"Testo"};
-		DefaultTableModel tableModel = new DefaultTableModel(col, 0);
 		
-		Connessione c = new Connessione();
-					
-		c.ConnessioneDB();
-		String select = "nome, citta, specialita, valutazione ,titolo , testo";
-		String from = " ristorante join recensione on codri=codri2 ";
-		String where = " nome = '"+ luogo+"' and approvata <> false";
-		
-		try {
-			ResultSet rs=c.Query(select, from, where, tableModel);
-			while(rs.next()) {
-				String nome = rs.getString(1);
-				String citta = rs.getString(2);
-				String specialita = rs.getString(3);
-				String valutazione = rs.getString(4);
-				String titolo = rs.getString(5);
-				String testo = rs.getString(6);
-				
-				Object[] riga = {nome, citta,specialita,valutazione,titolo,testo};
-				tableModel.addRow(riga);
-				
-			}
-		}catch(SQLException e) {
-			System.err.println("Errore SQL");
-			e.printStackTrace();
-		}
+		String values= "'"+risto.getNome()+"','"+risto.getCittà()+"','"+risto.getProvenienza()+"','"+risto.getQualita()+"','"+risto.getSpecialita()+"','"+risto.getVia()+"',"+risto.getCodm2()+risto.getCodt2()+risto.getCodv2()+risto.getCivico();
+		String attr ="nome,citta,provenienza,qualita,specialita,via,codm2,codt2,codv2,civico" ;
+		c.Insert("ristorante",attr, values);
 		c.ChiudiConn();
-		return tableModel;
-	}*/
-
+    }
 }
