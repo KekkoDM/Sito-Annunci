@@ -24,6 +24,7 @@ public class Accedi_Frame extends JDialog {
 	private UtentiDAO udao = new UtentiDAO();
 
 	public Accedi_Frame(Controller ctr) {
+		setTitle("Schermata di accesso");
 		setResizable(false);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
@@ -51,7 +52,7 @@ public class Accedi_Frame extends JDialog {
 		
 		usertext = new JTextField();
 		usertext.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		usertext.setBounds(168, 85, 196, 26);
+		usertext.setBounds(169, 85, 196, 26);
 		contentPanel.add(usertext);
 		usertext.setColumns(10);
 		
@@ -84,8 +85,8 @@ public class Accedi_Frame extends JDialog {
 		});
 		accedijb.setForeground(new Color(255, 255, 255));
 		accedijb.setBackground(new Color(46, 139, 87));
-		accedijb.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 14));
-		accedijb.setBounds(153, 217, 137, 23);
+		accedijb.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 16));
+		accedijb.setBounds(153, 217, 140, 30);
 		contentPanel.add(accedijb);
 	}
 }

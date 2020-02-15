@@ -80,8 +80,8 @@ public class Connessione{
 			st.executeUpdate();
 		}
 		catch(SQLException e) {
-			System.err.println("Errore SQL");
-			e.printStackTrace();
+			System.err.println("Errore: vincolo di limite utente non rispettato");
+			JOptionPane.showMessageDialog(null,"Errore, questo utente ha già inserito una recensione per questo elemento");
 		}
 		
 	}

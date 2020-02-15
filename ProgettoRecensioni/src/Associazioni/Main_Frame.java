@@ -153,7 +153,8 @@ public class Main_Frame extends JFrame {
 			}
 		));
 		
-		populateJTableRisto(ctr.getAllRistoranti(),ristotable); //popolo la tabella con tutti i ristoranti presenti nel DB
+		
+		populateJTableRisto(ctr.getAllRistoranti(),ristotable); //Aggiungo in tabella tutti i ristoranti presenti nel DB
 		
 		
 		scrollPane.setViewportView(ristotable);
@@ -172,7 +173,7 @@ public class Main_Frame extends JFrame {
 				ctr.apriInserisci(from); //chiamata al frame di insrimento
 			}
 		});
-		inseriscijb.setBounds(639, 30, 125, 30);
+		inseriscijb.setBounds(683, 100, 125, 30);
 		
 		
 		admininseriscijb = new JButton("Inserisci"); //Bottone per inserire le recensioni per un certo elemento 
@@ -182,10 +183,10 @@ public class Main_Frame extends JFrame {
 		admininseriscijb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				ctr.apriInserisciAdmin(from); //chiamata al frame di insrimento
+				ctr.apriInserisciAdmin(from); //chiamata al frame di inserimento
 			}
 		});
-		admininseriscijb.setBounds(639, 30, 125, 30);
+		admininseriscijb.setBounds(683, 100, 125, 30);
 		
 		
 		JButton btnNewButton = new JButton("Recensioni"); //bottone per visualizzare le recensioni
@@ -198,7 +199,7 @@ public class Main_Frame extends JFrame {
 				ctr.apriRecensioni(from);
 			}
 		});
-		btnNewButton.setBounds(639, 84, 125, 30);
+		btnNewButton.setBounds(683, 60, 125, 30);
 		ristopanel.add(btnNewButton);
 		
 		JLabel lblNewLabel_5 = new JLabel("New label");
@@ -207,18 +208,21 @@ public class Main_Frame extends JFrame {
 		ristopanel.add(lblNewLabel_5);
 		
 		JRadioButton terrarb = new JRadioButton("Terra");
+		terrarb.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 18));
 		terrarb.setBackground(new Color(222, 184, 135));
-		terrarb.setBounds(364, 30, 71, 23);
+		terrarb.setBounds(397, 30, 80, 25);
 		ristopanel.add(terrarb);
 		
 		JRadioButton marerb = new JRadioButton("Mare");
+		marerb.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 18));
 		marerb.setBackground(new Color(175, 238, 238));
-		marerb.setBounds(441, 30, 71, 23);
+		marerb.setBounds(484, 31, 80, 25);
 		ristopanel.add(marerb);
 		
 		JRadioButton veganrb = new JRadioButton("Vegan");
+		veganrb.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 18));
 		veganrb.setBackground(new Color(144, 238, 144));
-		veganrb.setBounds(521, 30, 71, 23);
+		veganrb.setBounds(571, 31, 90, 25);
 		ristopanel.add(veganrb);
 		//gruppo di rb per la selezione delle tabelle di ristoranti
 		ButtonGroup bgroup1 = new ButtonGroup();
@@ -227,6 +231,9 @@ public class Main_Frame extends JFrame {
         bgroup1.add(veganrb);
 		
 		JButton cercajb = new JButton("Cerca");//bottone che cera tabelle in base al tipo selezionato
+		cercajb.setForeground(new Color(255, 255, 255));
+		cercajb.setBackground(new Color(46, 139, 87));
+		cercajb.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 18));
 		cercajb.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				ristotable = new JTable();
@@ -248,12 +255,12 @@ public class Main_Frame extends JFrame {
 					ristotable.setBackground(new Color(222, 184, 135));
 				}
 					
-				else if(marerb.isSelected()==true) {// se il tipo selezionato è mare, allora cosìvia
+				else if(marerb.isSelected()==true) {// se il tipo selezionato è mare...
 					populateJTableRisto(ctr.getAllRistorantiMare(),ristotable);
 					ristotable.setBackground(new Color(175, 238, 238));
 				}
 					
-				else if(veganrb.isSelected()==true) {// se il tipo selezionato è mare, allora cosìvia
+				else if(veganrb.isSelected()==true) {// se il tipo selezionato è mare...
 					populateJTableRisto(ctr.getAllRistorantiVegan(),ristotable);
 					ristotable.setBackground(new Color(144, 238, 144));
 				}
@@ -273,10 +280,11 @@ public class Main_Frame extends JFrame {
 		});
 		
 		JRadioButton tuttird = new JRadioButton("Tutti");
-		tuttird.setBounds(286, 30, 71, 23);
+		tuttird.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 18));
+		tuttird.setBounds(310, 30, 80, 25);
 		ristopanel.add(tuttird);
 		bgroup1.add(tuttird);
-		cercajb.setBounds(388, 84, 89, 23);
+		cercajb.setBounds(422, 84, 100, 30);
 		ristopanel.add(cercajb);
 		
 		
@@ -318,28 +326,33 @@ public class Main_Frame extends JFrame {
 		btnNewButton_2.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 18));
 		btnNewButton_2.setBackground(new Color(46, 139, 87));
 		btnNewButton_2.setForeground(new Color(255, 255, 255));
-		btnNewButton_2.setBounds(639, 103, 125, 30);
+		btnNewButton_2.setBounds(683, 60, 125, 30);
 		alloggipanel.add(btnNewButton_2);
 		
 		JLabel lblNewLabel_1 = new JLabel("New label");
 		lblNewLabel_1.setIcon(new ImageIcon(Main_Frame.class.getResource("/img/Alloggi.png")));
-		lblNewLabel_1.setBounds(15, 0, 300, 133);
+		lblNewLabel_1.setBounds(0, 0, 300, 150);
 		alloggipanel.add(lblNewLabel_1);
 		
 		JRadioButton tuttirb2 = new JRadioButton("Tutti");
-		tuttirb2.setBounds(303, 29, 64, 23);
+		tuttirb2.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 18));
+		tuttirb2.setBackground(new Color(240, 240, 240));
+		tuttirb2.setBounds(310, 31, 80, 25);
 		alloggipanel.add(tuttirb2);
 		
 		JRadioButton hotelrb = new JRadioButton("Hotel");
-		hotelrb.setBounds(377, 29, 58, 23);
+		hotelrb.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 18));
+		hotelrb.setBounds(397, 31, 80, 25);
 		alloggipanel.add(hotelrb);
 		
 		JRadioButton bbrb = new JRadioButton("B&B");
-		bbrb.setBounds(449, 29, 50, 23);
+		bbrb.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 18));
+		bbrb.setBounds(484, 31, 80, 25);
 		alloggipanel.add(bbrb);
 		
 		JRadioButton casarb = new JRadioButton("Casa");
-		casarb.setBounds(512, 29, 58, 23);
+		casarb.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 18));
+		casarb.setBounds(571, 31, 80, 25);
 		alloggipanel.add(casarb);
 		
 		//gruppo di radio button con i tipi di alloggi
@@ -350,6 +363,9 @@ public class Main_Frame extends JFrame {
         bgroup2.add(casarb);
 		
 		JButton btnNewButton_1 = new JButton("Cerca");
+		btnNewButton_1.setForeground(new Color(255, 255, 255));
+		btnNewButton_1.setBackground(new Color(46, 139, 87));
+		btnNewButton_1.setFont(new Font("Microsoft JhengHei UI Light", Font.PLAIN, 18));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String tipo = "";
@@ -399,7 +415,7 @@ public class Main_Frame extends JFrame {
 			}
 			
 		});
-		btnNewButton_1.setBounds(398, 72, 89, 23);
+		btnNewButton_1.setBounds(422, 84, 100, 30);
 		alloggipanel.add(btnNewButton_1);
 
 		
@@ -410,7 +426,7 @@ public class Main_Frame extends JFrame {
 		attrazionepanel.setLayout(null);
 		
 		JScrollPane scrollPane3 = new JScrollPane();
-		scrollPane3.setBounds(0, 149, 839, 430);
+		scrollPane3.setBounds(0, 144, 824, 430);
 		attrazionepanel.add(scrollPane3);
 	
 		//TABELLA ATTRAZIONE
@@ -419,7 +435,7 @@ public class Main_Frame extends JFrame {
 			new Object[][] {
 			},
 			new String[] {
-				"Nome", "Città", "Via", "Civico", "Bagni" ,"Camere"
+				"Nome", "Città", "Via", "Civico", "Descrizione" ,"Telefono"
 			}
 		));
 		String tipo2 = " ";
@@ -441,28 +457,32 @@ public class Main_Frame extends JFrame {
 		btnNewButton_5.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 18));
 		btnNewButton_5.setForeground(new Color(255, 255, 255));
 		btnNewButton_5.setBackground(new Color(46, 139, 87));
-		btnNewButton_5.setBounds(639, 103, 125, 30);
+		btnNewButton_5.setBounds(683, 60, 125, 30);
 		attrazionepanel.add(btnNewButton_5);
 		
 		JLabel lblNewLabel_4 = new JLabel("New label");
 		lblNewLabel_4.setIcon(new ImageIcon(Main_Frame.class.getResource("/img/Attrazioni.png")));
-		lblNewLabel_4.setBounds(15, 0, 300, 151);
+		lblNewLabel_4.setBounds(0, 0, 300, 151);
 		attrazionepanel.add(lblNewLabel_4);
 		
 		JRadioButton cinemarb = new JRadioButton("Cinema");
-		cinemarb.setBounds(367, 48, 61, 23);
+		cinemarb.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 18));
+		cinemarb.setBounds(377, 31, 100, 25);
 		attrazionepanel.add(cinemarb);
 		
 		JRadioButton museorb = new JRadioButton("Museo");
-		museorb.setBounds(448, 48, 57, 23);
+		museorb.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 18));
+		museorb.setBounds(484, 32, 90, 25);
 		attrazionepanel.add(museorb);
 		
 		JRadioButton parcorb = new JRadioButton("Parco");
-		parcorb.setBounds(521, 48, 61, 23);
+		parcorb.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 18));
+		parcorb.setBounds(581, 32, 90, 25);
 		attrazionepanel.add(parcorb);
 		
 		JRadioButton tuttirb3 = new JRadioButton("Tutti");
-		tuttirb3.setBounds(306, 48, 47, 23);
+		tuttirb3.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 18));
+		tuttirb3.setBounds(280, 31, 90, 25);
 		attrazionepanel.add(tuttirb3);
 		
 		//gruppo con i bottoni delle specializziazioni di attrazione
@@ -473,6 +493,9 @@ public class Main_Frame extends JFrame {
         bgroup3.add(parcorb);
 		
 		JButton btnCerca = new JButton("Cerca");
+		btnCerca.setBackground(new Color(46, 139, 87));
+		btnCerca.setForeground(new Color(255, 255, 255));
+		btnCerca.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 18));
 		btnCerca.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String tipo = "";//flag che permette di indicare il tipo specializzato
@@ -522,7 +545,7 @@ public class Main_Frame extends JFrame {
 				}
 			}
 		});
-		btnCerca.setBounds(397, 89, 89, 23);
+		btnCerca.setBounds(422, 84, 100, 30);
 		attrazionepanel.add(btnCerca);
 		
 		//PANEL RISTORANTE MODERATORE
@@ -532,7 +555,7 @@ public class Main_Frame extends JFrame {
 		modristopanel.setLayout(null);
 		
 		JScrollPane scrollPane4 = new JScrollPane();
-		scrollPane4.setBounds(120, 78, 598, 426);
+		scrollPane4.setBounds(0, 0, 823, 514);
 		modristopanel.add(scrollPane4);
 	
 		//TABELLA MODERATORE
@@ -541,7 +564,7 @@ public class Main_Frame extends JFrame {
 			new Object[][] {
 			},
 			new String[] {
-				"Titolo", "Testo", "Valutazione", "Data","CodiceRec","CodU"
+				"Titolo", "Testo", "Valutazione", "Data","Cod Recensione","Utente"
 			}
 		));
 		
@@ -552,6 +575,9 @@ public class Main_Frame extends JFrame {
 		modristotable.setRowHeight(50);
 		
 		JButton btnConferma = new JButton("Conferma");//bottone che permette di accettare una recensione
+		btnConferma.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 18));
+		btnConferma.setForeground(new Color(255, 255, 255));
+		btnConferma.setBackground(new Color(46, 139, 87));
 		btnConferma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (modristotable.getSelectedRow() != -1) {
@@ -566,10 +592,13 @@ public class Main_Frame extends JFrame {
 			}
 			}
 		});
-		btnConferma.setBounds(601, 538, 89, 23);
+		btnConferma.setBounds(535, 523, 120, 35);
 		modristopanel.add(btnConferma);
 		
 		JButton btnElimina = new JButton("Elimina");//permette di non approvare una determinata funzione
+		btnElimina.setBackground(new Color(46, 139, 87));
+		btnElimina.setForeground(new Color(255, 255, 255));
+		btnElimina.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 18));
 		btnElimina.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (modristotable.getSelectedRow() != -1) {
@@ -581,7 +610,7 @@ public class Main_Frame extends JFrame {
 			}
 			}
 		});
-		btnElimina.setBounds(714, 537, 97, 25);
+		btnElimina.setBounds(688, 523, 120, 35);
 		modristopanel.add(btnElimina);
 		
 		
@@ -599,7 +628,6 @@ public class Main_Frame extends JFrame {
 				
 				else if(ctr.getUtenteCorrente().getTipo().equals("base"))
 					ctr.main.getInserisciButton(ristopanel,inseriscijb);
-				
 				else if(ctr.getUtenteCorrente().getTipo().equals("admin"))
 					ctr.main.getInserisciButton(ristopanel,admininseriscijb);
 			}
@@ -622,7 +650,6 @@ public class Main_Frame extends JFrame {
 				
 				else if(ctr.getUtenteCorrente().getTipo().equals("base"))
 					ctr.main.getInserisciButton(alloggipanel,inseriscijb);
-				
 				else if(ctr.getUtenteCorrente().getTipo().equals("admin"))
 					ctr.main.getInserisciButton(alloggipanel,admininseriscijb);
 			}
@@ -660,7 +687,6 @@ public class Main_Frame extends JFrame {
 				
 				else if(ctr.getUtenteCorrente().getTipo().equals("base"))
 					ctr.main.getInserisciButton(attrazionepanel,inseriscijb);
-				
 				else if(ctr.getUtenteCorrente().getTipo().equals("admin"))
 					ctr.main.getInserisciButton(attrazionepanel,admininseriscijb);
 			}
@@ -683,7 +709,7 @@ public class Main_Frame extends JFrame {
 		lblNewLabel_3.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 28));
 		main_panel.add(lblNewLabel_3);
 		
-		JButton modjb = new JButton("Area Mod");
+		JButton modjb = new JButton("Area Moderatore");
 		modjb.setBackground(new Color(46, 139, 87));
 		Border emptyBorder5 = BorderFactory.createEmptyBorder();
 		modjb.setBorder(emptyBorder5);

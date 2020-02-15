@@ -116,29 +116,26 @@ public class ristoranteDAO {
     	Connessione c = new Connessione();
 		c.ConnessioneDB();
 		
-		
-		
-		
 		String values= "'"+r.getNome()+"', '"+r.getCittà()+"', '"+r.getVia()+"', "+r.getCivico()+", '"+r.getTelefono()+"', '"+r.getSpecialita()+
 				"', '"+r.getProvenienza()+"',' "+r.getQualita()+"'";
-		
+
 		String attr ="nome,citta,via,civico,telefono,specialita,provenienza,qualita";
-		
+
 		if(r.getCodm2()>0) {
 			values=values + ", "+r.getCodm2();
 			attr=attr+",codm2";
 		}
-		
+
 		if(r.getCodt2()>0) {
 			values=values + ", "+r.getCodt2();
 			attr=attr+",codt2";
 		}
-		
+
 		if(r.getCodv2()>0) {
 			values=values + ", "+r.getCodv2();
 			attr=attr+",codv2";
 		}
-		
+
 		c.Insert(from,attr,values);
 		c.ChiudiConn();
     }

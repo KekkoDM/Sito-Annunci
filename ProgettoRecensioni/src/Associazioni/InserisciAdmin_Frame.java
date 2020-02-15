@@ -14,6 +14,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import java.awt.Font;
+import java.awt.Color;
 
 public class InserisciAdmin_Frame extends JDialog {
 
@@ -43,6 +45,7 @@ public class InserisciAdmin_Frame extends JDialog {
 	
 	
 	public InserisciAdmin_Frame(Controller ctr, String from) {
+		setTitle("Inserisci Localit\u00E0");
 		
 		ctr.main.setEnabled(false);
 		
@@ -53,49 +56,49 @@ public class InserisciAdmin_Frame extends JDialog {
 		contentPanel.setLayout(null);
 		
 		JLabel lblNome = new JLabel("Nome");
-		lblNome.setBounds(12, 25, 56, 16);
+		lblNome.setBounds(10, 20, 56, 25);
 		contentPanel.add(lblNome);
 		
 		nome = new JTextField();
-		nome.setBounds(58, 22, 116, 22);
+		nome.setBounds(80, 20, 125, 25);
 		contentPanel.add(nome);
 		nome.setColumns(10);
 		
 		JLabel lblCitt = new JLabel("Citt\u00E0");
-		lblCitt.setBounds(12, 54, 56, 16);
+		lblCitt.setBounds(10, 50, 56, 25);
 		contentPanel.add(lblCitt);
 		
 		citta = new JTextField();
-		citta.setBounds(58, 51, 116, 22);
+		citta.setBounds(80, 50, 125, 25);
 		contentPanel.add(citta);
 		citta.setColumns(10);
 		
 		JLabel lblVia = new JLabel("Via");
-		lblVia.setBounds(12, 83, 56, 16);
+		lblVia.setBounds(10, 80, 56, 25);
 		contentPanel.add(lblVia);
 		
 		via = new JTextField();
-		via.setBounds(58, 83, 116, 22);
+		via.setBounds(80, 80, 125, 25);
 		contentPanel.add(via);
 		via.setColumns(10);
 		
 		JLabel lblCivico = new JLabel("Civico");
-		lblCivico.setBounds(12, 112, 56, 16);
+		lblCivico.setBounds(10, 120, 56, 25);
 		contentPanel.add(lblCivico);
 		
 		JComboBox<Integer> civico = new JComboBox<Integer>();
-		civico.setBounds(58, 109, 43, 22);
+		civico.setBounds(80, 120, 43, 25);
 		contentPanel.add(civico);
 		for(int i=1;i<=100;i++)
 			civico.addItem(new Integer(i));
 		
 		
 		JLabel lblTelefono = new JLabel("Telefono");
-		lblTelefono.setBounds(12, 138, 56, 16);
+		lblTelefono.setBounds(10, 150, 74, 25);
 		contentPanel.add(lblTelefono);
 		
 		telefono = new JTextField();
-		telefono.setBounds(80, 135, 116, 22);
+		telefono.setBounds(80, 150, 125, 25);
 		contentPanel.add(telefono);
 		telefono.setColumns(10);
 		
@@ -122,6 +125,9 @@ public class InserisciAdmin_Frame extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("Inserisci");
+				okButton.setBackground(new Color(46, 139, 87));
+				okButton.setForeground(new Color(255, 255, 255));
+				okButton.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 18));
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						
@@ -140,9 +146,6 @@ public class InserisciAdmin_Frame extends JDialog {
 							ctr.main.setEnabled(true);
 							dispose();
 						}
-							
-							
-						
 					}
 				});
 				
@@ -152,7 +155,10 @@ public class InserisciAdmin_Frame extends JDialog {
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
-				JButton cancelButton = new JButton("Cancel");
+				JButton cancelButton = new JButton("Cancella");
+				cancelButton.setForeground(new Color(255, 255, 255));
+				cancelButton.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 18));
+				cancelButton.setBackground(new Color(46, 139, 87));
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
@@ -177,39 +183,39 @@ public class InserisciAdmin_Frame extends JDialog {
 	public void addSchermataRistorante() {
 		
 		JLabel lblSpecialita = new JLabel("Specialità");
-		lblSpecialita.setBounds(12, 162, 56, 16);
+		lblSpecialita.setBounds(10, 180, 56, 25);
 		contentPanel.add(lblSpecialita);
 		
 		specialita = new JTextField();
-		specialita.setBounds(80, 165, 116, 22);
+		specialita.setBounds(80, 180, 125, 25);
 		contentPanel.add(specialita);
 		specialita.setColumns(10);
 		
 		JLabel lblQualita = new JLabel("Qualità");
-		lblQualita.setBounds(12, 192, 56, 16);
+		lblQualita.setBounds(10, 210, 56, 25);
 		contentPanel.add(lblQualita);
 		
 		qualita = new JTextField();
-		qualita.setBounds(80, 195, 116, 22);
+		qualita.setBounds(80, 210, 125, 25);
 		contentPanel.add(qualita);
 		qualita.setColumns(10);
 		
 		JLabel lblProvenienza = new JLabel("Provenienza");
-		lblProvenienza.setBounds(12, 222, 56, 16);
+		lblProvenienza.setBounds(12, 240, 80, 25);
 		contentPanel.add(lblProvenienza);
 		
 		provenienza = new JTextField();
-		provenienza.setBounds(80, 225, 116, 22);
+		provenienza.setBounds(80, 240, 125, 25);
 		contentPanel.add(provenienza);
 		provenienza.setColumns(10);
 		
 		
 		JLabel lblMare = new JLabel("Mare");
-		lblMare.setBounds(200, 22, 116, 22);
+		lblMare.setBounds(350, 20, 125, 25);
 		contentPanel.add(lblMare);
 		
 		mare = new JComboBox<String>();
-		mare.setBounds(240, 22, 100, 22);
+		mare.setBounds(390, 20, 125, 25);
 		contentPanel.add(mare);
 		mare.addItem(null);
 		this.updateComboBox(mare,"mare","tipom");
@@ -217,22 +223,22 @@ public class InserisciAdmin_Frame extends JDialog {
 		
 		
 		JLabel lblTerra = new JLabel("Terra");
-		lblTerra.setBounds(200, 62, 116, 22);
+		lblTerra.setBounds(350, 50, 125, 25);
 		contentPanel.add(lblTerra);
 		
 		terra = new JComboBox<String>();
-		terra.setBounds(240, 62, 100, 22);
+		terra.setBounds(390, 50, 125, 25);
 		contentPanel.add(terra);
 		terra.addItem(null);
 		this.updateComboBox(terra,"terra","tipot");
 		
 		
 		JLabel lblVegan = new JLabel("Vegan");
-		lblVegan.setBounds(200, 92, 116, 22);
+		lblVegan.setBounds(350, 80, 125, 25);
 		contentPanel.add(lblVegan);
 		
 		vegan = new JComboBox<String>();
-		vegan.setBounds(240, 92, 100, 22);
+		vegan.setBounds(390, 80, 125, 25);
 		contentPanel.add(vegan);
 		vegan.addItem(null);
 		this.updateComboBox(vegan,"vegan","tipov");
@@ -242,22 +248,22 @@ public class InserisciAdmin_Frame extends JDialog {
 	
 	public void addSchermataAlloggio() {
 		JLabel lblBagni = new JLabel("Bagni");
-		lblBagni.setBounds(200, 22, 116, 22);
+		lblBagni.setBounds(350, 20, 125, 25);
 		contentPanel.add(lblBagni);
 		
 		bagni = new JComboBox<Integer>();
-		bagni.setBounds(270, 22, 116, 22);
+		bagni.setBounds(430, 20, 125, 25);
 		contentPanel.add(bagni);
 		bagni.addItem(null);
 		for(int i=1;i<5;i++)
 			bagni.addItem(new Integer(i));
 		
 		JLabel lblCamere = new JLabel("Camere");
-		lblCamere.setBounds(200, 62, 116, 22);
+		lblCamere.setBounds(350, 50, 125, 25);
 		contentPanel.add(lblCamere);
 		
 		camere = new JComboBox<Integer>();
-		camere.setBounds(270, 62, 116, 22);
+		camere.setBounds(430, 50, 125, 25);
 		contentPanel.add(camere);
 		camere.addItem(null);
 		for(int i=1;i<=100;i++)
@@ -266,11 +272,11 @@ public class InserisciAdmin_Frame extends JDialog {
 		
 		
 		JLabel lblMetriQ = new JLabel("Metri quadri");
-		lblMetriQ.setBounds(200, 92, 116, 22);
+		lblMetriQ.setBounds(350, 80, 125, 25);
 		contentPanel.add(lblMetriQ);
 		
 		metriq = new JComboBox<Integer>();
-		metriq.setBounds(270, 92, 116, 22);
+		metriq.setBounds(430, 80, 125, 25);
 		contentPanel.add(metriq);
 		metriq.addItem(null);
 		for(int i=1;i<=100;i++)
@@ -278,13 +284,78 @@ public class InserisciAdmin_Frame extends JDialog {
 		
 		
 		JLabel lblLetti = new JLabel("Letti");
-		lblLetti.setBounds(200,112, 116, 22);
+		lblLetti.setBounds(350,110, 125, 25);
 		contentPanel.add(lblLetti);
 		
 		letti = new JComboBox<Integer>();
-		letti.setBounds(270, 112, 100, 22);
+		letti.setBounds(430, 110, 125, 25);
 		contentPanel.add(letti);
 		for(int i=1;i<=10;i++)
 			letti.addItem(new Integer(i));
+	}
+	
+	public void addSchermataAttrazione() {
+		
+		JLabel lblSpecialita = new JLabel("Specialità");
+		lblSpecialita.setBounds(10, 180, 56, 25);
+		contentPanel.add(lblSpecialita);
+		
+		specialita = new JTextField();
+		specialita.setBounds(80, 180, 125, 25);
+		contentPanel.add(specialita);
+		specialita.setColumns(10);
+		
+		JLabel lblQualita = new JLabel("Qualità");
+		lblQualita.setBounds(10, 210, 56, 25);
+		contentPanel.add(lblQualita);
+		
+		qualita = new JTextField();
+		qualita.setBounds(80, 210, 125, 25);
+		contentPanel.add(qualita);
+		qualita.setColumns(10);
+		
+		JLabel lblProvenienza = new JLabel("Provenienza");
+		lblProvenienza.setBounds(12, 240, 80, 25);
+		contentPanel.add(lblProvenienza);
+		
+		provenienza = new JTextField();
+		provenienza.setBounds(80, 240, 125, 25);
+		contentPanel.add(provenienza);
+		provenienza.setColumns(10);
+		
+		
+		JLabel lblMare = new JLabel("Mare");
+		lblMare.setBounds(350, 20, 125, 25);
+		contentPanel.add(lblMare);
+		
+		mare = new JComboBox<String>();
+		mare.setBounds(390, 20, 125, 25);
+		contentPanel.add(mare);
+		mare.addItem(null);
+		this.updateComboBox(mare,"mare","tipom");
+		
+		
+		
+		JLabel lblTerra = new JLabel("Terra");
+		lblTerra.setBounds(350, 50, 125, 25);
+		contentPanel.add(lblTerra);
+		
+		terra = new JComboBox<String>();
+		terra.setBounds(390, 50, 125, 25);
+		contentPanel.add(terra);
+		terra.addItem(null);
+		this.updateComboBox(terra,"terra","tipot");
+		
+		
+		JLabel lblVegan = new JLabel("Vegan");
+		lblVegan.setBounds(350, 80, 125, 25);
+		contentPanel.add(lblVegan);
+		
+		vegan = new JComboBox<String>();
+		vegan.setBounds(390, 80, 125, 25);
+		contentPanel.add(vegan);
+		vegan.addItem(null);
+		this.updateComboBox(vegan,"vegan","tipov");
+		
 	}
 }
