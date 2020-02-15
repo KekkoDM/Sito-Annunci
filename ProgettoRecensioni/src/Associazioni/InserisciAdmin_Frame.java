@@ -15,7 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 
-public class InserisciAdmin_Frame extends Inserisci_Frame {
+public class InserisciAdmin_Frame extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField nome;
@@ -44,7 +44,7 @@ public class InserisciAdmin_Frame extends Inserisci_Frame {
 	
 	public InserisciAdmin_Frame(Controller ctr, String from) {
 		
-		super(ctr, from, null);
+		ctr.main.setEnabled(false);
 		
 		setBounds(100, 100, 593, 373);
 		getContentPane().setLayout(new BorderLayout());
@@ -128,25 +128,21 @@ public class InserisciAdmin_Frame extends Inserisci_Frame {
 						if(from.equals("ristorante")) {//se il valore è ristorante , allora aggiunge la recensione con il codice corrispondente alla chiave esterna di ristorante
 							risto.setNome(nome.getText());
 							risto.setCittà(citta.getText());
-							risto.setCivico(civico.toString());
+							risto.setCivico(civico.getSelectedIndex());
 							risto.setProvenienza(provenienza.getText());
+							risto.setTelefono(telefono.getText());
 							risto.setQualita(qualita.getText());
 							risto.setSpecialita(specialita.getText());
 							risto.setCodm2(mare.getSelectedIndex());
 							risto.setCodt2(terra.getSelectedIndex());
 							risto.setCodv2(vegan.getSelectedIndex());
 							ctr.inserisciRistorante(risto, from);
+							ctr.main.setEnabled(true);
+							dispose();
 						}
 							
 							
-//						}else if(valutazione != "0" && from.equals("alloggio")){
-//							ctr.inserisciRecensione(r,from,"codal");
-//							ctr.chiudiInserisci();	
-//						}else if(valutazione != "0" && from.equals("attrazione")){
-//							ctr.inserisciRecensione(r,from,"codat");
-//							ctr.chiudiInserisci();
-//						}
-//						
+						
 					}
 				});
 				

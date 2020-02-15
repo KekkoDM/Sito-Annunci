@@ -5,7 +5,7 @@ public class ristorante {
 	private String Nome;
 	private String Città;
 	private String Via;
-	private String Civico;
+	private int Civico;
 	private String Telefono;
 	private int codri;
 	private String specialita;
@@ -87,11 +87,11 @@ public class ristorante {
 	public void setVia(String via) {
 		Via = via;
 	}
-	public String getCivico() {
+	public int getCivico() {
 		return Civico;
 	}
-	public void setCivico(String civico) {
-		Civico = civico;
+	public void setCivico(int i) {
+		Civico = i;
 	}
 	public String getTelefono() {
 		return Telefono;
