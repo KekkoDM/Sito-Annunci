@@ -112,12 +112,13 @@ public class ristoranteDAO {
 	}
 	
 	
-    public void AggiungiRistorante(ristorante risto, String from) {
+    public void AggiungiRistorante(ristorante r, String from) {
     	Connessione c = new Connessione();
 		c.ConnessioneDB();
 		
-		String values= "'"+risto.getNome()+"','"+risto.getCittà()+"','"+risto.getProvenienza()+"','"+risto.getQualita()+"','"+risto.getSpecialita()+"','"+risto.getVia()+"',"+risto.getCodm2()+risto.getCodt2()+risto.getCodv2()+risto.getCivico();
-		String attr ="nome,citta,provenienza,qualita,specialita,via,codm2,codt2,codv2,civico" ;
+		String values= "'"+r.getNome()+"','"+r.getCittà()+"','"+r.getVia()+"',"+r.getCivico()+",'"+r.getTelefono()+"','"+r.getSpecialita()
+		+"','"+r.getProvenienza()+"','"+r.getQualita()+r.getCodm2()+r.getCodt2()+r.getCodv2();
+		String attr ="nome,citta,via,civico,telefono,specialita,provenienza,qualita,codm2,codt2,cov2" ;
 		c.Insert("ristorante",attr, values);
 		c.ChiudiConn();
     }
