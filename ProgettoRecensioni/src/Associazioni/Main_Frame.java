@@ -627,9 +627,9 @@ public class Main_Frame extends JFrame {
 					
 				
 				else if(ctr.getUtenteCorrente().getTipo().equals("base"))
-					ctr.main.getInserisciButton(ristopanel,inseriscijb);
+					ristopanel.add(inseriscijb);
 				else if(ctr.getUtenteCorrente().getTipo().equals("admin"))
-					ctr.main.getInserisciButton(ristopanel,admininseriscijb);
+					ristopanel.add(admininseriscijb);
 			}
 		});
 		ristojb.setForeground(new Color(255, 255, 255));
@@ -649,9 +649,9 @@ public class Main_Frame extends JFrame {
 					ctr.switchPanel(layeredPane, alloggipanel);
 				
 				else if(ctr.getUtenteCorrente().getTipo().equals("base"))
-					ctr.main.getInserisciButton(alloggipanel,inseriscijb);
+					alloggipanel.add(inseriscijb);
 				else if(ctr.getUtenteCorrente().getTipo().equals("admin"))
-					ctr.main.getInserisciButton(alloggipanel,admininseriscijb);
+					alloggipanel.add(admininseriscijb);
 			}
 		});
 		alloggijb.setBackground(new Color(46, 139, 87));
@@ -686,9 +686,9 @@ public class Main_Frame extends JFrame {
 					ctr.switchPanel(layeredPane, attrazionepanel);
 				
 				else if(ctr.getUtenteCorrente().getTipo().equals("base"))
-					ctr.main.getInserisciButton(attrazionepanel,inseriscijb);
+					attrazionepanel.add(inseriscijb);
 				else if(ctr.getUtenteCorrente().getTipo().equals("admin"))
-					ctr.main.getInserisciButton(attrazionepanel,admininseriscijb);
+					attrazionepanel.add(admininseriscijb);
 			}
 		});
 		attrazionijb.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 23));
@@ -834,10 +834,6 @@ public class Main_Frame extends JFrame {
 	public JButton getEsciButton() {
 		return escijb;
 	}
-	public void getInserisciButton(JPanel panel, JButton button) {//permette di mostrare il bottone per inserire recensioni
-		panel.add(button);
-	}
-	public void removeInserisciButton(JPanel panel, JButton button) {//permette di eliminare il bottone per inserire recensioni
-		panel.remove(button);
-	}
+	
+	
 }

@@ -112,4 +112,20 @@ public class AlloggioDAO {
 			return null;
 		}
 	}	
+	
+	
+	
+	public void AggiungiAlloggio(Alloggio a, String from) {
+		
+		Connessione c = new Connessione();
+		c.ConnessioneDB();
+		
+		
+		String values= "'"+a.getNome()+"', '"+a.getCittà()+"', '"+a.getVia()+"', "+a.getCivico()+", '"+a.getTelefono()+"', "+a.getBagni()+
+				", "+a.getCamere()+", "+a.getMetriq();
+		
+		String attr ="nome,citta,via,civico,telefono,bagni,camere,metriq";
+		
+		c.ChiudiConn();
+	}
 }

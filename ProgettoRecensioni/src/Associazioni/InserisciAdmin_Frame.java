@@ -37,12 +37,16 @@ public class InserisciAdmin_Frame extends JDialog {
 	private JComboBox<Integer> camere;
 	private JComboBox<Integer> letti;
 	private JComboBox<Integer> metriq;
+	private JComboBox<String> tipo;
 	
     
+	private JButton okButton;
+	private JPanel buttonPane;
+	
     
     Connessione c = new Connessione();
 	ristorante risto = new ristorante();
-	
+	Alloggio allo = new Alloggio();
 	
 	public InserisciAdmin_Frame(Controller ctr, String from) {
 		setTitle("Inserisci Localit\u00E0");
@@ -102,32 +106,17 @@ public class InserisciAdmin_Frame extends JDialog {
 		contentPanel.add(telefono);
 		telefono.setColumns(10);
 		
-		switch (from) {
-		case "ristorante":
-			this.addSchermataRistorante();
-			
-			break;
-
-			
-		case "alloggio":
-			this.addSchermataAlloggio();
-			break;
-			
-			
-		
-		default:
-			break;
-		}
 		
 		{
-			JPanel buttonPane = new JPanel();
+			buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("Inserisci");
+				okButton = new JButton("Inserisci");
 				okButton.setBackground(new Color(46, 139, 87));
 				okButton.setForeground(new Color(255, 255, 255));
 				okButton.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 18));
+				okButton.setVisible(false);
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						
@@ -143,6 +132,20 @@ public class InserisciAdmin_Frame extends JDialog {
 							risto.setCodt2(terra.getSelectedIndex());
 							risto.setCodv2(vegan.getSelectedIndex());
 							ctr.inserisciRistorante(risto, from);
+							ctr.main.setEnabled(true);
+							dispose();
+						}
+						
+						else if(from.contentEquals("alloggio")){
+							allo.setNome(nome.getText());
+							allo.setCittà(citta.getText());
+							allo.setCivico(civico.toString());
+							allo.setTelefono(telefono.getText());
+							allo.setBagni(bagni.getSelectedIndex());
+							allo.setCamere(camere.getSelectedIndex());
+							allo.setMetriq(metriq.getSelectedIndex()+1);
+							
+							
 							ctr.main.setEnabled(true);
 							dispose();
 						}
@@ -163,6 +166,26 @@ public class InserisciAdmin_Frame extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+		
+		
+		switch (from) {
+		case "ristorante":
+			
+			this.addSchermataRistorante();
+			
+			
+			break;
+
+			
+		case "alloggio":
+			this.addSchermataAlloggio(this);
+			break;
+			
+			
+		
+		default:
+			break;
+		}
 	}
 	
 	
@@ -178,9 +201,13 @@ public class InserisciAdmin_Frame extends JDialog {
 			System.err.println("Errore SQL");
 			e.printStackTrace();
 		}
+		c.ChiudiConn();
 	}
 	
+	
 	public void addSchermataRistorante() {
+		
+		okButton.setVisible(true);
 		
 		JLabel lblSpecialita = new JLabel("Specialità");
 		lblSpecialita.setBounds(10, 180, 56, 25);
@@ -243,10 +270,12 @@ public class InserisciAdmin_Frame extends JDialog {
 		vegan.addItem(null);
 		this.updateComboBox(vegan,"vegan","tipov");
 		
+		
+		
 	}
 	
 	
-	public void addSchermataAlloggio() {
+	public void addSchermataAlloggio(InserisciAdmin_Frame frame) {
 		JLabel lblBagni = new JLabel("Bagni");
 		lblBagni.setBounds(350, 20, 125, 25);
 		contentPanel.add(lblBagni);
@@ -292,7 +321,47 @@ public class InserisciAdmin_Frame extends JDialog {
 		contentPanel.add(letti);
 		for(int i=1;i<=10;i++)
 			letti.addItem(new Integer(i));
+		
+		
+		JLabel lblTipo = new JLabel("Tipo");
+		lblTipo.setBounds(350,140, 125, 25);
+		contentPanel.add(lblTipo);
+		
+		tipo = new JComboBox<String>();
+		tipo.setBounds(430, 140, 125, 25);
+		contentPanel.add(tipo);
+		tipo.addItem(null);
+		tipo.addItem("Hotel");
+		tipo.addItem("Bed & Breakfast");
+		tipo.addItem("Casa");
+		
+		
+		JButton avantiButton = new JButton("Avanti");
+		avantiButton.setBackground(new Color(46, 139, 87));
+		avantiButton.setForeground(new Color(255, 255, 255));
+		avantiButton.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 18));
+		avantiButton.setVisible(true);
+		avantiButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				allo.setTipo(tipo.getSelectedItem().toString());
+				frame.estendiFrame(allo.getTipo());
+			}
+
+			
+			
+		});
+		
+		buttonPane.add(avantiButton);
+		
 	}
+	
+	
+	private void estendiFrame(String tipo) {
+		
+		
+		
+	}
+	
 	
 	public void addSchermataAttrazione() {
 		

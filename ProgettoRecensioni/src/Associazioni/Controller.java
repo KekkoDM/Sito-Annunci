@@ -36,6 +36,7 @@ public class Controller {
 		Controller ctr = new Controller();
 	}
 	
+	
 	//costruttore Controller
 	public Controller() {
 		UtenteCorrente = new Utente();
@@ -74,6 +75,7 @@ public class Controller {
 		ListaRec = Recdao.getRecensioniAttrazione(l);
 		return ListaRec;
 	}
+	
 	
 	//metodi che permettono di recuperare ristoranti attraverso oggetto DAO
 	public ArrayList<ristorante> getAllRistoranti(){
